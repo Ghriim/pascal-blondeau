@@ -13,15 +13,31 @@
         {% endblock %}
     </head>
     <body>
-        <header>
-            {% include "::components/_header.html.twig" %}
+        <header class="container text-center">
+            <h1>
+                <a href="{{ path('slide_show_public_display') }}" title="{{ 'header.backToHome.title' | trans({}, 'layout') }}">
+                    {{ 'header.title' | trans({}, 'layout') }}
+                </a>
+            </h1>
+
+            <h2>
+                <a href="{{ path('slide_show_public_display') }}" title="{{ 'header.backToHome.title' | trans({}, 'layout') }}">
+                    {{ 'header.baseline' | trans({}, 'layout') }}
+                </a>
+            </h2>
+
+            <nav>
+                {% block navigation %}
+                    {% include "::components/_navigationPublic.html.twig" %}
+                {% endblock %}
+            </nav>
         </header>
 
-        <main>
+        <main class="container padding-y">
             {% block body %}{% endblock %}
         </main>
 
-        <footer>
+        <footer class="container text-center">
             {% include "::components/_footer.html.twig" %}
         </footer>
 

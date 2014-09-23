@@ -1,0 +1,12 @@
+<form action="{{ path('slide_show_admin_add') }}" method="post" {{ form_enctype(form) }}>
+    <div class="errors">
+        {{ form_errors(form) }}
+    </div>
+
+    {{ form_row(form.file) }}
+    {{ form_row(form.position) }}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" value="Upload Document" />
+</form>

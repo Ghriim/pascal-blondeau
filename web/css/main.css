@@ -1,0 +1,24 @@
+/* Padding - Default */
+.padding-left {
+    padding-left: 20px;
+}
+.padding-right {
+    padding-right: 20px;
+}
+.padding-bottom {
+    padding-bottom: 20px;
+}
+.padding-top {
+    padding-top: 20px;
+}
+.padding-x {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.padding-y {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.padding-xy {
+    padding: 20px;
+}

@@ -17,6 +17,10 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Genemu\Bundle\FormBundle\GenemuFormBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
             new PBlondeau\Bundle\CommonBundle\PBlondeauCommonBundle(),
             new PBlondeau\Bundle\NewsBundle\PBlondeauNewsBundle(),
             new PBlondeau\Bundle\WorkBundle\PBlondeauWorkBundle(),
@@ -24,9 +28,12 @@ class AppKernel extends Kernel
             new PBlondeau\Bundle\PressBundle\PBlondeauPressBundle(),
             new PBlondeau\Bundle\BiographyBundle\PBlondeauBiographyBundle(),
             new PBlondeau\Bundle\ContactBundle\PBlondeauContactBundle(),
+            new PBlondeau\Bundle\SlideShowBundle\PBlondeauSlideShowBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
+            $bundles[] = new CoreSphere\ConsoleBundle\CoreSphereConsoleBundle();
+
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();

@@ -1,0 +1,48 @@
+{% extends "::adminLayout.html.twig" %}
+
+{% trans_default_domain "adminSlideShow" %}
+
+{% block body %}
+    <h1>Slide list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Path</th>
+                <th>Position</th>
+                <th>Creation</th>
+                <th>Status</th>
+                <th>User</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.path }}</td>
+                <td>{{ entity.position }}</td>
+                <td>{% if entity.creation %}{{ entity.creation|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.status }}</td>
+                <td>{{ entity.user }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('admin_slides_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('admin_slides_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

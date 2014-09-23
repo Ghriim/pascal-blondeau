@@ -1,0 +1,40 @@
+{% trans_default_domain "layout" %}
+
+<ul class="list-inline">
+
+    <li>
+        <a href="{{ path('news_public_display') }}" title="" {% block currentNews %}{% endblock %}>
+            {{ 'header.navigation.news.label'| trans({}) }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ path('work_public_display') }}" title="" {% block currentWork %}{% endblock %}>
+            {{ 'header.navigation.work.label'| trans({}) }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ path('exhibition_public_display') }}" title="" {% block currentExhibitions %}{% endblock %}>
+            {{ 'header.navigation.exhibitions.label'| trans({}) }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ path('press_public_display') }}" title="" {% block currentPress %}{% endblock %}>
+            {{ 'header.navigation.press.label'| trans({}) }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ path('biography_public_display') }}" title="" {% block currentBiography %}{% endblock %}>
+            {{ 'header.navigation.biography.label'| trans({}) }}
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ path('contact_public_display') }}" title="" {% block currentContact %}{% endblock %}>
+            {{ 'header.navigation.contact.label'| trans({}) }}
+        </a>
+    </li>
+</ul>

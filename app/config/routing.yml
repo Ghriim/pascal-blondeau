@@ -1,3 +1,8 @@
+p_blondeau_slide_show:
+    resource: "@PBlondeauSlideShowBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 p_blondeau_news:
     resource: "@PBlondeauNewsBundle/Controller/"
     type:     annotation

@@ -1,0 +1,11 @@
+list:
+  action:
+    add: Add a new Slide
+
+  slide:
+    count: %numberOfSlide% Slides
+    empty: No Slide added yet
+    header:
+      image: Image
+      status: Status
+      creation: Added

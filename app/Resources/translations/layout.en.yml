@@ -5,6 +5,8 @@ header:
     title: Back to the Home page
 
   navigation:
+    slideShow:
+      label: Slide Show
     news:
       label: News
     work:
