@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Pascal Blondeau{% endblock %}</title>
+
+        {% block stylesheets %}
+            {% include "::components/_stylesheets.html.twig" %}
+        {% endblock %}
+
+        {% block icons %}
+            {% include "::components/_icons.html.twig" %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            {% include "::components/_header.html.twig" %}
+        </header>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer>
+            {% include "::components/_footer.html.twig" %}
+        </footer>
+
+        {% block javascripts %}
+            {% include "::components/_javascripts.html.twig" %}
+        {% endblock %}
+    </body>
+</html>

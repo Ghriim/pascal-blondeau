@@ -1,0 +1,22 @@
+header:
+  title: Pascal Blondeau
+  baseline: Artist Photographer
+  backToHome:
+    title: Back to the Home page
+
+  navigation:
+    news:
+      label: News
+    work:
+      label: Work
+    exhibitions:
+      label: Exhibitions
+    press:
+      label: Press
+    biography:
+      label: Biography
+    contact:
+      label: Contact
+
+footer:
+  creationBy: Developed by
