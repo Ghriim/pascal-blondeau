@@ -86,7 +86,7 @@ class Slide extends BaseEntity
      * Set path
      *
      * @param string $path
-     * @return SlideShow
+     * @return Slide
      */
     public function setPath($path)
     {
@@ -109,7 +109,7 @@ class Slide extends BaseEntity
      * Set position
      *
      * @param integer $position
-     * @return SlideShow
+     * @return Slide
      */
     public function setPosition($position)
     {

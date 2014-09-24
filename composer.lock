@@ -1290,17 +1290,17 @@
         },
         {
             "name": "sensio/distribution-bundle",
-            "version": "v3.0.5",
+            "version": "v3.0.6",
             "target-dir": "Sensio/Bundle/DistributionBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioDistributionBundle.git",
-                "reference": "ad10123f2532f6e311e583cce203ef368eedc469"
+                "reference": "e20461e4f8e1afd68f36cf90bdccc06f7aa6a6c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/ad10123f2532f6e311e583cce203ef368eedc469",
-                "reference": "ad10123f2532f6e311e583cce203ef368eedc469",
+                "url": "https://api.github.com/repos/sensiolabs/SensioDistributionBundle/zipball/e20461e4f8e1afd68f36cf90bdccc06f7aa6a6c2",
+                "reference": "e20461e4f8e1afd68f36cf90bdccc06f7aa6a6c2",
                 "shasum": ""
             },
             "require": {
@@ -1339,7 +1339,7 @@
                 "configuration",
                 "distribution"
             ],
-            "time": "2014-08-26 13:14:47"
+            "time": "2014-09-24 14:47:46"
         },
         {
             "name": "sensio/framework-extra-bundle",
@@ -1619,20 +1619,22 @@
         },
         {
             "name": "symfony/icu",
-            "version": "v1.0.1",
+            "version": "v1.2.2",
             "target-dir": "Symfony/Component/Icu",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Icu.git",
-                "reference": "fdba214b1e087c149843bde976263c53ac10c975"
+                "reference": "d4d85d6055b87f394d941b45ddd3a9173e1e3d2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Icu/zipball/fdba214b1e087c149843bde976263c53ac10c975",
-                "reference": "fdba214b1e087c149843bde976263c53ac10c975",
+                "url": "https://api.github.com/repos/symfony/Icu/zipball/d4d85d6055b87f394d941b45ddd3a9173e1e3d2a",
+                "reference": "d4d85d6055b87f394d941b45ddd3a9173e1e3d2a",
                 "shasum": ""
             },
             "require": {
+                "ext-intl": "*",
+                "lib-icu": ">=4.4",
                 "php": ">=5.3.3",
                 "symfony/intl": "~2.3"
             },
@@ -1662,7 +1664,7 @@
                 "icu",
                 "intl"
             ],
-            "time": "2013-10-04 09:12:07"
+            "time": "2014-07-25 09:58:17"
         },
         {
             "name": "symfony/monolog-bundle",
@@ -2050,9 +2052,7 @@
             "time": "2014-09-22 14:56:14"
         }
     ],
-    "aliases": [
-
-    ],
+    "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
         "stof/doctrine-extensions-bundle": 20,
@@ -2065,7 +2065,5 @@
     "platform": {
         "php": ">=5.3.3"
     },
-    "platform-dev": [
-
-    ]
+    "platform-dev": []
 }

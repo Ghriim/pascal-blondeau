@@ -3,10 +3,10 @@
 namespace PBlondeau\Bundle\SlideShowBundle\Controller\SlideShow;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\SlideShowBundle\Entity\Slide;
 use PBlondeau\Bundle\SlideShowBundle\Form\Type\SlideType;
 
@@ -15,7 +15,7 @@ use PBlondeau\Bundle\SlideShowBundle\Form\Type\SlideType;
  *
  * @Route("/admin/slides")
  */
-class AdminController extends Controller
+class AdminController extends BaseController
 {
 
     /**
@@ -27,12 +27,21 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $slides = $this->getPaginator()->paginate(
+            $this->getSlideRepository()->findAll(),
+            $this->get('request')->query->get('page', 1),
+            10
+        );
 
-        $entities = $em->getRepository('PBlondeauSlideShowBundle:Slide')->findAll();
+        $slide = new Slide();
+        $form = $this->createForm(new SlideType(), $slide, array(
+            'action' => $this->generateUrl('admin_slides_create'),
+            'method' => 'POST',
+        ));
 
         return array(
-            'entities' => $entities,
+            'slides' => $slides,
+            'form'   => $form->createView(),
         );
     }
     /**
@@ -40,12 +49,16 @@ class AdminController extends Controller
      *
      * @Route("/", name="admin_slides_create")
      * @Method("POST")
-     * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:new.html.twig")
+     * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:list.html.twig")
      */
     public function createAction(Request $request)
     {
         $entity = new Slide();
-        $form = $this->createCreateForm($entity);
+        $form = $this->createForm(new SlideType(), $entity, array(
+            'action' => $this->generateUrl('admin_slides_create'),
+            'method' => 'POST',
+        ));
+
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -55,43 +68,6 @@ class AdminController extends Controller
 
             return $this->redirect($this->generateUrl('admin_slides'));
         }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
-
-    /**
-     * Creates a form to create a Slide entity.
-     *
-     * @param Slide $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Slide $entity)
-    {
-        $form = $this->createForm(new SlideType(), $entity, array(
-            'action' => $this->generateUrl('admin_slides_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
-
-    /**
-     * Displays a form to create a new Slide entity.
-     *
-     * @Route("/new", name="admin_slides_new")
-     * @Method("GET")
-     * @Template()
-     */
-    public function newAction()
-    {
-        $entity = new Slide();
-        $form   = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,

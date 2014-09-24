@@ -51,7 +51,7 @@ class BaseController extends Controller
     /**
      * @return \PBlondeau\Bundle\SlideShowBundle\Repository\SlideRepository
      */
-    protected function getSlideShowRepository()
+    protected function getSlideRepository()
     {
         return $this->getEntityManager()->getRepository('PBlondeauSlideShowBundle:Slide');
     }

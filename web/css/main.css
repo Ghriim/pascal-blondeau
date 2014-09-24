@@ -22,3 +22,14 @@
 .padding-xy {
     padding: 20px;
 }
+
+/* Badge */
+.badge.status-inactive {
+    background-color: #d9534f;
+}
+.badge.status-active {
+    background-color: #3fad46;
+}
+.badge.status-to-review {
+    background-color: #f0ad4e;
+}

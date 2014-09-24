@@ -1,11 +1,28 @@
 list:
-  action:
-    add: Add a new Slide
+    action:
+        add: Add a new Slide
 
-  slide:
-    count: %numberOfSlide% Slides
-    empty: No Slide added yet
-    header:
-      image: Image
-      status: Status
-      creation: Added
+    slide:
+        count: %numberOfSlide% Slides
+        empty: No Slide added yet
+        header:
+            image: Image
+            status: Status
+            creation: Added
+            actions: Actions
+        body:
+            status:
+                inactive: Inactive
+                active: Active
+                to-review: To Review
+            action:
+                edit: Edit
+                delete: Remove
+
+form:
+    add:
+        modal:
+            title: New Slide in Slide Show
+            action:
+                save: Save the Slide
+                cancel: Cancel
