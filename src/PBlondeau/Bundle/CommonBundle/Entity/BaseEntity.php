@@ -4,7 +4,8 @@ namespace PBlondeau\Bundle\CommonBundle\Entity;
 
 class BaseEntity
 {
-    const STATUS_INACTIVE = 'inactive';
+
     const STATUS_ACTIVE = 'active';
-    const STATUS_TO_REVIEW = 'to-review';
+    const STATUS_PLANNED = 'planned';
+    const STATUS_INACTIVE = 'stopped';
 } 

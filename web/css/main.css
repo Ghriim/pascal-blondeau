@@ -24,12 +24,23 @@
 }
 
 /* Badge */
-.badge.status-inactive {
-    background-color: #d9534f;
-}
 .badge.status-active {
     background-color: #3fad46;
 }
-.badge.status-to-review {
+.badge.status-planned {
     background-color: #f0ad4e;
+}
+.badge.status-stopped {
+    background-color: #d9534f;
+}
+
+
+/* Button & Link */
+.btn > .fa, .btn-link > .fa, a > .fa {
+    margin-right: 5px;
+}
+
+/* Form */
+.form-delete {
+    display: inline;
 }

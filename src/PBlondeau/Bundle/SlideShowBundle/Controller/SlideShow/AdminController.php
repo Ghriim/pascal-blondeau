@@ -19,8 +19,6 @@ class AdminController extends BaseController
 {
 
     /**
-     * Lists all Slide entities.
-     *
      * @Route("/", name="admin_slides")
      * @Method("GET")
      * @Template()
@@ -28,9 +26,8 @@ class AdminController extends BaseController
     public function indexAction()
     {
         $slides = $this->getPaginator()->paginate(
-            $this->getSlideRepository()->findAll(),
-            $this->get('request')->query->get('page', 1),
-            10
+            $this->getSlideRepository()->findForAdminList(),
+            $this->get('request')->query->get('page', 1)
         );
 
         $slide = new Slide();
@@ -45,8 +42,6 @@ class AdminController extends BaseController
         );
     }
     /**
-     * Creates a new Slide entity.
-     *
      * @Route("/", name="admin_slides_create")
      * @Method("POST")
      * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:list.html.twig")
@@ -76,8 +71,6 @@ class AdminController extends BaseController
     }
 
     /**
-     * Displays a form to edit an existing Slide entity.
-     *
      * @Route("/{id}/edit", name="admin_slides_edit")
      * @Method("GET")
      * @Template()
@@ -121,8 +114,6 @@ class AdminController extends BaseController
         return $form;
     }
     /**
-     * Edits an existing Slide entity.
-     *
      * @Route("/{id}", name="admin_slides_update")
      * @Method("PUT")
      * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:edit.html.twig")
@@ -137,7 +128,6 @@ class AdminController extends BaseController
             throw $this->createNotFoundException('Unable to find Slide entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
@@ -150,49 +140,22 @@ class AdminController extends BaseController
         return array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
         );
     }
+
     /**
-     * Deletes a Slide entity.
+     * @param Slide $slide
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Route("/{id}", name="admin_slides_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Slide $slide)
     {
-        $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('PBlondeauSlideShowBundle:Slide')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Slide entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
-        }
+        $this->getEntityManager()->remove($slide);
+        $this->getEntityManager()->flush();
 
         return $this->redirect($this->generateUrl('admin_slides'));
-    }
-
-    /**
-     * Creates a form to delete a Slide entity by id.
-     *
-     * @param mixed $id The entity id
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createDeleteForm($id)
-    {
-        return $this->createFormBuilder()
-            ->setAction($this->generateUrl('admin_slides_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
-            ->getForm()
-        ;
     }
 }

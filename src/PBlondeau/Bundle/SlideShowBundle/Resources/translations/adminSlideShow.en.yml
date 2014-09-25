@@ -12,9 +12,9 @@ list:
             actions: Actions
         body:
             status:
-                inactive: Inactive
                 active: Active
-                to-review: To Review
+                planned: Planned
+                stopped: Stopped
             action:
                 edit: Edit
                 delete: Remove
@@ -25,4 +25,15 @@ form:
             title: New Slide in Slide Show
             action:
                 save: Save the Slide
+                cancel: Cancel
+    delete:
+        modal:
+            title: Remove Slide from Slide Show
+            content: >
+                You are about to delete a Slide from the home Slide Show.<br />
+                Suppression is permanent and you won't be able to recover the data.<br />
+                <br />
+                Are you sure you want to proceed ?
+            action:
+                confirm: Remove the Slide
                 cancel: Cancel
