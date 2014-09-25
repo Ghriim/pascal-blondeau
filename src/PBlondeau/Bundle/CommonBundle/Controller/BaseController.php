@@ -49,6 +49,15 @@ class BaseController extends Controller
     }
 
     /**
+     * @param string $message
+     * @param string $type
+     */
+    protected function addFlashMessage($message, $type = 'notice')
+    {
+        $this->getSession()->getFlashBag()->add($type, $message);
+    }
+
+    /**
      * @return \PBlondeau\Bundle\SlideShowBundle\Repository\SlideRepository
      */
     protected function getSlideRepository()

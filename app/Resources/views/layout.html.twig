@@ -33,6 +33,23 @@
             </nav>
         </header>
 
+        <div class="container padding-top">
+            {% for type, messages in app.session.flashBag.all() %}
+                {% for message in messages %}
+                    <div class="alert alert-dismissable alert-{{ type }}">
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span class="fa fa-times"></span>
+                        </button>
+
+                        <p>
+                            {{ message|raw }}
+                        </p>
+                    </div>
+                    <div class="cb"></div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+
         <main class="container padding-y">
             {% block body %}{% endblock %}
         </main>

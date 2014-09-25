@@ -41,15 +41,20 @@ class AdminController extends BaseController
             'form'   => $form->createView(),
         );
     }
+
     /**
+     * @param Request $request
+     *
+     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     *
      * @Route("/", name="admin_slides_create")
      * @Method("POST")
      * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:list.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Slide();
-        $form = $this->createForm(new SlideType(), $entity, array(
+        $slide = new Slide();
+        $form = $this->createForm(new SlideType(), $slide, array(
             'action' => $this->generateUrl('admin_slides_create'),
             'method' => 'POST',
         ));
@@ -57,15 +62,14 @@ class AdminController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
+            $this->getEntityManager()->persist($slide);
+            $this->getEntityManager()->flush();
 
             return $this->redirect($this->generateUrl('admin_slides'));
         }
 
         return array(
-            'entity' => $entity,
+            'entity' => $slide,
             'form'   => $form->createView(),
         );
     }
@@ -155,6 +159,9 @@ class AdminController extends BaseController
     {
         $this->getEntityManager()->remove($slide);
         $this->getEntityManager()->flush();
+
+        $message = $this->getTranslator()->trans('form.delete.success', array(), 'adminSlideShow');
+        $this->addFlashMessage($message, 'success');
 
         return $this->redirect($this->generateUrl('admin_slides'));
     }

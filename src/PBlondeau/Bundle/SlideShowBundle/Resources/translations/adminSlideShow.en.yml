@@ -37,3 +37,4 @@ form:
             action:
                 confirm: Remove the Slide
                 cancel: Cancel
+        success: Suppression completed successfully
