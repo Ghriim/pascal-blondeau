@@ -44,3 +44,12 @@
 .form-delete {
     display: inline;
 }
+
+/* Table */
+.table>tbody>tr>th, .table>tbody>tr>td {
+    vertical-align: baseline;
+}
+table .list-inline {
+    margin-bottom: 0;
+}
+

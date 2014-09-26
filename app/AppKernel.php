@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
 
             new PBlondeau\Bundle\CommonBundle\PBlondeauCommonBundle(),
             new PBlondeau\Bundle\NewsBundle\PBlondeauNewsBundle(),
@@ -29,6 +30,7 @@ class AppKernel extends Kernel
             new PBlondeau\Bundle\BiographyBundle\PBlondeauBiographyBundle(),
             new PBlondeau\Bundle\ContactBundle\PBlondeauContactBundle(),
             new PBlondeau\Bundle\SlideShowBundle\PBlondeauSlideShowBundle(),
+            new PBlondeau\Bundle\UserBundle\PBlondeauUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -3,6 +3,7 @@
 namespace PBlondeau\Bundle\SlideShowBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use PBlondeau\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
@@ -55,9 +56,10 @@ class Slide extends BaseEntity
     private $status;
 
     /**
-     * @var \stdClass
+     * @var User
      *
-     * @ORM\Column(name="user", type="object")
+     * @ORM\ManyToOne(targetEntity="PBlondeau\Bundle\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
     private $user;
 

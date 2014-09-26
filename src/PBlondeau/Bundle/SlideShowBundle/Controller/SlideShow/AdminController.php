@@ -54,6 +54,8 @@ class AdminController extends BaseController
     public function createAction(Request $request)
     {
         $slide = new Slide();
+        $slide->setUser($this->getUser());
+
         $form = $this->createForm(new SlideType(), $slide, array(
             'action' => $this->generateUrl('admin_slides_create'),
             'method' => 'POST',

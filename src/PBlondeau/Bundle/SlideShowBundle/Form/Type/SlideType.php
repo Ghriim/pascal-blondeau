@@ -17,9 +17,7 @@ class SlideType extends AbstractType
         $builder
             ->add('path')
             ->add('position')
-            ->add('creation')
             ->add('status')
-            ->add('user')
         ;
     }
     

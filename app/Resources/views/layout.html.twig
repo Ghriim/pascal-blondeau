@@ -50,6 +50,12 @@
             {% endfor %}
         </div>
 
+        {% if is_granted('ROLE_ADMIN') %}
+            <aside class="admin-menu">
+                {% include "::components/_navigationAdmin.html.twig" %}
+            </aside>
+        {% endif %}
+
         <main class="container padding-y">
             {% block body %}{% endblock %}
         </main>

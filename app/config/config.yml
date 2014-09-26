@@ -68,6 +68,11 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: PBlondeau\Bundle\UserBundle\Entity\User
+
 knp_paginator:
     page_range: 25
     template:
