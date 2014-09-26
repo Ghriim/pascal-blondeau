@@ -71,7 +71,6 @@ class AdminController extends BaseController
         }
 
         return array(
-            'entity' => $slide,
             'form'   => $form->createView(),
         );
     }
