@@ -52,12 +52,12 @@
 	        </div>
 
 	        {% if is_granted('ROLE_ADMIN') %}
-	            <aside class="admin-menu">
+	            <aside id="admin-menu">
 	                {% include "::components/_navigationAdmin.html.twig" %}
 	            </aside>
 	        {% endif %}
 
-	        <main class="container padding-y">
+	        <main class="container">
 	            {% block body %}{% endblock %}
 	        </main>
 

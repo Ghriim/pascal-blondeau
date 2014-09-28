@@ -82,3 +82,69 @@ table td .img-thumbnail {
 .carousel-inner > .item > img {
 	margin: 0 auto;
 }
+
+
+/* Admin Menu */
+#admin-menu {
+	position: fixed;
+	z-index: 100;
+}
+ul#admin-nav {
+	list-style-type: none;
+	padding: 0;
+	display: table;
+	border: 2px solid #999;
+}
+
+#admin-nav li {
+	border-bottom: 1px solid #999;
+}
+
+#admin-nav li:last-of-type {
+	border-bottom: 0;
+}
+#admin-nav li a {
+	display: block;
+	color: #FFF;
+}
+#admin-nav li a:hover {
+	text-decoration: none;
+}
+#admin-nav li a:hover span {
+	background-color: #888;
+}
+#admin-nav li a:hover label {
+	background-color: #AAA;
+}
+#admin-nav li span,
+	#admin-nav li label  {
+	display:  table-cell;
+	line-height:  25px;
+	vertical-align: middle;
+	padding: 5px;
+}
+#admin-nav li span {
+	width: 40px;
+	font-size: 20px;
+	text-align: center;
+	background-color: #999;
+}
+#admin-nav li label {
+	margin: 0;
+	width: 145px;
+	padding-left: 15px;
+	background-color: #BBB;
+
+	display: none;
+}
+
+/* Tooltip */
+div.tooltip-inner {
+	white-space: nowrap;
+	max-width: 350px;
+}
+
+/* Main */
+main.container {
+	padding: 20px 45px;
+}

@@ -1,45 +1,66 @@
 {% trans_default_domain "layout" %}
 
-<ul>
+<ul id="admin-nav">
+	<li id="deploy-admin-menu">
+		<a href="#" title="{{ 'aside.link.deploy.label.long'| trans({}) }}"
+		   data-toggle="tooltip" data-placement="right">
+			<span class="fa fa-chevron-right"></span><label>{{ 'aside.link.deploy.label.short'| trans({}) }}</label>
+		</a>
+	</li>
+
+	<li id="reduce-admin-menu" class="hidden">
+		<a  href="#" title="{{ 'aside.link.reduce.label.long'| trans({}) }}"
+		   data-toggle="tooltip" data-placement="right">
+			<span class="fa fa-chevron-left"></span><label>{{ 'aside.link.reduce.label.short'| trans({}) }}</label>
+		</a>
+	</li>
+
     <li>
-        <a href="{{ path('admin_slides') }}" title="" {% block currentAdminSlides %}{% endblock %}>
-            {{ 'aside.link.slideShow.label'| trans({}) }}
+        <a href="{{ path('admin_slides') }}" title="{{ 'aside.link.slideShow.label'| trans({}) }}"
+           data-toggle="tooltip" data-placement="right" {% block currentAdminSlides %}{% endblock %}>
+            <span class="fa fa-file-image-o"></span><label>{{ 'aside.link.slideShow.label'| trans({}) }}</label>
         </a>
     </li>
 
 	<li>
-		<a href="{{ path('admin_news') }}" title="" {% block currentAdminNews %}{% endblock %}>
-			{{ 'aside.link.news.label'| trans({}) }}
+		<a href="{{ path('admin_news') }}" title="{{ 'aside.link.news.label'| trans({}) }}"
+		   data-toggle="tooltip" data-placement="right" {% block currentAdminNews %}{% endblock %}>
+			<span class="fa fa-bullhorn"></span><label>{{ 'aside.link.news.label'| trans({}) }}</label>
 		</a>
 	</li>
 
 	<li>
-		<a href="{{ path('admin_work_albums') }}" title="" {% block currentAdminWork %}{% endblock %}>
-			{{ 'aside.link.work.label'| trans({}) }}
+		<a href="{{ path('admin_work_albums') }}" title="{{ 'aside.link.work.label'| trans({}) }}"
+		   data-toggle="tooltip" data-placement="right" {% block currentAdminWork %}{% endblock %}>
+			<span class="fa fa-desktop"></span><label>{{ 'aside.link.work.label'| trans({}) }}</label>
 		</a>
 	</li>
 
 	<li>
-		<a href="{{ path('admin_exhibitions') }}" title="" {% block currentAdminExhibition %}{% endblock %}>
-			{{ 'aside.link.exhibition.label'| trans({}) }}
+		<a href="{{ path('admin_exhibitions') }}" title="{{ 'aside.link.exhibition.label'| trans({}) }}"
+		   data-toggle="tooltip" data-placement="right" {% block currentAdminExhibition %}{% endblock %}>
+			<span class="fa fa-camera-retro"></span><label>{{ 'aside.link.exhibition.label'| trans({}) }}</label>
 		</a>
 	</li>
 
 	<li>
-		<a href="{{ path('admin_press') }}" title="" {% block currentAdminPress %}{% endblock %}>
-			{{ 'aside.link.press.label'| trans({}) }}
+		<a href="{{ path('admin_press') }}" title="{{ 'aside.link.press.label'| trans({}) }}"
+		   data-toggle="tooltip" data-placement="right" {% block currentAdminPress %}{% endblock %}>
+			<span class="fa fa-newspaper-o"></span><label>{{ 'aside.link.press.label'| trans({}) }}</label>
 		</a>
 	</li>
 
 	<li>
-		<a href="{{ path('admin_biography') }}" title="" {% block currentAdminBiography %}{% endblock %}>
-			{{ 'aside.link.biography.label'| trans({}) }}
+		<a href="{{ path('admin_biography') }}" title="{{ 'aside.link.biography.label'| trans({}) }}"
+		   data-toggle="tooltip" data-placement="right" {% block currentAdminBiography %}{% endblock %}>
+			<span class="fa fa-user"></span><label>{{ 'aside.link.biography.label'| trans({}) }}</label>
 		</a>
 	</li>
 
     <li>
-        <a href="{{ path('fos_user_security_logout') }}" title="">
-            {{ 'aside.link.logout.label'| trans({}) }}
+        <a href="{{ path('fos_user_security_logout') }}" title="{{ 'aside.link.logout.label'| trans({}) }}"
+           data-toggle="tooltip" data-placement="right">
+	        <span class="fa fa-unlock"></span><label>{{ 'aside.link.logout.label'| trans({}) }}</label>
         </a>
     </li>
 </ul>

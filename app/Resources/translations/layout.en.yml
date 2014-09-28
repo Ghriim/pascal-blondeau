@@ -22,6 +22,14 @@ header:
 
 aside:
     link:
+        deploy:
+            label:
+                short: Deploy the menu
+                long: Deploy the Admin menu
+        reduce:
+            label:
+                short: Reduce the menu
+                long: Reduce the Admin menu
         slideShow:
             label: Slide Show
         news:
