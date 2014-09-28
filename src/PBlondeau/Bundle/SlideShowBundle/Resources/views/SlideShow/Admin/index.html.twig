@@ -4,8 +4,8 @@
 
 {% block body %}
      <div class="row">
-        <div class="col-md-10">
-            {{ 'list.slide.count' | trans({'%numberOfSlide%': slides.getTotalItemCount}) }}
+        <div class="col-md-10 padding-left">
+            <h4>{{ 'list.slide.count' | trans({'%numberOfSlide%': slides.getTotalItemCount}) }}</h4>
         </div>
 
         <div class="col-md-2 text-right">
@@ -64,7 +64,7 @@
         </tbody>
     </table>
 
-    <div class="navigation">
+    <div class="paginator">
         {{ knp_pagination_render(slides) }}
     </div>
 

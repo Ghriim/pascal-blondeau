@@ -148,3 +148,8 @@ div.tooltip-inner {
 main.container {
 	padding: 20px 45px;
 }
+
+/* Pagination */
+.paginator {
+	text-align: right;
+}

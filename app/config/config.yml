@@ -76,7 +76,7 @@ fos_user:
 knp_paginator:
     page_range: 25
     template:
-        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_pagination.html.twig
+        pagination: PBlondeauCommonBundle::_pagination.html.twig
 
 genemu_form:
     date: ~
