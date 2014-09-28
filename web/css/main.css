@@ -153,3 +153,27 @@ main.container {
 .paginator {
 	text-align: right;
 }
+
+/* Main Header */
+#main-header a {
+	color: #BBB;
+	text-transform: uppercase;
+}
+#main-header h1 a {
+	color: #888;
+}
+
+#main-header h2 {
+	margin-top: 10px;
+}
+#main-header a:hover {
+	text-decoration: none;
+}
+#main-header nav a:hover {
+	color: #888;
+}
+
+/* Main Footer */
+#main-footer, #main-footer a {
+	color: #888;
+}
