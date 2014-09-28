@@ -7,6 +7,36 @@
         </a>
     </li>
 
+	<li>
+		<a href="{{ path('admin_news') }}" title="" {% block currentAdminNews %}{% endblock %}>
+			{{ 'aside.link.news.label'| trans({}) }}
+		</a>
+	</li>
+
+	<li>
+		<a href="{{ path('admin_work_albums') }}" title="" {% block currentAdminWork %}{% endblock %}>
+			{{ 'aside.link.work.label'| trans({}) }}
+		</a>
+	</li>
+
+	<li>
+		<a href="{{ path('admin_exhibitions') }}" title="" {% block currentAdminExhibition %}{% endblock %}>
+			{{ 'aside.link.exhibition.label'| trans({}) }}
+		</a>
+	</li>
+
+	<li>
+		<a href="{{ path('admin_press') }}" title="" {% block currentAdminPress %}{% endblock %}>
+			{{ 'aside.link.press.label'| trans({}) }}
+		</a>
+	</li>
+
+	<li>
+		<a href="{{ path('admin_biography') }}" title="" {% block currentAdminBiography %}{% endblock %}>
+			{{ 'aside.link.biography.label'| trans({}) }}
+		</a>
+	</li>
+
     <li>
         <a href="{{ path('fos_user_security_logout') }}" title="">
             {{ 'aside.link.logout.label'| trans({}) }}

@@ -1,6 +1,6 @@
 <?php
 
-namespace PBlondeau\Bundle\SlideShowBundle\Controller\SlideShow;
+namespace PBlondeau\Bundle\WorkBundle\Controller\Album;
 
 use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,7 +25,7 @@ class PublicController extends BaseController
         );
 
         return array(
-            'albums' => $this->getAlbumRepository()->findBy($criteria, $order)
+            'albums' => null //$this->getAlbumRepository()->findBy($criteria, $order)
         );
     }
 }

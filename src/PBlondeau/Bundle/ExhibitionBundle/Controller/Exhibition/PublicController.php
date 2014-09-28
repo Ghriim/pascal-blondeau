@@ -1,20 +1,23 @@
 <?php
 
-namespace PBlondeau\Bundle\NewsBundle\Controller;
+namespace PBlondeau\Bundle\ExhibitionBundle\Controller\Exhibition;
 
+use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 
-class NewsController extends BaseController
+class PublicController extends BaseController
 {
     /**
-     * @Route("/", name="news_public_display")
+     * @Route("/exhibitions", name="exhibition_public_display")
      * @Template()
      */
     public function indexAction()
     {
-        return array();
+        return array(
+
+        );
     }
 }

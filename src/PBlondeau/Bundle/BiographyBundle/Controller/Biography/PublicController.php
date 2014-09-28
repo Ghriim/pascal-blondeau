@@ -1,20 +1,23 @@
 <?php
 
-namespace PBlondeau\Bundle\WorkBundle\Controller;
+namespace PBlondeau\Bundle\BiographyBundle\Controller\Biography;
 
+use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 
-class WorkController extends BaseController
+class PublicController extends BaseController
 {
     /**
-     * @Route("/", name="work_public_display")
+     * @Route("/biography", name="biography_public_display")
      * @Template()
      */
     public function indexAction()
     {
-        return array();
+        return array(
+
+        );
     }
 }

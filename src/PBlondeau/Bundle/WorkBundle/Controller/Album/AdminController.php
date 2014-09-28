@@ -1,6 +1,6 @@
 <?php
 
-namespace PBlondeau\Bundle\SlideShowBundle\Controller\SlideShow;
+namespace PBlondeau\Bundle\WorkBundle\Controller\Album;
 
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -19,7 +19,7 @@ class AdminController extends BaseController
 {
 
     /**
-     * @Route("/", name="admin_albums")
+     * @Route("/", name="admin_work_albums")
      * @Method("GET")
      * @Template()
      */
@@ -36,7 +36,7 @@ class AdminController extends BaseController
      *
      * @Route("/", name="admin_albums_create")
      * @Method("POST")
-     * @Template("PBlondeauWorkBundle:Album/Admin:list.html.twig")
+     * @Template("PBlondeauWorkBundle:Album/Admin:index.html.twig")
      */
     public function createAction(Request $request)
     {
