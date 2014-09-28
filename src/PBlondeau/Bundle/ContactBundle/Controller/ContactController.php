@@ -10,7 +10,7 @@ use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 class ContactController extends BaseController
 {
     /**
-     * @Route("/", name="contact_public_display")
+     * @Route("/contact", name="contact_public_display")
      * @Template()
      */
     public function indexAction()
