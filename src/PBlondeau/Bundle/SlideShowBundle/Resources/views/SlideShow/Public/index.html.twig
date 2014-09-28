@@ -1,5 +1,20 @@
 {% extends '::layout.html.twig' %}
 
 {% block body %}
-    SLIDES
+	<div id="carousel" class="carousel slide text-center" data-ride="carousel">
+		<ol class="carousel-indicators">
+			{% for slide in slides %}
+				<li data-target="#carousel" data-slide-to="{{ loop.index - 1 }}"
+				    class="{% if loop.index == 1 %}active{% endif %}"></li>
+			{% endfor %}
+		</ol>
+
+		<div class="carousel-inner">
+			{% for slide in slides %}
+				<div class="item {% if loop.index == 1 %}active{% endif %}">
+					<img src="{{ asset(slide.webPath) }}" class="" alt="" />
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

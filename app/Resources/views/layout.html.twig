@@ -13,54 +13,58 @@
         {% endblock %}
     </head>
     <body>
-        <header class="container text-center">
-            <h1>
-                <a href="{{ path('slide_show_public_display') }}" title="{{ 'header.backToHome.title' | trans({}, 'layout') }}">
-                    {{ 'header.title' | trans({}, 'layout') }}
-                </a>
-            </h1>
+        <div id="wrap">
+	        <header class="container text-center">
+	            <h1>
+	                <a href="{{ path('slide_show_public_display') }}" title="{{ 'header.backToHome.title' | trans({}, 'layout') }}">
+	                    {{ 'header.title' | trans({}, 'layout') }}
+	                </a>
+	            </h1>
 
-            <h2>
-                <a href="{{ path('slide_show_public_display') }}" title="{{ 'header.backToHome.title' | trans({}, 'layout') }}">
-                    {{ 'header.baseline' | trans({}, 'layout') }}
-                </a>
-            </h2>
+	            <h2>
+	                <a href="{{ path('slide_show_public_display') }}" title="{{ 'header.backToHome.title' | trans({}, 'layout') }}">
+	                    {{ 'header.baseline' | trans({}, 'layout') }}
+	                </a>
+	            </h2>
 
-            <nav>
-                {% block navigation %}
-                    {% include "::components/_navigationPublic.html.twig" %}
-                {% endblock %}
-            </nav>
-        </header>
+	            <nav>
+	                {% block navigation %}
+	                    {% include "::components/_navigationPublic.html.twig" %}
+	                {% endblock %}
+	            </nav>
+	        </header>
 
-        <div class="container padding-top">
-            {% for type, messages in app.session.flashBag.all() %}
-                {% for message in messages %}
-                    <div class="alert alert-dismissable alert-{{ type }}">
-                        <button type="button" class="close" data-dismiss="alert">
-                            <span class="fa fa-times"></span>
-                        </button>
+	        <div class="container padding-top">
+	            {% for type, messages in app.session.flashBag.all() %}
+	                {% for message in messages %}
+	                    <div class="alert alert-dismissable alert-{{ type }}">
+	                        <button type="button" class="close" data-dismiss="alert">
+	                            <span class="fa fa-times"></span>
+	                        </button>
 
-                        <p>
-                            {{ message|raw }}
-                        </p>
-                    </div>
-                    <div class="cb"></div>
-                {% endfor %}
-            {% endfor %}
+	                        <p>
+	                            {{ message|raw }}
+	                        </p>
+	                    </div>
+	                    <div class="cb"></div>
+	                {% endfor %}
+	            {% endfor %}
+	        </div>
+
+	        {% if is_granted('ROLE_ADMIN') %}
+	            <aside class="admin-menu">
+	                {% include "::components/_navigationAdmin.html.twig" %}
+	            </aside>
+	        {% endif %}
+
+	        <main class="container padding-y">
+	            {% block body %}{% endblock %}
+	        </main>
+
+	        <div id="push"></div>
         </div>
 
-        {% if is_granted('ROLE_ADMIN') %}
-            <aside class="admin-menu">
-                {% include "::components/_navigationAdmin.html.twig" %}
-            </aside>
-        {% endif %}
-
-        <main class="container padding-y">
-            {% block body %}{% endblock %}
-        </main>
-
-        <footer class="container text-center">
+        <footer id="main-footer" class="container text-center">
             {% include "::components/_footer.html.twig" %}
         </footer>
 

@@ -211,7 +211,7 @@ class Slide extends BaseEntity
 
     protected function getUploadRootDir()
     {
-        return __DIR__.'/../../../../web/'.$this->getUploadDir();
+        return __DIR__.'/../../../../../web/'.$this->getUploadDir();
     }
 
     protected function getUploadDir()
@@ -240,7 +240,7 @@ class Slide extends BaseEntity
             return;
         }
 
-        $this->file->move($this->getUploadRootDir(), $this->file->getClientOriginalName());
+        $this->file->move($this->getUploadRootDir(), $this->path);
         $this->path = $this->file->getClientOriginalName();
         $this->file = null;
     }

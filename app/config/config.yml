@@ -77,3 +77,22 @@ knp_paginator:
     page_range: 25
     template:
         pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_pagination.html.twig
+
+genemu_form:
+    date: ~
+
+stof_doctrine_extensions:
+    default_locale: en
+    translation_fallback: true
+    orm:
+        default:
+            sluggable: true
+
+avalanche_imagine:
+    filters:
+        small_thumb:
+            type:    thumbnail
+            options: { size: [65, 65], mode: outbound, quality: 100, format: png }
+        large_thumb:
+            type:    thumbnail
+            options: { size: [250, 250], mode: outbound, quality: 100, format: png }

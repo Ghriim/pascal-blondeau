@@ -11,7 +11,7 @@ use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 class PublicController extends BaseController
 {
     /**
-     * @Route("/slide-show", name="slide_show_public_display")
+     * @Route("/slides", name="slide_show_public_display")
      * @Template()
      */
     public function indexAction()
@@ -25,7 +25,7 @@ class PublicController extends BaseController
         );
 
         return array(
-            'slides' => $this->getSlideShowRepository()->findBy($criteria, $order)
+            'slides' => $this->getSlideRepository()->findBy($criteria, $order)
         );
     }
 }

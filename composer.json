@@ -23,6 +23,7 @@
         "friendsofsymfony/user-bundle": "2.0.*@dev",
         "knplabs/knp-paginator-bundle": "2.4.*@dev",
         "genemu/form-bundle": "2.2.*@dev",
+	    "avalanche123/imagine-bundle": "dev-master",
         "coresphere/console-bundle": "dev-master"
     },
     "require-dev": {

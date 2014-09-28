@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Genemu\Bundle\FormBundle\GenemuFormBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+	        new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
 
             new PBlondeau\Bundle\CommonBundle\PBlondeauCommonBundle(),
             new PBlondeau\Bundle\NewsBundle\PBlondeauNewsBundle(),

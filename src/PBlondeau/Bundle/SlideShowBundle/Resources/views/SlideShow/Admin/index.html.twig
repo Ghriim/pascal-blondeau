@@ -28,7 +28,9 @@
         <tbody>
             {% for slide in slides %}
                 <tr>
-                    <td><img src="{{ slide.path }}" alt="" /></td>
+                    <td>
+	                    <img src="{{ asset(slide.webPath) }}" class="img-responsive img-thumbnail" alt="" />
+                    </td>
                     <td>
                         <span class="badge status-{{ slide.status }}">
                             {{ ('list.slide.body.status.' ~ slide.status) | trans({}) }}

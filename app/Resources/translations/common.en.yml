@@ -1,0 +1,9 @@
+form:
+    status:
+        label: Status
+        option:
+            active: Active
+            planned: Planned
+            stopped: Stopped
+    position:
+        label: Position

@@ -1,0 +1,10 @@
+services:
+    pblondeau.form.type.pblondeau_status:
+        class: PBlondeau\Bundle\CommonBundle\Form\Type\StatusType
+        tags:
+            - { name: form.type, alias: pblondeau_status }
+
+    pblondeau.form.type.pblondeau_position:
+        class: PBlondeau\Bundle\CommonBundle\Form\Type\PositionType
+        tags:
+            - { name: form.type, alias: pblondeau_position }

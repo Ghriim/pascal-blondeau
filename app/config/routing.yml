@@ -11,32 +11,32 @@ p_blondeau_slide_show:
 p_blondeau_news:
     resource: "@PBlondeauNewsBundle/Controller/"
     type:     annotation
-    prefix:   /news
+    prefix:   /
 
 p_blondeau_work:
     resource: "@PBlondeauWorkBundle/Controller/"
     type:     annotation
-    prefix:   /works
+    prefix:   /
 
 p_blondeau_exhibition:
     resource: "@PBlondeauExhibitionBundle/Controller/"
     type:     annotation
-    prefix:   /exhibitions
+    prefix:   /
 
 p_blondeau_press:
     resource: "@PBlondeauPressBundle/Controller/"
     type:     annotation
-    prefix:   /press
+    prefix:   /
 
 p_blondeau_biography:
     resource: "@PBlondeauBiographyBundle/Controller/"
     type:     annotation
-    prefix:   /biography
+    prefix:   /
 
 p_blondeau_contact:
     resource: "@PBlondeauContactBundle/Controller/"
     type:     annotation
-    prefix:   /contact
+    prefix:   /
 
 
 p_blondeau_common:
@@ -45,6 +45,10 @@ p_blondeau_common:
     prefix:   /
 
 
+
+_imagine:
+    resource: .
+    type:     imagine
 
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

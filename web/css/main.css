@@ -1,3 +1,20 @@
+/* Sticky footer */
+* {
+	margin: 0;
+}
+html, body {
+	height: 100%;
+}
+#wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -50px;
+}
+#main-footer, #push {
+	height: 50px;
+}
+
 /* Padding - Default */
 .padding-left {
     padding-left: 20px;
@@ -53,3 +70,15 @@ table .list-inline {
     margin-bottom: 0;
 }
 
+.submits a, .submits .btn-default {
+	display:  inline-block;
+	margin-right: 15px;
+}
+
+/* Image & Carousel */
+table td .img-thumbnail {
+	height: 75px;
+}
+.carousel-inner > .item > img {
+	margin: 0 auto;
+}
