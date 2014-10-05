@@ -21,12 +21,14 @@ list:
                 delete: Remove
 
 form:
-    add:
-        modal:
-            title: New Slide in Slide Show
-            action:
-                save: Save the Slide
-                cancel: Cancel
+    modal:
+        add:
+            title: Add a new Slide
+        edit:
+            title: Edit Slide
+        action:
+            save: Save the Slide
+            cancel: Cancel
     delete:
         modal:
             title: Remove Slide from Slide Show

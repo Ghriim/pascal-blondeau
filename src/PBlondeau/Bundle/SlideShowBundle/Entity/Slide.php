@@ -68,8 +68,11 @@ class Slide extends BaseEntity
     private $user;
 
     /**
-     * @Assert\File(maxSize="6000000")
-     * @Assert\NotNull()
+     * @Assert\File(
+     *      maxSize="6000000",
+     *      mimeTypes = {"image/jpeg", "image/gif", "image/png"}
+     * )
+     * @Assert\NotNull(groups={"creation"})
      */
     public $file;
 

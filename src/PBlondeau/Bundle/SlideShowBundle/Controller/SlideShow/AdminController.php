@@ -39,75 +39,65 @@ class AdminController extends BaseController
 
         return array(
             'slides' => $slides,
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
     /**
      * @param Request $request
+     * @param Slide $slide
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
      * @Route("/", name="admin_slides_create")
-     * @Method("POST")
+     * @Route("/{id}", name="admin_slides_edit")
+     * @Method({"GET", "POST"})
      * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:_saveForm.html.twig")
      */
-    public function createAjaxAction(Request $request)
+    public function saveAjaxAction(Request $request, Slide $slide = null)
     {
-        $slide = new Slide();
-        $slide->setUser($this->getUser());
+        if (!$slide) {
+            $slide = new Slide();
+            $slide->setUser($this->getUser());
+
+            $action = $this->generateUrl('admin_slides_create');
+            $validationGroups = array('creation');
+        } else {
+            $action = $this->generateUrl('admin_slides_edit',
+                array('id' => $slide->getId()));
+
+            $validationGroups = array('default');
+        }
 
         $form = $this->createForm(new SlideType(), $slide, array(
-            'action' => $this->generateUrl('admin_slides_create'),
+            'action' => $action,
             'method' => 'POST',
+            'validation_groups' => $validationGroups
         ));
 
-        $form->submit($request);
+        if ($request->isMethod('POST')) {
+            $form->submit($request);
 
-        if ($form->isValid()) {
-            $this->getEntityManager()->persist($slide);
-            $this->getEntityManager()->flush();
+            if ($form->isValid()) {
+                $this->getEntityManager()->persist($slide);
+                $this->getEntityManager()->flush();
 
-            return $this->redirect($this->generateUrl('admin_slides'));
+                return $this->redirect($this->generateUrl('admin_slides'));
+            }
         }
 
         return array(
-            'form'   => $form->createView(),
+            'form' => $form->createView(),
         );
     }
 
     /**
-     * @Route("/{id}/edit", name="admin_slides_edit")
-     * @Method("GET")
-     * @Template()
+     * Creates a form to edit a Slide entity.
+     *
+     * @param Slide $entity The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
      */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('PBlondeauSlideShowBundle:Slide')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Slide entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
-
-    /**
-    * Creates a form to edit a Slide entity.
-    *
-    * @param Slide $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
     private function createEditForm(Slide $entity)
     {
         $form = $this->createForm(new SlideType(), $entity, array(
@@ -119,6 +109,7 @@ class AdminController extends BaseController
 
         return $form;
     }
+
     /**
      * @Route("/{id}", name="admin_slides_update")
      * @Method("PUT")
@@ -144,8 +135,8 @@ class AdminController extends BaseController
         }
 
         return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
+            'entity' => $entity,
+            'edit_form' => $editForm->createView(),
         );
     }
 

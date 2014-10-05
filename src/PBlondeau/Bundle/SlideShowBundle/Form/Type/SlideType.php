@@ -28,7 +28,7 @@ class SlideType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'PBlondeau\Bundle\SlideShowBundle\Entity\Slide',
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ));
     }
 

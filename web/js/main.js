@@ -3,6 +3,7 @@ jQuery(document).ready(function() {
 
 	toggleAdminMenu();
 
+    buildSaveForm();
 	submitSaveForm();
 });
 
@@ -23,27 +24,43 @@ function toggleAdminMenu()
 	});
 }
 
-
-
 function submitSaveForm()
 {
-    var saveFormContainer = jQuery('#save-form');
-    var form = saveFormContainer.find('form');
+    var saveFormDOM = jQuery('#save-form');
+    var form = saveFormDOM.find('form');
 
     form.on('submit', function(e) {
         e.preventDefault();
 
 	    var $this = jQuery(this);
-	    $.ajax({
+	    jQuery.ajax({
 		    url: $this.attr('action'), // Le nom du fichier indiqué dans le formulaire
 		    type: $this.attr('method'), // La méthode indiquée dans le formulaire (get ou post)
 		    data: new FormData($this), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
 		    processData: false,
 		    success: function(html) {
-			    saveFormContainer.find('#save-form-container').html(html);
-		    }, error: function() {
-
-            }
+                saveFormDOM.find('#save-form-container').html(html);
+		    }
 	    });
     });
+}
+
+function buildSaveForm()
+{
+    var editLink = jQuery('.edit-entity');
+    var saveFormDOM = jQuery('#save-form');
+
+    editLink.on('click', function(e) {
+        e.preventDefault();
+
+        var $this = jQuery(this);
+        jQuery.ajax({
+            url: $this.data('action'),
+            type: 'GET',
+            success: function(html) {
+                saveFormDOM.modal('show');
+                saveFormDOM.find('#save-form-container').html(html);
+            }
+        });
+    })
 }
