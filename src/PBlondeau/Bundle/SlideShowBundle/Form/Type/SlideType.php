@@ -27,7 +27,8 @@ class SlideType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'PBlondeau\Bundle\SlideShowBundle\Entity\Slide'
+            'data_class' => 'PBlondeau\Bundle\SlideShowBundle\Entity\Slide',
+            'csrf_protection' => false
         ));
     }
 

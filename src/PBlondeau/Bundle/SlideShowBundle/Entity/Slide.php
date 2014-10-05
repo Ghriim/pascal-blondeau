@@ -38,6 +38,8 @@ class Slide extends BaseEntity
      * @var integer
      *
      * @ORM\Column(name="position", type="integer")
+     * @Assert\NotNull()
+     * @Assert\GreaterThanOrEqual(1)
      */
     private $position;
 
@@ -45,6 +47,8 @@ class Slide extends BaseEntity
      * @var \DateTime
      *
      * @ORM\Column(name="creation", type="datetime")
+     * @Assert\NotNull()
+     * @Assert\DateTime()
      */
     private $creation;
 
@@ -65,6 +69,7 @@ class Slide extends BaseEntity
 
     /**
      * @Assert\File(maxSize="6000000")
+     * @Assert\NotNull()
      */
     public $file;
 

@@ -62,7 +62,7 @@ class AdminController extends BaseController
             'method' => 'POST',
         ));
 
-        $form->handleRequest($request);
+        $form->submit($request);
 
         if ($form->isValid()) {
             $this->getEntityManager()->persist($slide);
@@ -70,7 +70,6 @@ class AdminController extends BaseController
 
             return $this->redirect($this->generateUrl('admin_slides'));
         }
-
 
         return array(
             'form'   => $form->createView(),

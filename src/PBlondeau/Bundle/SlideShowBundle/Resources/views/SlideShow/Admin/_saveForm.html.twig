@@ -4,6 +4,10 @@
 <div class="modal-body">
     {{ form_errors(form) }}
 
+    {% if errors is defined %}
+        {{ errors }}
+    {% endif %}
+
     {{ form_rest(form) }}
 </div>
 
