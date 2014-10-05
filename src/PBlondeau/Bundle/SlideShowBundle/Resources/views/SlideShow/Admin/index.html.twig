@@ -24,6 +24,7 @@
         <thead>
             <tr>
                 <th>{{ 'list.slide.header.image' | trans({}) }}</th>
+	            <th>{{ 'list.slide.header.position' | trans({}) }}</th>
                 <th>{{ 'list.slide.header.status' | trans({}) }}</th>
                 <th>{{ 'list.slide.header.creation' | trans({}) }}</th>
                 <th>{{ 'list.slide.header.actions' | trans({}) }}</th>
@@ -36,6 +37,9 @@
                     <td>
 	                    <img src="{{ asset(slide.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                     </td>
+	                <td>
+		                {{ slide.position }}
+	                </td>
                     <td>
                         <span class="badge status-{{ slide.status }}">
                             {{ ('list.slide.body.status.' ~ slide.status) | trans({}) }}

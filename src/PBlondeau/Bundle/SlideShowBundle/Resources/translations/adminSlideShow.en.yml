@@ -7,6 +7,7 @@ list:
         empty: No Slide added yet
         header:
             image: Image
+            position: Position
             status: Status
             creation: Added
             actions: Actions

@@ -2,6 +2,8 @@ jQuery(document).ready(function() {
 	jQuery("body").tooltip({ selector: '[data-toggle=tooltip]', width: 'auto' });
 
 	toggleAdminMenu();
+
+	submitSaveForm();
 });
 
 function toggleAdminMenu()
@@ -21,6 +23,8 @@ function toggleAdminMenu()
 	});
 }
 
+
+
 function submitSaveForm()
 {
     var saveFormContainer = jQuery('#save-form');
@@ -29,11 +33,17 @@ function submitSaveForm()
     form.on('submit', function(e) {
         e.preventDefault();
 
-        var action = form.attr('action');
-        jQuery.post(
+	    var $this = jQuery(this);
 
-        );
-
-        alert('submit');
+	    $.ajax({
+		    url: $this.attr('action'), // Le nom du fichier indiqué dans le formulaire
+		    type: $this.attr('method'), // La méthode indiquée dans le formulaire (get ou post)
+		    data: new FormData($this), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
+		    processData: false,
+		    error: function(html) {
+			    var formDom = jQuery('#'+ $this.attr('id'));
+			    formDom.html(html);
+		    }
+	    });
     });
 }
