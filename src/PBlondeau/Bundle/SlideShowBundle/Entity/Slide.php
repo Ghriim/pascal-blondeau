@@ -37,8 +37,7 @@ class Slide extends BaseEntity
     /**
      * @var integer
      *
-     * @ORM\Column(name="position", type="integer")
-     * @Assert\NotNull()
+     * @ORM\Column(name="position", type="integer", nullable=true)
      * @Assert\GreaterThanOrEqual(1)
      */
     private $position;
@@ -171,6 +170,10 @@ class Slide extends BaseEntity
     {
         $this->status = $status;
 
+        if($status == BaseEntity::STATUS_STOPPED) {
+            $this->setPosition(null);
+        }
+
         return $this;
     }
 
@@ -263,5 +266,13 @@ class Slide extends BaseEntity
         if ($file && file_exists($file)) {
             unlink($file);
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isNew()
+    {
+        return is_null($this->getId());
     }
 }

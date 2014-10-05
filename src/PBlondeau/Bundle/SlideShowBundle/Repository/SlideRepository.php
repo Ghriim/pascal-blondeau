@@ -33,7 +33,7 @@ class SlideRepository extends EntityRepository
         }
 
         $qb->orderBy('slide.status');
-        $qb->addOrderBy('slide.creation');
+        $qb->addOrderBy('slide.position');
 
         return $qb->getQuery()->getResult();
     }

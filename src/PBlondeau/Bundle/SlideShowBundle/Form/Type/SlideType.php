@@ -16,7 +16,6 @@ class SlideType extends AbstractType
     {
         $builder
             ->add('file')
-            ->add('position', 'pblondeau_position')
             ->add('status', 'pblondeau_status')
         ;
     }

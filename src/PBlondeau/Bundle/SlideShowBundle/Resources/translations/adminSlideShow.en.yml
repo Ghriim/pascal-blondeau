@@ -21,13 +21,13 @@ list:
                 delete: Remove
 
 form:
+    create:
+        title: Add a new Slide
+        success.message: A new Slide has been successfully added
+    update:
+        title: Update Slide informations
+        success.message: The Slide has been successfully modified
     modal:
-        add:
-            title: Add a new Slide
-            success.message: A new Slide has been successfully added
-        edit:
-            title: Edit Slide
-            success.message: The Slide has been successfully modified
         action:
             save: Save the Slide
             cancel: Cancel
@@ -42,4 +42,4 @@ form:
             action:
                 confirm: Remove the Slide
                 cancel: Cancel
-        success: Suppression completed successfully
+        success.message: The Slide has been successfully removed

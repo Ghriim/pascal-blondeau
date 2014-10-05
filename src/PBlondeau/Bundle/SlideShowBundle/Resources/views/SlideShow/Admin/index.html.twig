@@ -14,7 +14,9 @@
         </div>
 
         <div class="col-md-2 text-right">
-            <button class="btn btn-default" data-toggle="modal" data-target="#save-form">
+            <button class="btn btn-default create-entity"
+                    data-action="{{ path('admin_slides_create') }}"
+                    data-title="{{ 'form.create.title' | trans({})  }}">
                 <span class="fa fa-plus"></span>{{ 'list.action.add' | trans({}) }}
             </button>
         </div>
@@ -50,7 +52,8 @@
                         <ul class="list-inline">
                             <li>
                                 <a href="#" class="edit-entity" title="{{ 'list.slide.body.action.edit' | trans({}) }}"
-                                        data-action="{{ path('admin_slides_edit', {'id': slide.id}) }}">
+                                        data-action="{{ path('admin_slides_edit', {'id': slide.id}) }}"
+                                        data-title="{{ 'form.update.title' | trans({})  }}">
                                     <span class="fa fa-pencil"></span>{{ 'list.slide.body.action.edit' | trans({}) }}</a>
                             </li>
 
@@ -75,7 +78,7 @@
     </table>
 
     <div class="paginator">
-        {#{ knp_pagination_render(slides) }#}
+        {{ knp_pagination_render(slides) }}
     </div>
 
     <div id="save-form" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -85,15 +88,10 @@
                     <button type="button" class="close" data-dismiss="modal">
                         <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                     </button>
-                    <h4 class="modal-title">{{ 'form.modal.add.title' | trans({}) }}</h4>
-
-                    <h4 class="modal-title hidden">{{ 'form.modal.edit.title' | trans({}) }}</h4>
+                    <h4 class="modal-title"></h4>
                 </div>
 
-                <div id="save-form-container">
-                    {% include "PBlondeauSlideShowBundle:SlideShow/Admin:_saveForm.html.twig"
-                        with {'form': form} only %}
-                </div>
+                <div id="save-form-container"></div>
             </div>
         </div>
     </div>

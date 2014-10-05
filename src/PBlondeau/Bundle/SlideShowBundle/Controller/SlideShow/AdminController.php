@@ -31,15 +31,8 @@ class AdminController extends BaseController
             $this->get('request')->query->get('page', 1)
         );
 
-        $slide = new Slide();
-        $form = $this->createForm(new SlideType(), $slide, array(
-            'action' => $this->generateUrl('admin_slides_create'),
-            'method' => 'POST',
-        ));
-
         return array(
             'slides' => $slides,
-            'form' => $form->createView(),
         );
     }
 
@@ -49,33 +42,19 @@ class AdminController extends BaseController
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/", name="admin_slides_create")
-     * @Route("/{id}", name="admin_slides_edit")
+     * @Route("/create", name="admin_slides_create")
+     * @Route("/{id}/update", name="admin_slides_edit")
      * @Method({"GET", "POST"})
      * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:_saveForm.html.twig")
      */
     public function saveAjaxAction(Request $request, Slide $slide = null)
     {
-        if (!$slide) {
+        if(!$slide) {
             $slide = new Slide();
             $slide->setUser($this->getUser());
-
-            $action = $this->generateUrl('admin_slides_create');
-            $validationGroups = array('creation');
-            $successMessageKey = 'form.modal.add.success.message';
-        } else {
-            $action = $this->generateUrl('admin_slides_edit',
-                array('id' => $slide->getId()));
-
-            $validationGroups = array('default');
-            $successMessageKey = 'form.modal.edit.success.message';
         }
 
-        $form = $this->createForm(new SlideType(), $slide, array(
-            'action' => $action,
-            'method' => 'POST',
-            'validation_groups' => $validationGroups
-        ));
+        $form = $this->buildSaveForm($slide);
 
         if ($request->isMethod('POST')) {
             $form->submit($request);
@@ -84,7 +63,8 @@ class AdminController extends BaseController
                 $this->getEntityManager()->persist($slide);
                 $this->getEntityManager()->flush();
 
-                $message = $this->getTranslator()->trans($successMessageKey, array(), 'adminSlideShow');
+                $context = $slide ? 'update' : 'create';
+                $message = $this->getSuccessMessageFromContext($context);
                 $this->addFlashMessage($message, 'success');
 
                 return $this->redirect($this->generateUrl('admin_slides'));
@@ -96,53 +76,33 @@ class AdminController extends BaseController
         );
     }
 
-    /**
-     * Creates a form to edit a Slide entity.
-     *
-     * @param Slide $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createEditForm(Slide $entity)
+    private function buildSaveForm(Slide $slide = null)
     {
-        $form = $this->createForm(new SlideType(), $entity, array(
-            'action' => $this->generateUrl('admin_slides_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
+        if ($slide->isNew()) {
+            $action = $this->generateUrl('admin_slides_create');
+            $validationGroups = array('creation');
+        } else {
+            $action = $this->generateUrl('admin_slides_edit',
+                array('id' => $slide->getId()));
+
+            $validationGroups = array('default');
+        }
+
+        return $this->createForm(new SlideType(), $slide, array(
+            'action' => $action,
+            'method' => 'POST',
+            'validation_groups' => $validationGroups
         ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
-
-        return $form;
     }
 
     /**
-     * @Route("/{id}", name="admin_slides_update")
-     * @Method("PUT")
-     * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:edit.html.twig")
+     * @param $context
+     *
+     * @return string
      */
-    public function updateAction(Request $request, $id)
+    private function getSuccessMessageFromContext($context = 'create')
     {
-        $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('PBlondeauSlideShowBundle:Slide')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Slide entity.');
-        }
-
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('admin_slides'));
-        }
-
-        return array(
-            'entity' => $entity,
-            'edit_form' => $editForm->createView(),
-        );
+        return $this->getTranslator()->trans('form.' . $context . '.success.message', array(), 'adminSlideShow');
     }
 
     /**
@@ -158,7 +118,7 @@ class AdminController extends BaseController
         $this->getEntityManager()->remove($slide);
         $this->getEntityManager()->flush();
 
-        $message = $this->getTranslator()->trans('form.delete.success', array(), 'adminSlideShow');
+        $message = $this->getSuccessMessageFromContext('delete');
         $this->addFlashMessage($message, 'success');
 
         return $this->redirect($this->generateUrl('admin_slides'));

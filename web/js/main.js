@@ -47,10 +47,10 @@ function submitSaveForm()
 
 function buildSaveForm()
 {
-    var editLink = jQuery('.edit-entity');
+    var openSaveFormLink = jQuery('.create-entity, .edit-entity');
     var saveFormDOM = jQuery('#save-form');
 
-    editLink.on('click', function(e) {
+    openSaveFormLink.on('click', function(e) {
         e.preventDefault();
 
         var $this = jQuery(this);
@@ -58,8 +58,10 @@ function buildSaveForm()
             url: $this.data('action'),
             type: 'GET',
             success: function(html) {
-                saveFormDOM.modal('show');
+                saveFormDOM.find('.modal-title').html($this.data('title'));
                 saveFormDOM.find('#save-form-container').html(html);
+
+                saveFormDOM.modal('show');
             }
         });
     })
