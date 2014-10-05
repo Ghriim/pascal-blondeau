@@ -62,11 +62,13 @@ class AdminController extends BaseController
 
             $action = $this->generateUrl('admin_slides_create');
             $validationGroups = array('creation');
+            $successMessageKey = 'form.modal.add.success.message';
         } else {
             $action = $this->generateUrl('admin_slides_edit',
                 array('id' => $slide->getId()));
 
             $validationGroups = array('default');
+            $successMessageKey = 'form.modal.edit.success.message';
         }
 
         $form = $this->createForm(new SlideType(), $slide, array(
@@ -81,6 +83,9 @@ class AdminController extends BaseController
             if ($form->isValid()) {
                 $this->getEntityManager()->persist($slide);
                 $this->getEntityManager()->flush();
+
+                $message = $this->getTranslator()->trans($successMessageKey, array(), 'adminSlideShow');
+                $this->addFlashMessage($message, 'success');
 
                 return $this->redirect($this->generateUrl('admin_slides'));
             }
