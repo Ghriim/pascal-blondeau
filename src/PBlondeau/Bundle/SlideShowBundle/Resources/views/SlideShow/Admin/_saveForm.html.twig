@@ -1,0 +1,21 @@
+{% trans_default_domain "adminSlideShow" %}
+
+{{ form_start(form) }}
+<div class="modal-body">
+    {{ form_errors(form) }}
+
+    {{ form_rest(form) }}
+</div>
+
+<div class="submits modal-footer text-right">
+    <button type="button" class="btn btn-default" data-dismiss="modal">
+        <span class="fa fa-times"></span>
+        {{ 'form.add.modal.action.cancel' | trans({}) }}
+    </button>
+
+    <button type="submit" class="submit btn btn-primary">
+        <span class="fa fa-floppy-o"></span>
+        {{ 'form.add.modal.action.save' | trans({}) }}
+    </button>
+</div>
+{{ form_end(form) }}

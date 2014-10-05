@@ -49,9 +49,9 @@ class AdminController extends BaseController
      *
      * @Route("/", name="admin_slides_create")
      * @Method("POST")
-     * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:list.html.twig")
+     * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:_saveForm.html.twig")
      */
-    public function createAction(Request $request)
+    public function createAjaxAction(Request $request)
     {
         $slide = new Slide();
         $slide->setUser($this->getUser());

@@ -2,6 +2,11 @@
 
 {% trans_default_domain "adminSlideShow" %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/pblondeauslideshow/js/slides-admin.js') }}"></script>
+{% endblock %}
+
 {% block body %}
      <div class="row">
         <div class="col-md-10 padding-left">
@@ -9,7 +14,7 @@
         </div>
 
         <div class="col-md-2 text-right">
-            <button class="btn btn-default" data-toggle="modal" data-target="#add-form">
+            <button class="btn btn-default" data-toggle="modal" data-target="#save-form">
                 <span class="fa fa-plus"></span>{{ 'list.action.add' | trans({}) }}
             </button>
         </div>
@@ -65,10 +70,22 @@
     </table>
 
     <div class="paginator">
-        {{ knp_pagination_render(slides) }}
+        {#{ knp_pagination_render(slides) }#}
     </div>
 
-    <div id="add-form" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        {% include "PBlondeauSlideShowBundle:SlideShow/Admin:saveForm.html.twig" with {'form': form} only %}
+    <div id="save-form" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">{{ 'form.add.modal.title' | trans({}) }}</h4>
+                </div>
+
+                {% include "PBlondeauSlideShowBundle:SlideShow/Admin:_saveForm.html.twig"
+                    with {'form': form} only %}
+            </div>
+        </div>
     </div>
 {% endblock %}

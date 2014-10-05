@@ -21,3 +21,19 @@ function toggleAdminMenu()
 	});
 }
 
+function submitSaveForm()
+{
+    var saveFormContainer = jQuery('#save-form');
+    var form = saveFormContainer.find('form');
+
+    form.on('submit', function(e) {
+        e.preventDefault();
+
+        var action = form.attr('action');
+        jQuery.post(
+
+        );
+
+        alert('submit');
+    });
+}
