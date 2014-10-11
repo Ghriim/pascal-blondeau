@@ -87,24 +87,28 @@ class AdminController extends BaseController
      */
     public function updatePositionAjaxAction(Request $request)
     {
-        $idWithPositionList = $request->get('idWithPositionList');
-        foreach ($idWithPositionList as $idWithPosition) {
-            /** @var Slide $slide */
-            $slide = $this->getSlideRepository()->find($idWithPosition['id']);
-            if (!$slide) {
-                throw new NotFoundHttpException();
+        if ($request->isMethod('POST')) {
+            $idWithPositionList = $request->get('idWithPositionList');
+            foreach ($idWithPositionList as $idWithPosition) {
+                /** @var Slide $slide */
+                $slide = $this->getSlideRepository()->find($idWithPosition['id']);
+                if (!$slide) {
+                    throw new NotFoundHttpException();
+                }
+                $slide->setPosition($idWithPosition['position']);
             }
-            $slide->setPosition($idWithPosition['position']);
+
+            $this->getEntityManager()->flush();
+
+            return new JsonResponse(
+                array(
+                    'status' => 'success',
+                    'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminSlideShow')
+                )
+            );
         }
 
-        $this->getEntityManager()->flush();
-
-        return new JsonResponse(
-            array(
-                'status'  => 'success',
-                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminSlideShow')
-            )
-        );
+        return new JsonResponse(array('status' => 'error'));
     }
 
     /**

@@ -15,7 +15,9 @@ class SlideType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file')
+            ->add('file', 'file', array(
+                'required' => false
+            ))
             ->add('status', 'pblondeau_status')
         ;
     }

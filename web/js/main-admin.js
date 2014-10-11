@@ -17,36 +17,45 @@ function initSortableTable()
         cursor: "move",
         items: "tr:not(.sortable-disabled)",
         update: function() {
-            var sortableTableLines = sortableTable.find('tr');
-            var idWithPositionList = [];
+            updateEntityPosition(sortableTable)
+        }
+    });
+}
 
-            jQuery.each(sortableTableLines, function(index) {
-                var currentLine = jQuery(this);
-                idWithPositionList.push({id: currentLine.data('id'), position: index + 1});
+function updateEntityPosition(sortableTable)
+{
+    var sortableTableLines = sortableTable.find('tr:not(.sortable-disabled)');
+    var idWithPositionList = [];
+
+    jQuery.each(sortableTableLines, function(index) {
+        var currentLine = jQuery(this);
+        idWithPositionList.push({id: currentLine.data('id'), position: index + 1});
+    });
+
+    var data = {
+        idWithPositionList: idWithPositionList
+    };
+
+    jQuery.ajax({
+        url: sortableTable.data('action'),
+        method: 'POST',
+        data: data,
+        success: function(json) {
+            if(json.status == 'error') {
+                return;
+            }
+
+            idWithPositionList.forEach(function(idWithPosition) {
+                var positionArea = '#slide-' + idWithPosition.id + ' td.position';
+                sortableTable.find(positionArea).html(idWithPosition.position);
             });
 
-            var data = {
-                idWithPositionList: idWithPositionList
-            };
+            var newFlashMessage = '<div class="alert alert-dismissable alert-success">'
+                + json.message
+                + '</div>';
 
-            jQuery.ajax({
-                url: sortableTable.data('action'),
-                method: 'POST',
-                data: data,
-                success: function(json) {
-                    idWithPositionList.forEach(function(idWithPosition) {
-                        var positionArea = '#slide-' + idWithPosition.id + ' td.position';
-                        sortableTable.find(positionArea).html(idWithPosition.position);
-                    });
-
-                    var newFlashMessage = '<div class="alert alert-dismissable alert-success">'
-                                        + json.message
-                                        + '</div>';
-
-                    var flashMessagesContainer = jQuery('#flash-messages');
-                    flashMessagesContainer.append(newFlashMessage);
-                }
-            });
+            var flashMessagesContainer = jQuery('#flash-messages');
+            flashMessagesContainer.append(newFlashMessage);
         }
     });
 }
@@ -78,9 +87,9 @@ function submitSaveForm()
 
 	    var $this = jQuery(this);
 	    jQuery.ajax({
-		    url: $this.attr('action'), // Le nom du fichier indiqué dans le formulaire
-		    type: $this.attr('method'), // La méthode indiquée dans le formulaire (get ou post)
-		    data: new FormData($this), // Je sérialise les données (j'envoie toutes les valeurs présentes dans le formulaire)
+		    url: $this.attr('action'),
+		    type: $this.attr('method'),
+		    data: new FormData($this),
 		    processData: false,
 		    success: function(html) {
                 saveFormDOM.find('#save-form-container').html(html);
