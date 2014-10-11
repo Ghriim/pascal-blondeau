@@ -35,7 +35,7 @@ form:
         modal:
             title: Remove Press Article
             content: >
-                You are about to delete a Press Article from the home.<br />
+                You are about to delete a Press Article.<br />
                 Suppression is permanent and you won't be able to recover the data.<br />
                 <br />
                 Are you sure you want to proceed ?

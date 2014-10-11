@@ -33,9 +33,9 @@ form:
             cancel: Cancel
     delete:
         modal:
-            title: Remove Exhibition from Exhibition Show
+            title: Remove Exhibition
             content: >
-                You are about to delete a Exhibition from the home Exhibition Show.<br />
+                You are about to delete an Exhibition.<br />
                 Suppression is permanent and you won't be able to recover the data.<br />
                 <br />
                 Are you sure you want to proceed ?
