@@ -1,0 +1,100 @@
+{% extends "::layout.html.twig" %}
+
+{% trans_default_domain "adminPressArticle" %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/main-admin.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+     <div class="row">
+        <div class="col-md-10 padding-left">
+            <h4>{{ 'list.pressArticle.count' | trans({'%numberOfPress%': pressArticles.getTotalItemCount}) }}</h4>
+        </div>
+
+        <div class="col-md-2 text-right">
+            <button class="btn btn-default create-entity"
+                    data-action="{{ path('admin_press_articles_create') }}"
+                    data-title="{{ 'form.create.title' | trans({})  }}">
+                <span class="fa fa-plus"></span>{{ 'list.action.add' | trans({}) }}
+            </button>
+        </div>
+    </div>
+
+    <table class="table table-striped table-hover table-sortable">
+        <thead>
+            <tr>
+                <th>{{ 'list.pressArticle.header.image' | trans({}) }}</th>
+	            <th>{{ 'list.pressArticle.header.position' | trans({}) }}</th>
+                <th>{{ 'list.pressArticle.header.status' | trans({}) }}</th>
+                <th>{{ 'list.pressArticle.header.creation' | trans({}) }}</th>
+                <th>{{ 'list.pressArticle.header.actions' | trans({}) }}</th>
+            </tr>
+        </thead>
+
+        <tbody data-action="{{ path('admin_press_articles_update_positions') }}">
+            {% for pressArticle in pressArticles %}
+                <tr id="entity-{{ pressArticle.id }}" data-id="{{ pressArticle.id }}"
+                        class="{% if pressArticle.isStopped %}sortable-disabled{% endif %}">
+                    <td class="preview">
+                        <span class="fa fa-arrows-v margin-x {% if pressArticle.isStopped %}invisible{% endif %}"></span>
+                        <img src="{{ asset(pressArticle.webPath) }}" class="img-responsive img-thumbnail" alt="" />
+                    </td>
+	                <td class="position">
+		                {{ pressArticle.position }}
+	                </td>
+                    <td>
+                        <span class="badge status-{{ pressArticle.status }}">
+                            {{ ('list.pressArticle.body.status.' ~ pressArticle.status) | trans({}) }}
+                        </span>
+                    </td>
+                    <td>{{ pressArticle.creation|date('d-m-Y') }}</td>
+                    <td>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="#" class="edit-entity" title="{{ 'list.pressArticle.body.action.edit' | trans({}) }}"
+                                        data-action="{{ path('admin_press_articles_edit', {'id': pressArticle.id}) }}"
+                                        data-title="{{ 'form.update.title' | trans({})  }}">
+                                    <span class="fa fa-pencil"></span>{{ 'list.pressArticle.body.action.edit' | trans({}) }}</a>
+                            </li>
+
+                            <li>
+                                <button class="btn btn-link" data-toggle="modal" data-target="#delete-modal-{{ pressArticle.id }}">
+                                    <span class="fa fa-times-circle"></span>{{ 'list.pressArticle.body.action.delete' | trans({}) }}
+                                </button>
+
+                                <div id="delete-modal-{{ pressArticle.id }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+                                    {% include "PBlondeauPressBundle:PressArticle/Admin:deleteModal.html.twig" %}
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5" class="">{{ 'list.pressArticle.empty' | trans({}) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="paginator">
+        {{ knp_pagination_render(pressArticles) }}
+    </div>
+
+    <div id="save-form" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title"></h4>
+                </div>
+
+                <div id="save-form-container"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

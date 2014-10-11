@@ -1,0 +1,9 @@
+{% extends '::layout.html.twig' %}
+
+{% block body %}
+	{% for pressArticle in pressArticles %}
+        <div class="text-center margin-bottom">
+            <img class="img-max-width" src="{{ asset(pressArticle.webPath) }}" alt="" />
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,48 @@
+list:
+    action:
+        add: Add a new Press Article
+
+    pressArticle:
+        count: %numberOfPress% Press Articles
+        empty: No Press added yet
+        header:
+            image: Image
+            position: Position
+            status: Status
+            creation: Added
+            actions: Actions
+        body:
+            status:
+                active: Active
+                planned: Planned
+                stopped: Stopped
+            action:
+                edit: Edit
+                delete: Remove
+
+form:
+    create:
+        title: Add a new Press Article
+        success.message: A new Press Article has been successfully added
+    update:
+        title: Update Press Article informations
+        success.message: The Press Article has been successfully modified
+    modal:
+        action:
+            save: Save the Press Article
+            cancel: Cancel
+    delete:
+        modal:
+            title: Remove Press Article
+            content: >
+                You are about to delete a Press Article from the home.<br />
+                Suppression is permanent and you won't be able to recover the data.<br />
+                <br />
+                Are you sure you want to proceed ?
+            action:
+                confirm: Remove the Press Article
+                cancel: Cancel
+        success.message: The Press Article has been successfully removed
+
+    updatePosition:
+        message: Positions have been successfully updated

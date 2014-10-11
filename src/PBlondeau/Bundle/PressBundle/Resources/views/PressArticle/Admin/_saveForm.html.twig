@@ -1,0 +1,33 @@
+{% trans_default_domain "adminPressArticle" %}
+
+{{ form_start(form) }}
+<div class="modal-body">
+    {{ form_errors(form) }}
+
+    {% if errors is defined %}
+        {{ errors }}
+    {% endif %}
+
+    <div>
+        {{ form_row(form.file) }}
+    </div>
+
+    <div>
+        {{ form_row(form.file) }}
+    </div>
+
+    {{ form_rest(form) }}
+</div>
+
+<div class="submits modal-footer text-right">
+    <button type="button" class="btn btn-default" data-dismiss="modal">
+        <span class="fa fa-times"></span>
+        {{ 'form.modal.action.cancel' | trans({}) }}
+    </button>
+
+    <button type="submit" class="submit btn btn-primary">
+        <span class="fa fa-floppy-o"></span>
+        {{ 'form.modal.action.save' | trans({}) }}
+    </button>
+</div>
+{{ form_end(form) }}
