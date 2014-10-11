@@ -4,7 +4,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/pblondeauslideshow/js/slides-admin.js') }}"></script>
+    <script src="{{ asset('js/main-admin.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <table class="table table-striped table-hover">
+    <table class="table table-striped table-hover table-sortable">
         <thead>
             <tr>
                 <th>{{ 'list.slide.header.image' | trans({}) }}</th>
@@ -33,13 +33,15 @@
             </tr>
         </thead>
 
-        <tbody>
+        <tbody data-action="{{ path('admin_slides_update_positions') }}">
             {% for slide in slides %}
-                <tr>
-                    <td>
-	                    <img src="{{ asset(slide.webPath) }}" class="img-responsive img-thumbnail" alt="" />
+                <tr id="slide-{{ slide.id }}" data-id="{{ slide.id }}"
+                        class="{% if slide.isStopped %}sortable-disabled{% endif %}">
+                    <td class="preview">
+                        <span class="fa fa-arrows-v margin-x {% if slide.isStopped %}invisible{% endif %}"></span>
+                        <img src="{{ asset(slide.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                     </td>
-	                <td>
+	                <td class="position">
 		                {{ slide.position }}
 	                </td>
                     <td>

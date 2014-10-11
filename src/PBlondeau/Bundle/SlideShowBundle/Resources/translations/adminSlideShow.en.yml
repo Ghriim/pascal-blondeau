@@ -43,3 +43,6 @@ form:
                 confirm: Remove the Slide
                 cancel: Cancel
         success.message: The Slide has been successfully removed
+
+    updatePosition:
+        message: Positions have been successfully updated

@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\SlideShowBundle\Entity\Slide;
 use PBlondeau\Bundle\SlideShowBundle\Form\Type\SlideType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Slide controller.
@@ -49,7 +50,7 @@ class AdminController extends BaseController
      */
     public function saveAjaxAction(Request $request, Slide $slide = null)
     {
-        if(!$slide) {
+        if (!$slide) {
             $slide = new Slide();
             $slide->setUser($this->getUser());
         }
@@ -76,6 +77,60 @@ class AdminController extends BaseController
         );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     *
+     * @Route("/update-position", name="admin_slides_update_positions")
+     * @Method("POST")
+     */
+    public function updatePositionAjaxAction(Request $request)
+    {
+        $idWithPositionList = $request->get('idWithPositionList');
+        foreach ($idWithPositionList as $idWithPosition) {
+            /** @var Slide $slide */
+            $slide = $this->getSlideRepository()->find($idWithPosition['id']);
+            if (!$slide) {
+                throw new NotFoundHttpException();
+            }
+            $slide->setPosition($idWithPosition['position']);
+        }
+
+        $this->getEntityManager()->flush();
+
+        return new JsonResponse(
+            array(
+                'status'  => 'success',
+                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminSlideShow')
+            )
+        );
+    }
+
+    /**
+     * @param Slide $slide
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     *
+     * @Route("/{id}", name="admin_slides_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Slide $slide)
+    {
+        $this->getEntityManager()->remove($slide);
+        $this->getEntityManager()->flush();
+
+        $message = $this->getSuccessMessageFromContext('delete');
+        $this->addFlashMessage($message, 'success');
+
+        return $this->redirect($this->generateUrl('admin_slides'));
+    }
+
+    /**
+     * @param Slide $slide
+     *
+     * @return \Symfony\Component\Form\Form
+     */
     private function buildSaveForm(Slide $slide = null)
     {
         if ($slide->isNew()) {
@@ -105,22 +160,4 @@ class AdminController extends BaseController
         return $this->getTranslator()->trans('form.' . $context . '.success.message', array(), 'adminSlideShow');
     }
 
-    /**
-     * @param Slide $slide
-     *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     *
-     * @Route("/{id}", name="admin_slides_delete")
-     * @Method("DELETE")
-     */
-    public function deleteAction(Slide $slide)
-    {
-        $this->getEntityManager()->remove($slide);
-        $this->getEntityManager()->flush();
-
-        $message = $this->getSuccessMessageFromContext('delete');
-        $this->addFlashMessage($message, 'success');
-
-        return $this->redirect($this->generateUrl('admin_slides'));
-    }
 }

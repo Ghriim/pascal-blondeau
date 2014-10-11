@@ -275,4 +275,12 @@ class Slide extends BaseEntity
     {
         return is_null($this->getId());
     }
+
+    /**
+     * @return bool
+     */
+    public function isStopped()
+    {
+        return $this->status == BaseEntity::STATUS_STOPPED;
+    }
 }

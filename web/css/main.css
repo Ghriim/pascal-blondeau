@@ -40,6 +40,31 @@ html, body {
     padding: 20px;
 }
 
+/* Margin - Default */
+.margin-left {
+    margin-left: 20px;
+}
+.margin-right {
+    margin-right: 20px;
+}
+.margin-bottom {
+    margin-bottom: 20px;
+}
+.margin-top {
+    margin-top: 20px;
+}
+.margin-x {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.margin-y {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.margin-xy {
+    margin: 20px;
+}
+
 /* Badge */
 .badge.status-active {
     background-color: #3fad46;
@@ -81,6 +106,7 @@ table td .img-thumbnail {
 }
 .carousel-inner > .item > img {
 	margin: 0 auto;
+    height: 500px;
 }
 
 
@@ -176,4 +202,9 @@ main.container {
 /* Main Footer */
 #main-footer, #main-footer a {
 	color: #888;
+}
+
+/* Generics */
+.invisible {
+    visibility: hidden;
 }
