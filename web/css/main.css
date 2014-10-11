@@ -208,3 +208,7 @@ main.container {
 .invisible {
     visibility: hidden;
 }
+
+.img-max-width {
+    max-width: 80%;
+}

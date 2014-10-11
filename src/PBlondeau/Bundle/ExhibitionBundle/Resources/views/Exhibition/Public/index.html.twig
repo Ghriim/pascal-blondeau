@@ -1,5 +1,9 @@
 {% extends '::layout.html.twig' %}
 
 {% block body %}
-	EXHIBITIONS :D
+	{% for exhibition in exhibitions %}
+        <div class="text-center margin-bottom">
+            <img class="img-max-width" src="{{ asset(exhibition.webPath) }}" alt="" />
+        </div>
+    {% endfor %}
 {% endblock %}

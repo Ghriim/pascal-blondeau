@@ -16,8 +16,21 @@ class PublicController extends BaseController
      */
     public function indexAction()
     {
-        return array(
+        $criteria = array(
+            'status' => BaseEntity::STATUS_ACTIVE
+        );
 
+        $order = array(
+            'position' => 'ASC'
+        );
+
+        $exhibitions = $this->getPaginator()->paginate(
+            $this->getExhibitionRepository()->findBy($criteria, $order),
+            $this->get('request')->query->get('page', 1)
+        );
+
+        return array(
+            'exhibitions' => $exhibitions
         );
     }
 }

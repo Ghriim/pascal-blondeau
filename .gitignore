@@ -1,5 +1,8 @@
 /web/bundles/
 /web/uploads/slideshow/*
+/web/uploads/exhibitions/*
+/web/uploads/albums/*
+/web/uploads/press/*
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
