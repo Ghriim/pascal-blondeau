@@ -1,0 +1,48 @@
+list:
+    action:
+        add: Add a new Exhibition
+
+    exhibition:
+        count: %numberOfExhibition% Exhibitions
+        empty: No Exhibition added yet
+        header:
+            image: Image
+            position: Position
+            status: Status
+            creation: Added
+            actions: Actions
+        body:
+            status:
+                active: Active
+                planned: Planned
+                stopped: Stopped
+            action:
+                edit: Edit
+                delete: Remove
+
+form:
+    create:
+        title: Add a new Exhibition
+        success.message: A new Exhibition has been successfully added
+    update:
+        title: Update Exhibition informations
+        success.message: The Exhibition has been successfully modified
+    modal:
+        action:
+            save: Save the Exhibition
+            cancel: Cancel
+    delete:
+        modal:
+            title: Remove Exhibition from Exhibition Show
+            content: >
+                You are about to delete a Exhibition from the home Exhibition Show.<br />
+                Suppression is permanent and you won't be able to recover the data.<br />
+                <br />
+                Are you sure you want to proceed ?
+            action:
+                confirm: Remove the Exhibition
+                cancel: Cancel
+        success.message: The Exhibition has been successfully removed
+
+    updatePosition:
+        message: Positions have been successfully updated

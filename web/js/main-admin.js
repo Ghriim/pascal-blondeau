@@ -46,7 +46,7 @@ function updateEntityPosition(sortableTable)
             }
 
             idWithPositionList.forEach(function(idWithPosition) {
-                var positionArea = '#slide-' + idWithPosition.id + ' td.position';
+                var positionArea = '#entity-' + idWithPosition.id + ' td.position';
                 sortableTable.find(positionArea).html(idWithPosition.position);
             });
 

@@ -1,0 +1,17 @@
+{% extends "::layout.html.twig" %}
+
+{% trans_default_domain "adminExhibition" %}
+
+{% block body %}
+    <h1>Exhibition edit</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('admin_exhibitions') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

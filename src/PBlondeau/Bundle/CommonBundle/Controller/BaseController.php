@@ -64,4 +64,12 @@ class BaseController extends Controller
     {
         return $this->getEntityManager()->getRepository('PBlondeauSlideShowBundle:Slide');
     }
+
+    /**
+     * @return \PBlondeau\Bundle\ExhibitionBundle\Repository\ExhibitionRepository
+     */
+    protected function getExhibitionRepository()
+    {
+        return $this->getEntityManager()->getRepository('PBlondeauExhibitionBundle:Exhibition');
+    }
 } 

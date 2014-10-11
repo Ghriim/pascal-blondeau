@@ -35,7 +35,7 @@
 
         <tbody data-action="{{ path('admin_slides_update_positions') }}">
             {% for slide in slides %}
-                <tr id="slide-{{ slide.id }}" data-id="{{ slide.id }}"
+                <tr id="entity-{{ slide.id }}" data-id="{{ slide.id }}"
                         class="{% if slide.isStopped %}sortable-disabled{% endif %}">
                     <td class="preview">
                         <span class="fa fa-arrows-v margin-x {% if slide.isStopped %}invisible{% endif %}"></span>
@@ -73,7 +73,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4" class="">{{ 'list.slide.empty' | trans({}) }}</td>
+                    <td colspan="5" class="">{{ 'list.slide.empty' | trans({}) }}</td>
                 </tr>
             {% endfor %}
         </tbody>
