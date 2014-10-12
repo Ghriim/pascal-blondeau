@@ -73,8 +73,19 @@ class BaseController extends Controller
         return $this->getEntityManager()->getRepository('PBlondeauExhibitionBundle:Exhibition');
     }
 
+    /**
+     * @return \PBlondeau\Bundle\PressBundle\Repository\PressArticleRepository
+     */
     protected function getPressArticleRepository()
     {
         return $this->getEntityManager()->getRepository('PBlondeauPressBundle:PressArticle');
+    }
+
+    /**
+     * @return \PBlondeau\Bundle\NewsBundle\Repository\NewsRepository
+     */
+    protected function getNewsRepository()
+    {
+        return $this->getEntityManager()->getRepository('PBlondeauNewsBundle:News');
     }
 } 

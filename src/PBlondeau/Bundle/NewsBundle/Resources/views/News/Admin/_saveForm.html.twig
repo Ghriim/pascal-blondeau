@@ -1,4 +1,4 @@
-{% trans_default_domain "adminPressArticle" %}
+{% trans_default_domain "adminNews" %}
 
 {{ form_start(form) }}
 <div class="modal-body">
@@ -7,6 +7,14 @@
     {% if errors is defined %}
         {{ errors }}
     {% endif %}
+
+    <div>
+        {{ form_row(form.title) }}
+    </div>
+
+    <div>
+        {{ form_row(form.content) }}
+    </div>
 
     <div>
         {{ form_row(form.file) }}

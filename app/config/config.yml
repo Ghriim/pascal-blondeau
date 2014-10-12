@@ -68,6 +68,12 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
+
 fos_user:
     db_driver: orm
     firewall_name: main

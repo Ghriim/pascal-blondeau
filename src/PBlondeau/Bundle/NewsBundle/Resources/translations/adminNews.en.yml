@@ -1,0 +1,49 @@
+list:
+    action:
+        add: Add a new News
+
+    news:
+        count: %numberOfNews% News
+        empty: No News added yet
+        header:
+            image: Image
+            content: Content
+            position: Position
+            status: Status
+            creation: Added
+            actions: Actions
+        body:
+            status:
+                active: Active
+                planned: Planned
+                stopped: Stopped
+            action:
+                edit: Edit
+                delete: Remove
+
+form:
+    create:
+        title: Add a new News
+        success.message: A new News has been successfully added
+    update:
+        title: Update News informations
+        success.message: The News has been successfully modified
+    modal:
+        action:
+            save: Save the News
+            cancel: Cancel
+    delete:
+        modal:
+            title: Remove News
+            content: >
+                You are about to delete an News.<br />
+                Suppression is permanent and you won't be able to recover the data.<br />
+                <br />
+                Are you sure you want to proceed ?
+            action:
+                confirm: Remove the News
+                cancel: Cancel
+        success.message: The News has been successfully removed
+
+    updatePosition:
+        message: Positions have been successfully updated

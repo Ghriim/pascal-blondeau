@@ -86,18 +86,24 @@ html, body {
 .form-delete {
     display: inline;
 }
+.submits a, .submits .btn-default {
+    display:  inline-block;
+    margin-right: 15px;
+}
+.textarea-large {
+    width: 100%;
+    height: 250px;
+}
 
 /* Table */
-.table>tbody>tr>th, .table>tbody>tr>td {
+.table>thead>tr>th, .table>tbody>tr>td {
     vertical-align: baseline;
+}
+.table>tbody>tr>td.position {
+    text-align: center;
 }
 table .list-inline {
     margin-bottom: 0;
-}
-
-.submits a, .submits .btn-default {
-	display:  inline-block;
-	margin-right: 15px;
 }
 
 /* Image & Carousel */
@@ -109,6 +115,10 @@ table td .img-thumbnail {
     height: 500px;
 }
 
+/* Pop up */
+.modal-content {
+    text-align: left;
+}
 
 /* Admin Menu */
 #admin-menu {
@@ -211,4 +221,12 @@ main.container {
 
 .img-max-width {
     max-width: 80%;
+}
+
+/* Toolip */
+.tooltip {
+    white-space:pre-wrap;
+    word-wrap: break-word;
+    max-width: 250px;
+
 }
