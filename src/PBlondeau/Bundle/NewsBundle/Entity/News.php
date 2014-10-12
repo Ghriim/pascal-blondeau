@@ -285,7 +285,7 @@ class News extends BaseEntity
 
     protected function getUploadDir()
     {
-        return 'uploads/newss';
+        return 'uploads/news';
     }
 
     /**

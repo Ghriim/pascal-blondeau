@@ -1,13 +1,15 @@
 {% extends '::layout.html.twig' %}
 
 {% block body %}
-	{% for news in newsList %}
-        <article class="media margin-bottom">
-            <img class="img-thumbnail pull-left" src="{{ asset(news.webPath) }}" alt="" />
-            <div class="media-body">
-                <h4 class="media-heading">{{ news.title }}</h4>
-                <p>{{ news.content|nl2br() }}</p>
-            </div>
-        </article>
-    {% endfor %}
+    <section id="news">
+        {% for news in newsList %}
+            <article class="media margin-bottom">
+                <img class="img-responsive pull-left" src="{{ asset(news.webPath) }}" alt="" />
+                <div class="media-body">
+                    <h4 class="media-heading">{{ news.title }}</h4>
+                    <p>{{ news.content|nl2br() }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    </section>
 {% endblock %}

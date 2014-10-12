@@ -230,3 +230,16 @@ main.container {
     max-width: 250px;
 
 }
+
+/* News feed */
+#news {
+    width: 80%;
+    margin: auto;
+}
+#news img {
+    width: 250px;
+}
+#news article .media-body {
+    padding-left: 20px;
+    text-align: justify;
+}
