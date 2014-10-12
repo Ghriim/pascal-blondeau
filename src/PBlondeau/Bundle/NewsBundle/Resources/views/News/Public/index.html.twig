@@ -3,13 +3,19 @@
 {% block body %}
     <section id="news">
         {% for news in newsList %}
-            <article class="media margin-bottom">
+            <article class="media">
                 <img class="img-responsive pull-left" src="{{ asset(news.webPath) }}" alt="" />
                 <div class="media-body">
                     <h4 class="media-heading">{{ news.title }}</h4>
                     <p>{{ news.content|nl2br() }}</p>
                 </div>
             </article>
+
+            <hr class="separator" />
         {% endfor %}
     </section>
+
+    <div class="paginator">
+        {{ knp_pagination_render(newsList) }}
+    </div>
 {% endblock %}

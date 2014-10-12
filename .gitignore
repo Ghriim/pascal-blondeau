@@ -3,7 +3,7 @@
 /web/uploads/exhibitions/*
 /web/uploads/albums/*
 /web/uploads/press/*
-/web/upload/news/*
+/web/uploads/news/*
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
