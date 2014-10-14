@@ -2,17 +2,15 @@
 
 namespace PBlondeau\Bundle\ExhibitionBundle\Controller\Exhibition;
 
-use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 
 class PublicController extends BaseController
 {
     /**
      * @Route("/exhibitions", name="exhibition_public_display")
-     * @Template()
      */
     public function indexAction()
     {
@@ -29,8 +27,10 @@ class PublicController extends BaseController
             $this->get('request')->query->get('page', 1)
         );
 
-        return array(
-            'exhibitions' => $exhibitions
-        );
+        return $this->render(
+            'PBlondeauExhibitionBundle:Exhibition/Public:index.html.twig',
+            array(
+                'exhibitions' => $exhibitions
+            ));
     }
 }

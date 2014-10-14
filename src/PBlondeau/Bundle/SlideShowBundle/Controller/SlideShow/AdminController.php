@@ -6,7 +6,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\SlideShowBundle\Entity\Slide;
 use PBlondeau\Bundle\SlideShowBundle\Form\Type\SlideType;
@@ -23,7 +22,6 @@ class AdminController extends BaseController
     /**
      * @Route("/", name="admin_slides")
      * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -32,9 +30,11 @@ class AdminController extends BaseController
             $this->get('request')->query->get('page', 1)
         );
 
-        return array(
-            'slides' => $slides,
-        );
+        return $this->render(
+            'PBlondeauSlideShowBundle:SlideShow/Admin:index.html.twig',
+            array(
+                'slides' => $slides,
+            ));
     }
 
     /**
@@ -46,7 +46,6 @@ class AdminController extends BaseController
      * @Route("/create", name="admin_slides_create")
      * @Route("/{id}/update", name="admin_slides_edit")
      * @Method({"GET", "POST"})
-     * @Template("PBlondeauSlideShowBundle:SlideShow/Admin:_saveForm.html.twig")
      */
     public function saveAjaxAction(Request $request, Slide $slide = null)
     {
@@ -72,9 +71,11 @@ class AdminController extends BaseController
             }
         }
 
-        return array(
-            'form' => $form->createView(),
-        );
+        return $this->render(
+            'PBlondeauSlideShowBundle:SlideShow/Admin:_saveForm.html.twig',
+            array(
+                'form' => $form->createView(),
+            ));
     }
 
     /**

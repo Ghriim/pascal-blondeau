@@ -2,17 +2,14 @@
 
 namespace PBlondeau\Bundle\WorkBundle\Controller\Album;
 
-use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
+use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 
 class PublicController extends BaseController
 {
     /**
      * @Route("/albums", name="work_albums_public_display")
-     * @Template()
      */
     public function indexAction()
     {
@@ -29,8 +26,10 @@ class PublicController extends BaseController
             $this->get('request')->query->get('page', 1)
         );
 
-        return array(
-            'albums' => $albums
-        );
+        return $this->render(
+            'PBlondeauWorkBundle:Album/Public:index.html.twig',
+            array(
+                'albums' => $albums
+            ));
     }
 }

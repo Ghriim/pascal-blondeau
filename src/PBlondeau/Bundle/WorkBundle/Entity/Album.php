@@ -108,6 +108,8 @@ class Album extends BaseEntity
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
     /**

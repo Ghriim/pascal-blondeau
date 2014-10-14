@@ -4,7 +4,6 @@ namespace PBlondeau\Bundle\SlideShowBundle\Controller\SlideShow;
 
 use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 
@@ -12,7 +11,6 @@ class PublicController extends BaseController
 {
     /**
      * @Route("/slides", name="slide_show_public_display")
-     * @Template()
      */
     public function indexAction()
     {
@@ -24,8 +22,10 @@ class PublicController extends BaseController
             'position' => 'ASC'
         );
 
-        return array(
-            'slides' => $this->getSlideRepository()->findBy($criteria, $order)
-        );
+        return $this->render(
+            'PBlondeauSlideShowBundle:SlideShow/Public:index.html.twig',
+            array(
+                'slides' => $this->getSlideRepository()->findBy($criteria, $order)
+        ));
     }
 }

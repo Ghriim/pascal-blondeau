@@ -111,11 +111,13 @@ class News extends BaseEntity
      * Set title
      *
      * @param string $title
-     * @return News
+     * @return $this
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
     /**
@@ -132,7 +134,7 @@ class News extends BaseEntity
      * Set content
      *
      * @param string $content
-     * @return News
+     * @return $this
      */
     public function setContent($content)
     {
@@ -153,7 +155,7 @@ class News extends BaseEntity
      * Set path
      *
      * @param string $path
-     * @return News
+     * @return $this
      */
     public function setPath($path)
     {
@@ -176,7 +178,7 @@ class News extends BaseEntity
      * Set position
      *
      * @param integer $position
-     * @return News
+     * @return $this
      */
     public function setPosition($position)
     {

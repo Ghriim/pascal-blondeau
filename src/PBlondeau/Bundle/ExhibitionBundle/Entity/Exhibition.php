@@ -117,7 +117,7 @@ class Exhibition extends BaseEntity
      * Set position
      *
      * @param integer $position
-     * @return Exhibition
+     * @return $this
      */
     public function setPosition($position)
     {

@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\WorkBundle\Entity\Album;
 use PBlondeau\Bundle\WorkBundle\Form\Type\AlbumType;
@@ -24,7 +23,6 @@ class AdminController extends BaseController
     /**
      * @Route("/", name="admin_work_albums")
      * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -33,9 +31,11 @@ class AdminController extends BaseController
             $this->get('request')->query->get('page', 1)
         );
 
-        return array(
-            'albums' => $albums,
-        );
+        return $this->render(
+            'PBlondeauWorkBundle:Album/Admin:index.html.twig',
+            array(
+                'albums' => $albums,
+            ));
     }
 
     /**
@@ -47,7 +47,6 @@ class AdminController extends BaseController
      * @Route("/create", name="admin_work_albums_create")
      * @Route("/{id}/update", name="admin_work_albums_edit")
      * @Method({"GET", "POST"})
-     * @Template("PBlondeauWorkBundle:Album/Admin:_saveForm.html.twig")
      */
     public function saveAjaxAction(Request $request, Album $album = null)
     {
@@ -73,9 +72,11 @@ class AdminController extends BaseController
             }
         }
 
-        return array(
-            'form' => $form->createView(),
-        );
+        return $this->render(
+            'PBlondeauWorkBundle:Album/Admin:_saveForm.html.twig',
+            array(
+                'form' => $form->createView(),
+            ));
     }
 
     /**

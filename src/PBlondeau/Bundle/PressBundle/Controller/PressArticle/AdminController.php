@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\PressBundle\Entity\PressArticle;
 use PBlondeau\Bundle\PressBundle\Form\Type\PressArticleType;
@@ -23,7 +22,6 @@ class AdminController extends BaseController
     /**
      * @Route("/", name="admin_press_articles")
      * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -32,9 +30,11 @@ class AdminController extends BaseController
             $this->get('request')->query->get('page', 1)
         );
 
-        return array(
-            'pressArticles' => $pressArticles,
-        );
+        return $this->render(
+            'PBlondeauPressBundle:PressArticle/Admin:index.html.twig',
+            array(
+                'pressArticles' => $pressArticles,
+            ));
     }
 
     /**
@@ -46,7 +46,6 @@ class AdminController extends BaseController
      * @Route("/create", name="admin_press_articles_create")
      * @Route("/{id}/update", name="admin_press_articles_edit")
      * @Method({"GET", "POST"})
-     * @Template("PBlondeauPressBundle:PressArticle/Admin:_saveForm.html.twig")
      */
     public function saveAjaxAction(Request $request, PressArticle $pressArticle = null)
     {
@@ -72,9 +71,11 @@ class AdminController extends BaseController
             }
         }
 
-        return array(
-            'form' => $form->createView(),
-        );
+        return $this->render(
+            'PBlondeauPressBundle:PressArticle/Admin:index.html.twig',
+            array(
+                'form' => $form->createView(),
+            ));
     }
 
     /**

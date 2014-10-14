@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\NewsBundle\Entity\News;
 
@@ -23,7 +22,6 @@ class AdminController extends BaseController
     /**
      * @Route("/", name="admin_news")
      * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -32,9 +30,11 @@ class AdminController extends BaseController
             $this->get('request')->query->get('page', 1)
         );
 
-        return array(
-            'newsList' => $newsList,
-        );
+        return $this->render(
+            'PBlondeauNewsBundle:News/Admin:index.html.twig',
+            array(
+                'newsList' => $newsList,
+            ));
     }
 
     /**
@@ -46,7 +46,6 @@ class AdminController extends BaseController
      * @Route("/create", name="admin_news_create")
      * @Route("/{id}/update", name="admin_news_edit")
      * @Method({"GET", "POST"})
-     * @Template("PBlondeauNewsBundle:News/Admin:_saveForm.html.twig")
      */
     public function saveAjaxAction(Request $request, News $news = null)
     {
@@ -72,9 +71,11 @@ class AdminController extends BaseController
             }
         }
 
-        return array(
-            'form' => $form->createView(),
-        );
+        return $this->render(
+            'PBlondeauNewsBundle:News/Admin:_saveForm.html.twig',
+            array(
+                'form' => $form->createView(),
+            ));
     }
 
     /**

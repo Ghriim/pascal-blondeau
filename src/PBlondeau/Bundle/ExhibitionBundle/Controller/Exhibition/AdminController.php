@@ -2,15 +2,14 @@
 
 namespace PBlondeau\Bundle\ExhibitionBundle\Controller\Exhibition;
 
-use PBlondeau\Bundle\ExhibitionBundle\Form\Type\ExhibitionType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\ExhibitionBundle\Entity\Exhibition;
+use PBlondeau\Bundle\ExhibitionBundle\Form\Type\ExhibitionType;
 
 /**
  * Exhibition controller.
@@ -23,7 +22,6 @@ class AdminController extends BaseController
     /**
      * @Route("/", name="admin_exhibitions")
      * @Method("GET")
-     * @Template()
      */
     public function indexAction()
     {
@@ -32,9 +30,11 @@ class AdminController extends BaseController
             $this->get('request')->query->get('page', 1)
         );
 
-        return array(
-            'exhibitions' => $exhibitions,
-        );
+        return $this->render(
+            'PBlondeauExhibitionBundle:Exhibition/Admin:index.html.twig',
+            array(
+                'exhibitions' => $exhibitions,
+            ));
     }
 
     /**
@@ -46,7 +46,6 @@ class AdminController extends BaseController
      * @Route("/create", name="admin_exhibitions_create")
      * @Route("/{id}/update", name="admin_exhibitions_edit")
      * @Method({"GET", "POST"})
-     * @Template("PBlondeauExhibitionBundle:Exhibition/Admin:_saveForm.html.twig")
      */
     public function saveAjaxAction(Request $request, Exhibition $exhibition = null)
     {
@@ -71,10 +70,11 @@ class AdminController extends BaseController
                 return $this->redirect($this->generateUrl('admin_exhibitions'));
             }
         }
-
-        return array(
-            'form' => $form->createView(),
-        );
+        return $this->render(
+            'PBlondeauExhibitionBundle:Exhibition/Admin:_saveForm.html.twig',
+            array(
+                'form' => $form->createView()
+            ));
     }
 
     /**
