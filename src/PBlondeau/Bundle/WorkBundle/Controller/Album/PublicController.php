@@ -11,7 +11,7 @@ use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 class PublicController extends BaseController
 {
     /**
-     * @Route("/work", name="work_public_display")
+     * @Route("/albums", name="work_albums_public_display")
      * @Template()
      */
     public function indexAction()
@@ -24,8 +24,13 @@ class PublicController extends BaseController
             'position' => 'ASC'
         );
 
+        $albums = $this->getPaginator()->paginate(
+            $this->getAlbumRepository()->findBy($criteria, $order),
+            $this->get('request')->query->get('page', 1)
+        );
+
         return array(
-            'albums' => null //$this->getAlbumRepository()->findBy($criteria, $order)
+            'albums' => $albums
         );
     }
 }

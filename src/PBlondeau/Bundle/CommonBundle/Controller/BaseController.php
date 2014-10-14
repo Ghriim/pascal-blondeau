@@ -88,4 +88,12 @@ class BaseController extends Controller
     {
         return $this->getEntityManager()->getRepository('PBlondeauNewsBundle:News');
     }
+
+    /**
+     * @return \PBlondeau\Bundle\WorkBundle\Repository\AlbumRepository
+     */
+    protected function getAlbumRepository()
+    {
+        return $this->getEntityManager()->getRepository('PBlondeauWorkBundle:Album');
+    }
 } 

@@ -1,6 +1,6 @@
 <?php
 
-namespace PBlondeau\Bundle\WorkBundle\Tests\Controller;
+namespace PBlondeau\Bundle\ExhibitionBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
