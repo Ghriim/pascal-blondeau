@@ -1,18 +1,18 @@
 /* Sticky footer */
 * {
-	margin: 0;
+    margin: 0;
 }
 html, body {
-	height: 100%;
+    height: 100%;
 }
 #wrap {
-	min-height: 100%;
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -50px;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -50px;
 }
 #main-footer, #push {
-	height: 50px;
+    height: 50px;
 }
 
 /* Padding - Default */
@@ -108,10 +108,10 @@ table .list-inline {
 
 /* Image & Carousel */
 table td .img-thumbnail {
-	height: 75px;
+    height: 75px;
 }
 .carousel-inner > .item > img {
-	margin: 0 auto;
+    margin: 0 auto;
     height: 500px;
 }
 
@@ -122,96 +122,97 @@ table td .img-thumbnail {
 
 /* Admin Menu */
 #admin-menu {
-	position: fixed;
-	z-index: 100;
+    position: fixed;
+    z-index: 100;
 }
 ul#admin-nav {
-	list-style-type: none;
-	padding: 0;
-	display: table;
-	border: 2px solid #999;
+    list-style-type: none;
+    padding: 0;
+    display: table;
+    border: 2px solid #999;
 }
 
 #admin-nav li {
-	border-bottom: 1px solid #999;
+    border-bottom: 1px solid #999;
 }
 
 #admin-nav li:last-of-type {
-	border-bottom: 0;
+    border-bottom: 0;
 }
 #admin-nav li a {
-	display: block;
-	color: #FFF;
+    display: block;
+    color: #FFF;
 }
 #admin-nav li a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 #admin-nav li a:hover span {
-	background-color: #888;
+    background-color: #888;
 }
 #admin-nav li a:hover label {
-	background-color: #AAA;
+    background-color: #AAA;
 }
 #admin-nav li span,
-	#admin-nav li label  {
-	display:  table-cell;
-	line-height:  25px;
-	vertical-align: middle;
-	padding: 5px;
+#admin-nav li label  {
+    display:  table-cell;
+    line-height:  25px;
+    vertical-align: middle;
+    padding: 5px;
 }
 #admin-nav li span {
-	width: 40px;
-	font-size: 20px;
-	text-align: center;
-	background-color: #999;
+    width: 40px;
+    font-size: 20px;
+    text-align: center;
+    background-color: #999;
 }
 #admin-nav li label {
-	margin: 0;
-	width: 145px;
-	padding-left: 15px;
-	background-color: #BBB;
+    margin: 0;
+    width: 145px;
+    padding-left: 15px;
+    background-color: #BBB;
 
-	display: none;
+    display: none;
 }
 
 /* Tooltip */
 div.tooltip-inner {
-	white-space: nowrap;
-	max-width: 350px;
+    white-space: nowrap;
+    max-width: 350px;
 }
 
 /* Main */
 main.container {
-	padding: 20px 45px;
+    padding: 20px 45px;
 }
 
 /* Pagination */
 .paginator {
-	text-align: right;
+    text-align: right;
+    clear: both;
 }
 
 /* Main Header */
 #main-header a {
-	color: #BBB;
-	text-transform: uppercase;
+    color: #BBB;
+    text-transform: uppercase;
 }
 #main-header h1 a {
-	color: #888;
+    color: #888;
 }
 
 #main-header h2 {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 #main-header a:hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 #main-header nav a:hover {
-	color: #888;
+    color: #888;
 }
 
 /* Main Footer */
 #main-footer, #main-footer a {
-	color: #888;
+    color: #888;
 }
 
 /* Generics */
@@ -221,6 +222,10 @@ main.container {
 
 .img-max-width {
     max-width: 80%;
+}
+
+.img-max-height-fix {
+    max-height: 250px;
 }
 
 /* Toolip */
@@ -247,4 +252,34 @@ main.container {
     margin: 25px auto 35px auto;
     width: 80%;
     border: 1px dotted #EEE;
+}
+
+/* Work */
+#albums .album {
+    float: left;
+    margin: 10px;
+}
+#albums .album img {
+    position: relative;
+}
+#albums .album .title {
+    position: relative;
+    bottom: 35px;
+    line-height: 35px;
+    left: 0;
+    width: 100%;
+    z-index: 500;
+    color: #FFF;
+    overflow-y: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    opacity: 0;
+    transition: opacity 0.3s linear;
+}
+#albums .album:hover .title {
+    opacity: 1;
+}
+
+#albums .album .title label {
+    margin: 0 0 0 15px;
 }

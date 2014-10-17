@@ -1,15 +1,18 @@
 {% extends '::layout.html.twig' %}
 
 {% block body %}
-    <section id="exhibtions">
-        {% for exhibition in exhibitions %}
-            <article class="text-center margin-bottom">
-                <img class="img-max-width" src="{{ asset(exhibition.webPath) }}" alt="" />
+    <section id="albums">
+        {% for album in albums %}
+            <article class="album margin-bottom">
+                <img class="img-max-height-fix" src="{{ asset(album.webPath) }}" alt="" />
+                <div class="title">
+                    <label>{{ album.title }}</label>
+                </div>
             </article>
         {% endfor %}
     </section>
 
     <div class="paginator">
-        {{ knp_pagination_render(exhibitions) }}
+        {{ knp_pagination_render(albums) }}
     </div>
 {% endblock %}
