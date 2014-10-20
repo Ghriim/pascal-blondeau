@@ -21,7 +21,7 @@ class PressArticleType extends AbstractType
             ->add('status', 'pblondeau_status')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -21,7 +21,7 @@ class SlideType extends AbstractType
             ->add('status', 'pblondeau_status')
         ;
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -8,5 +8,5 @@ class BaseEntity
     const STATUS_PLANNED = 'planned';
     const STATUS_STOPPED = 'stopped';
 
-	const POSITION_MIN_VALUE_DEFAULT = 1;
-} 
+    const POSITION_MIN_VALUE_DEFAULT = 1;
+}

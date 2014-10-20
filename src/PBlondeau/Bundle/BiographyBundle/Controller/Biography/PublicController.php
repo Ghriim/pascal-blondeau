@@ -2,10 +2,8 @@
 
 namespace PBlondeau\Bundle\BiographyBundle\Controller\Biography;
 
-use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 
 class PublicController extends BaseController

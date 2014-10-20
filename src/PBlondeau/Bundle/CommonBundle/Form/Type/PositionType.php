@@ -8,24 +8,24 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PositionType extends AbstractType
 {
-	public function setDefaultOptions(OptionsResolverInterface $resolver)
-	{
-		$resolver->setDefaults(array(
-			'label' => 'form.position.label',
-			'required' => false,
-			'translation_domain' => 'common',
-			'attr' => array('min' => BaseEntity::POSITION_MIN_VALUE_DEFAULT)
-		));
-	}
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'label' => 'form.position.label',
+            'required' => false,
+            'translation_domain' => 'common',
+            'attr' => array('min' => BaseEntity::POSITION_MIN_VALUE_DEFAULT)
+        ));
+    }
 
-	public function getParent()
-	{
-		return 'integer';
-	}
+    public function getParent()
+    {
+        return 'integer';
+    }
 
-	public function getName()
-	{
-		return 'pblondeau_position';
-	}
+    public function getName()
+    {
+        return 'pblondeau_position';
+    }
 
 }

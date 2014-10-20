@@ -106,7 +106,7 @@ class Exhibition extends BaseEntity
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
@@ -129,7 +129,7 @@ class Exhibition extends BaseEntity
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -202,7 +202,7 @@ class Exhibition extends BaseEntity
     /**
      * Get user
      *
-     * @return \stdClass
+     * @return User
      */
     public function getUser()
     {

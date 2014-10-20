@@ -42,7 +42,7 @@ class AdminController extends BaseController
      * @param Request $request
      * @param News $news
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/create", name="admin_news_create")
      * @Route("/{id}/update", name="admin_news_edit")
