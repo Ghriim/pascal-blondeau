@@ -10,6 +10,7 @@ use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\SlideShowBundle\Entity\Slide;
 use PBlondeau\Bundle\SlideShowBundle\Form\Type\SlideType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Slide controller.
@@ -49,6 +50,10 @@ class AdminController extends BaseController
      */
     public function saveAjaxAction(Request $request, Slide $slide = null)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
+        }
+
         if (!$slide) {
             $slide = new Slide();
             $slide->setUser($this->getUser());
@@ -88,28 +93,28 @@ class AdminController extends BaseController
      */
     public function updatePositionAjaxAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $idWithPositionList = $request->get('idWithPositionList');
-            foreach ($idWithPositionList as $idWithPosition) {
-                /** @var Slide $slide */
-                $slide = $this->getSlideRepository()->find($idWithPosition['id']);
-                if (!$slide) {
-                    throw new NotFoundHttpException();
-                }
-                $slide->setPosition($idWithPosition['position']);
-            }
-
-            $this->getEntityManager()->flush();
-
-            return new JsonResponse(
-                array(
-                    'status' => 'success',
-                    'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminSlideShow')
-                )
-            );
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
         }
 
-        return new JsonResponse(array('status' => 'error'));
+        $idWithPositionList = $request->get('idWithPositionList');
+        foreach ($idWithPositionList as $idWithPosition) {
+            /** @var Slide $slide */
+            $slide = $this->getSlideRepository()->find($idWithPosition['id']);
+            if (!$slide) {
+                throw new NotFoundHttpException();
+            }
+            $slide->setPosition($idWithPosition['position']);
+        }
+
+        $this->getEntityManager()->flush();
+
+        return new JsonResponse(
+            array(
+                'status' => 'success',
+                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminSlideShow')
+            )
+        );
     }
 
     /**

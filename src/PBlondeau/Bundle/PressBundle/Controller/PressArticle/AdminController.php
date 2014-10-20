@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\PressBundle\Entity\PressArticle;
 use PBlondeau\Bundle\PressBundle\Form\Type\PressArticleType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * PressArticle controller.
@@ -49,6 +50,10 @@ class AdminController extends BaseController
      */
     public function saveAjaxAction(Request $request, PressArticle $pressArticle = null)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
+        }
+
         if (!$pressArticle) {
             $pressArticle = new PressArticle();
             $pressArticle->setUser($this->getUser());
@@ -88,28 +93,28 @@ class AdminController extends BaseController
      */
     public function updatePositionAjaxAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $idWithPositionList = $request->get('idWithPositionList');
-            foreach ($idWithPositionList as $idWithPosition) {
-                /** @var PressArticle $pressArticle */
-                $pressArticle = $this->getPressArticleRepository()->find($idWithPosition['id']);
-                if (!$pressArticle) {
-                    throw new NotFoundHttpException();
-                }
-                $pressArticle->setPosition($idWithPosition['position']);
-            }
-
-            $this->getEntityManager()->flush();
-
-            return new JsonResponse(
-                array(
-                    'status' => 'success',
-                    'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminPressArticle')
-                )
-            );
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
         }
 
-        return new JsonResponse(array('status' => 'error'));
+        $idWithPositionList = $request->get('idWithPositionList');
+        foreach ($idWithPositionList as $idWithPosition) {
+            /** @var PressArticle $pressArticle */
+            $pressArticle = $this->getPressArticleRepository()->find($idWithPosition['id']);
+            if (!$pressArticle) {
+                throw new NotFoundHttpException();
+            }
+            $pressArticle->setPosition($idWithPosition['position']);
+        }
+
+        $this->getEntityManager()->flush();
+
+        return new JsonResponse(
+            array(
+                'status' => 'success',
+                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminPressArticle')
+            )
+        );
     }
 
     /**

@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\WorkBundle\Entity\Album;
 use PBlondeau\Bundle\WorkBundle\Form\Type\AlbumType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Album controller.
@@ -50,6 +51,10 @@ class AdminController extends BaseController
      */
     public function saveAjaxAction(Request $request, Album $album = null)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
+        }
+
         if (!$album) {
             $album = new Album();
             $album->setUser($this->getUser());
@@ -89,28 +94,28 @@ class AdminController extends BaseController
      */
     public function updatePositionAjaxAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $idWithPositionList = $request->get('idWithPositionList');
-            foreach ($idWithPositionList as $idWithPosition) {
-                /** @var Album $album */
-                $album = $this->getAlbumRepository()->find($idWithPosition['id']);
-                if (!$album) {
-                    throw new NotFoundHttpException();
-                }
-                $album->setPosition($idWithPosition['position']);
-            }
-
-            $this->getEntityManager()->flush();
-
-            return new JsonResponse(
-                array(
-                    'status' => 'success',
-                    'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminWorkAlbum')
-                )
-            );
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
         }
 
-        return new JsonResponse(array('status' => 'error'));
+        $idWithPositionList = $request->get('idWithPositionList');
+        foreach ($idWithPositionList as $idWithPosition) {
+            /** @var Album $album */
+            $album = $this->getAlbumRepository()->find($idWithPosition['id']);
+            if (!$album) {
+                throw new NotFoundHttpException();
+            }
+            $album->setPosition($idWithPosition['position']);
+        }
+
+        $this->getEntityManager()->flush();
+
+        return new JsonResponse(
+            array(
+                'status' => 'success',
+                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminWorkAlbum')
+            )
+        );
     }
 
     /**

@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\NewsBundle\Entity\News;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * News controller.
@@ -49,6 +50,10 @@ class AdminController extends BaseController
      */
     public function saveAjaxAction(Request $request, News $news = null)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
+        }
+
         if (!$news) {
             $news = new News();
             $news->setUser($this->getUser());
@@ -88,28 +93,28 @@ class AdminController extends BaseController
      */
     public function updatePositionAjaxAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $idWithPositionList = $request->get('idWithPositionList');
-            foreach ($idWithPositionList as $idWithPosition) {
-                /** @var News $news */
-                $news = $this->getNewsRepository()->find($idWithPosition['id']);
-                if (!$news) {
-                    throw new NotFoundHttpException();
-                }
-                $news->setPosition($idWithPosition['position']);
-            }
-
-            $this->getEntityManager()->flush();
-
-            return new JsonResponse(
-                array(
-                    'status' => 'success',
-                    'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminNews')
-                )
-            );
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
         }
 
-        return new JsonResponse(array('status' => 'error'));
+        $idWithPositionList = $request->get('idWithPositionList');
+        foreach ($idWithPositionList as $idWithPosition) {
+            /** @var News $news */
+            $news = $this->getNewsRepository()->find($idWithPosition['id']);
+            if (!$news) {
+                throw new NotFoundHttpException();
+            }
+            $news->setPosition($idWithPosition['position']);
+        }
+
+        $this->getEntityManager()->flush();
+
+        return new JsonResponse(
+            array(
+                'status' => 'success',
+                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminNews')
+            )
+        );
     }
 
     /**

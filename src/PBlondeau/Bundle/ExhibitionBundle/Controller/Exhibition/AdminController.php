@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\ExhibitionBundle\Entity\Exhibition;
 use PBlondeau\Bundle\ExhibitionBundle\Form\Type\ExhibitionType;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Exhibition controller.
@@ -49,6 +50,10 @@ class AdminController extends BaseController
      */
     public function saveAjaxAction(Request $request, Exhibition $exhibition = null)
     {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
+        }
+
         if (!$exhibition) {
             $exhibition = new Exhibition();
             $exhibition->setUser($this->getUser());
@@ -87,28 +92,28 @@ class AdminController extends BaseController
      */
     public function updatePositionAjaxAction(Request $request)
     {
-        if ($request->isMethod('POST')) {
-            $idWithPositionList = $request->get('idWithPositionList');
-            foreach ($idWithPositionList as $idWithPosition) {
-                /** @var Exhibition $exhibition */
-                $exhibition = $this->getExhibitionRepository()->find($idWithPosition['id']);
-                if (!$exhibition) {
-                    throw new NotFoundHttpException();
-                }
-                $exhibition->setPosition($idWithPosition['position']);
-            }
-
-            $this->getEntityManager()->flush();
-
-            return new JsonResponse(
-                array(
-                    'status' => 'success',
-                    'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminExhibition')
-                )
-            );
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
         }
 
-        return new JsonResponse(array('status' => 'error'));
+        $idWithPositionList = $request->get('idWithPositionList');
+        foreach ($idWithPositionList as $idWithPosition) {
+            /** @var Exhibition $exhibition */
+            $exhibition = $this->getExhibitionRepository()->find($idWithPosition['id']);
+            if (!$exhibition) {
+                throw new NotFoundHttpException();
+            }
+            $exhibition->setPosition($idWithPosition['position']);
+        }
+
+        $this->getEntityManager()->flush();
+
+        return new JsonResponse(
+            array(
+                'status' => 'success',
+                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminExhibition')
+            )
+        );
     }
 
     /**
