@@ -84,40 +84,6 @@ class AdminController extends BaseController
     }
 
     /**
-     * @param Request $request
-     *
-     * @return JsonResponse
-     *
-     * @Route("/update-position", name="admin_news_update_positions")
-     * @Method("POST")
-     */
-    public function updatePositionAjaxAction(Request $request)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new AccessDeniedException('This path is only accessible in ajax');
-        }
-
-        $idWithPositionList = $request->get('idWithPositionList');
-        foreach ($idWithPositionList as $idWithPosition) {
-            /** @var News $news */
-            $news = $this->getNewsRepository()->find($idWithPosition['id']);
-            if (!$news) {
-                throw new NotFoundHttpException();
-            }
-            $news->setPosition($idWithPosition['position']);
-        }
-
-        $this->getEntityManager()->flush();
-
-        return new JsonResponse(
-            array(
-                'status' => 'success',
-                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminNews')
-            )
-        );
-    }
-
-    /**
      * @param News $news
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse

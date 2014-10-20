@@ -13,6 +13,6 @@ class PublicControllerTest extends WebTestCase
         $client->request('GET', '/press');
 
         $response = $client->getResponse();
-        $this->assertTrue($response->isSuccessful());
+        $this->assertTrue($response->isOk());
     }
 }

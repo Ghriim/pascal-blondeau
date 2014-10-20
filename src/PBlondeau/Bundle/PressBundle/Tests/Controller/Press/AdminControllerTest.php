@@ -23,6 +23,6 @@ class AdminControllerTest extends BaseWebTestCase
         $client->request('GET', '/admin/press/');
 
         $response = $client->getResponse();
-        $this->assertTrue($response->isSuccessful());
+        $this->assertTrue($response->isOk());
     }
 }
