@@ -12,6 +12,7 @@ security:
 
     firewalls:
         main:
+            http_basic: ~
             pattern: ^/
             form_login:
                 provider: fos_userbundle

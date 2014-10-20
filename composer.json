@@ -24,7 +24,10 @@
         "knplabs/knp-paginator-bundle": "2.4.*@dev",
         "genemu/form-bundle": "2.2.*@dev",
 	    "avalanche123/imagine-bundle": "dev-master",
-        "coresphere/console-bundle": "dev-master"
+        "coresphere/console-bundle": "dev-master",
+        "doctrine/data-fixtures": "dev-master",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*",
+        "hautelook/alice-bundle": "0.1.*"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

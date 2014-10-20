@@ -1,0 +1,13 @@
+PBlondeau\Bundle\UserBundle\Entity\User:
+    admin:
+        username: admin
+        plainPassword: root
+        email: admin@fakemail.com
+        enabled: 1
+        roles: ["ROLE_ADMIN"]
+    user:
+        username: user
+        plainPassword: user
+        email: user@fakemail.com
+        enabled: 1
+        roles: ["ROLE_USER"]

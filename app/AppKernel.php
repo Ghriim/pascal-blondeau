@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new FOS\UserBundle\FOSUserBundle(),
 	        new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
+            new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+            new Hautelook\AliceBundle\HautelookAliceBundle(),
 
             new PBlondeau\Bundle\CommonBundle\PBlondeauCommonBundle(),
             new PBlondeau\Bundle\NewsBundle\PBlondeauNewsBundle(),
