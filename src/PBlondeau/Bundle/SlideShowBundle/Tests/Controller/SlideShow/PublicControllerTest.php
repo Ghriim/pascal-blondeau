@@ -15,4 +15,4 @@ class PublicControllerTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertTrue($response->isSuccessful());
     }
-} 
+}

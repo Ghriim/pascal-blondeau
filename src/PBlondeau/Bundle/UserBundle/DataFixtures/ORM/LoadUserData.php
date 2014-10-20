@@ -1,6 +1,6 @@
 <?php
 
-namespace PBlondeau\Bundle\UserBundle\DataFixtures\Orm;
+namespace PBlondeau\Bundle\UserBundle\DataFixtures\ORM;
 
 use Hautelook\AliceBundle\Alice\DataFixtureLoader;
 

@@ -42,7 +42,7 @@ class AdminController extends BaseController
      * @param Request $request
      * @param Slide $slide
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/create", name="admin_slides_create")
      * @Route("/{id}/update", name="admin_slides_edit")

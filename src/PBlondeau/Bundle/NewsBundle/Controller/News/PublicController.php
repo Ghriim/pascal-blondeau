@@ -4,7 +4,6 @@ namespace PBlondeau\Bundle\NewsBundle\Controller\News;
 
 use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 
 class PublicController extends BaseController

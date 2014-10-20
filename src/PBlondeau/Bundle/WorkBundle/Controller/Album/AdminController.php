@@ -43,7 +43,7 @@ class AdminController extends BaseController
      * @param Request $request
      * @param Album $album
      *
-     * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/create", name="admin_work_albums_create")
      * @Route("/{id}/update", name="admin_work_albums_edit")

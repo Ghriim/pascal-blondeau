@@ -96,4 +96,4 @@ class BaseController extends Controller
     {
         return $this->getEntityManager()->getRepository('PBlondeauWorkBundle:Album');
     }
-} 
+}

@@ -5,7 +5,6 @@ namespace PBlondeau\Bundle\SlideShowBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use PBlondeau\Bundle\UserBundle\Entity\User;
 use Symfony\Component\Validator\Constraints as Assert;
-
 use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 
 /**
@@ -107,7 +106,7 @@ class Slide extends BaseEntity
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
@@ -130,7 +129,7 @@ class Slide extends BaseEntity
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {
@@ -203,7 +202,7 @@ class Slide extends BaseEntity
     /**
      * Get user
      *
-     * @return \stdClass
+     * @return User
      */
     public function getUser()
     {
