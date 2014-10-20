@@ -107,7 +107,7 @@ class AdminController extends BaseController
      *
      * @return \Symfony\Component\Form\Form
      */
-    private function buildSaveForm(News $news = null)
+    private function buildSaveForm(News $news)
     {
         if ($news->isNew()) {
             $action = $this->generateUrl('admin_news_create');

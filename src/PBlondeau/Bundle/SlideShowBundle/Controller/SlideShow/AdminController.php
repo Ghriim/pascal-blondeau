@@ -141,7 +141,7 @@ class AdminController extends BaseController
      *
      * @return \Symfony\Component\Form\Form
      */
-    private function buildSaveForm(Slide $slide = null)
+    private function buildSaveForm(Slide $slide)
     {
         if ($slide->isNew()) {
             $action = $this->generateUrl('admin_slides_create');

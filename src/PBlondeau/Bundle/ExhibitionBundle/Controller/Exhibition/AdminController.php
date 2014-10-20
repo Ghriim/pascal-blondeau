@@ -140,7 +140,7 @@ class AdminController extends BaseController
      *
      * @return \Symfony\Component\Form\Form
      */
-    private function buildSaveForm(Exhibition $exhibition = null)
+    private function buildSaveForm(Exhibition $exhibition)
     {
         if ($exhibition->isNew()) {
             $action = $this->generateUrl('admin_exhibitions_create');

@@ -215,10 +215,10 @@ class News extends BaseEntity
     /**
      * Set user
      *
-     * @param \stdClass $user
+     * @param User $user
      * @return $this
      */
-    public function setUser($user)
+    public function setUser(User $user)
     {
         $this->user = $user;
 
