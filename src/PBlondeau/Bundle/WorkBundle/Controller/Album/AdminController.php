@@ -142,7 +142,7 @@ class AdminController extends BaseController
      *
      * @return \Symfony\Component\Form\Form
      */
-    private function buildSaveForm(Album $album = null)
+    private function buildSaveForm(Album $album)
     {
         if ($album->isNew()) {
             $action = $this->generateUrl('admin_work_albums_create');
