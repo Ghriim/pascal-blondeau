@@ -1,0 +1,10 @@
+PBlondeau\Bundle\NewsBundle\Entity\News:
+    basic_news (template):
+        title (unique): <text()>
+        content: <text()>
+        path: fakepath
+        user: @admin
+    active_news{1..10} (extends basic_news):
+        status: active
+    stopped_news{1..10} (extends basic_news):
+        status: stopped

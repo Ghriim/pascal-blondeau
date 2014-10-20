@@ -1,0 +1,9 @@
+PBlondeau\Bundle\ExhibitionBundle\Entity\Exhibition:
+    basic_exhibition (template):
+        path: fakepath
+        user: @admin
+    active_exhibition{1..10} (extends basic_exhibition):
+        position (unique): <numberBetween(1, 10)>
+    stopped_exhibition{1..10} (extends basic_exhibition):
+        position: ~
+        status: stopped

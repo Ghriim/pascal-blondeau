@@ -1,0 +1,9 @@
+PBlondeau\Bundle\PressBundle\Entity\PressArticle:
+    basic_press_article (template):
+        path: fakepath
+        user: @admin
+    active_press_article{1..10} (extends basic_press_article):
+        position (unique): <numberBetween(1, 10)>
+    stopped_press_article{1..10} (extends basic_press_article):
+        position: ~
+        status: stopped

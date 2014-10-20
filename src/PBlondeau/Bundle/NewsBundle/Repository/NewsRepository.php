@@ -33,7 +33,6 @@ class NewsRepository extends EntityRepository
         }
 
         $qb->orderBy('news.status');
-        $qb->addOrderBy('news.position');
 
         return $qb->getQuery()->getResult();
     }

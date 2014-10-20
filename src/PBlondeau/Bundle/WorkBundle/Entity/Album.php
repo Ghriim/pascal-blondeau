@@ -29,9 +29,9 @@ class Album extends BaseEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=150)
+     * @ORM\Column(name="title", type="string", length=50)
      * @Assert\NotBlank()
-     * @Assert\Length(max="150")
+     * @Assert\Length(max="50")
      */
     private $title;
 

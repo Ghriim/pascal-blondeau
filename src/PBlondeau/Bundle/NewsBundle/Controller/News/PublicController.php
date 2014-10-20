@@ -18,7 +18,7 @@ class PublicController extends BaseController
         );
 
         $order = array(
-            'position' => 'ASC'
+            'creation' => 'DESC'
         );
 
         $newsList = $this->getPaginator()->paginate(

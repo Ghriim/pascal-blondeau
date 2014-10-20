@@ -29,9 +29,9 @@ class News extends BaseEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=150)
+     * @ORM\Column(name="title", type="string", length=50)
      * @Assert\NotBlank()
-     * @Assert\Length(max="150")
+     * @Assert\Length(max="50")
      */
     private $title;
 
@@ -49,14 +49,6 @@ class News extends BaseEntity
      * @ORM\Column(name="path", type="string", length=255)
      */
     private $path;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="position", type="integer", nullable=true)
-     * @Assert\GreaterThanOrEqual(1)
-     */
-    private $position;
 
     /**
      * @var \DateTime
@@ -175,29 +167,6 @@ class News extends BaseEntity
     }
 
     /**
-     * Set position
-     *
-     * @param integer $position
-     * @return $this
-     */
-    public function setPosition($position)
-    {
-        $this->position = $position;
-
-        return $this;
-    }
-
-    /**
-     * Get position
-     *
-     * @return integer
-     */
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
-    /**
      * Set creation
      *
      * @param \DateTime $creation
@@ -229,10 +198,6 @@ class News extends BaseEntity
     public function setStatus($status)
     {
         $this->status = $status;
-
-        if($status == BaseEntity::STATUS_STOPPED) {
-            $this->setPosition(null);
-        }
 
         return $this;
     }

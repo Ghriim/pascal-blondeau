@@ -1,13 +1,12 @@
 PBlondeau\Bundle\UserBundle\Entity\User:
-    admin:
-        username: admin
+    basic_user (template):
         plainPassword: root
+        enabled: 1
+    admin (extends basic_user):
+        username: admin
         email: admin@fakemail.com
-        enabled: 1
         roles: ["ROLE_ADMIN"]
-    user:
+    user (extends basic_user):
         username: user
-        plainPassword: user
         email: user@fakemail.com
-        enabled: 1
         roles: ["ROLE_USER"]

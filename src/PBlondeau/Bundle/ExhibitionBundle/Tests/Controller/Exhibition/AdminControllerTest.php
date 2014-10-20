@@ -25,4 +25,24 @@ class AdminControllerTest extends BaseWebTestCase
         $response = $client->getResponse();
         $this->assertTrue($response->isSuccessful());
     }
+
+    public function testDeleteForNotLoggedUser()
+    {
+        $client = static::createClient();
+        $client->enableProfiler();
+        $client->request('DELETE', '/admin/exhibitions/1');
+
+        $response = $client->getResponse();
+        $this->assertTrue($response->isRedirection());
+    }
+
+    public function testDeleteForLoggedAdmin()
+    {
+        $client = $this->createAuthorizedClient();
+        $client->enableProfiler();
+        $client->request('DELETE', '/admin/exhibitions/1');
+
+        $response = $client->getResponse();
+        $this->assertTrue($response->isSuccessful());
+    }
 }
