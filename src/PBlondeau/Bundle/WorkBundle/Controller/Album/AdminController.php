@@ -51,10 +51,6 @@ class AdminController extends BaseController
      */
     public function saveAjaxAction(Request $request, Album $album = null)
     {
-        if (!$request->isXmlHttpRequest()) {
-            throw new AccessDeniedException('This path is only accessible in ajax');
-        }
-
         if (!$album) {
             $album = new Album();
             $album->setUser($this->getUser());

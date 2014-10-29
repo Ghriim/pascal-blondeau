@@ -51,10 +51,6 @@ class AdminController extends BaseController
      */
     public function saveAjaxAction(Request $request, Exhibition $exhibition = null)
     {
-        if (!$request->isXmlHttpRequest()) {
-            throw new AccessDeniedException('This path is only accessible in ajax');
-        }
-
         if (!$exhibition) {
             $exhibition = new Exhibition();
             $exhibition->setUser($this->getUser());
