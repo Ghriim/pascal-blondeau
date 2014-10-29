@@ -1,0 +1,49 @@
+list:
+    action:
+        add: Add a new Album
+
+    album:
+        count: %numberOfAlbums% Albums
+        empty: No Album added yet
+        header:
+            cover: Cover
+            title: Title
+            position: Position
+            status: Status
+            creation: Added
+            actions: Actions
+        body:
+            status:
+                active: Active
+                planned: Planned
+                stopped: Stopped
+            action:
+                edit: Edit
+                delete: Remove
+
+form:
+    create:
+        title: Add a new Albums=
+        success.message: A new Album has been successfully added
+    update:
+        title: Update Album informations
+        success.message: The Album has been successfully modified
+    modal:
+        action:
+            save: Save the Album
+            cancel: Cancel
+    delete:
+        modal:
+            title: Remove Album
+            content: >
+                You are about to delete an Album.<br />
+                Suppression is permanent and you won't be able to recover the data.<br />
+                <br />
+                Are you sure you want to proceed ?
+            action:
+                confirm: Remove the Album
+                cancel: Cancel
+        success.message: The Album has been successfully removed
+
+    updatePosition:
+        message: Positions have been successfully updated
