@@ -8,7 +8,7 @@ use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use PBlondeau\Bundle\UserBundle\Entity\User;
 
 /**
- * Exhibition
+ * Album
  *
  * @ORM\Table(name="album")
  * @ORM\Entity(repositoryClass="PBlondeau\Bundle\WorkBundle\Repository\AlbumRepository")

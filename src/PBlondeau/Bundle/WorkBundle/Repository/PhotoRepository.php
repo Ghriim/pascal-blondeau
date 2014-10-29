@@ -3,8 +3,8 @@
 namespace PBlondeau\Bundle\WorkBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use PBlondeau\Bundle\ExhibitionBundle\Entity\Exhibition;
 use PBlondeau\Bundle\WorkBundle\Entity\Album;
+use PBlondeau\Bundle\WorkBundle\Entity\Photo;
 
 class PhotoRepository extends EntityRepository
 {
@@ -23,7 +23,7 @@ class PhotoRepository extends EntityRepository
      * @param Album $album
      * @param null  $status
      *
-     * @return Exhibition[]
+     * @return Photo[]
      */
     public function findForAdminList(Album $album, $status = null)
     {

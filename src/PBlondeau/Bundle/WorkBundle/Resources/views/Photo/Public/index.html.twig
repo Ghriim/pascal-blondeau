@@ -1,5 +1,7 @@
 {% extends '::layout.html.twig' %}
 
+{% trans_default_domain "publicWorkPhoto" %}
+
 {% block body %}
     <section id="albums">
         {% for album in albums %}
@@ -9,6 +11,10 @@
                     <label>{{ album.title }}</label>
                 </div>
             </article>
+        {% else %}
+            <div class="text-center text-italic">
+                {{ 'list.photo.empty' | trans({}) }}
+            </div>
         {% endfor %}
     </section>
 

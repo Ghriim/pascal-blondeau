@@ -1,0 +1,7 @@
+form:
+    action:
+        save: Save Biography
+        cancel: Cancel
+    save:
+        success:
+            message: The Biography has been successfully saved

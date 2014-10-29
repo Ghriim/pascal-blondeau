@@ -4,9 +4,16 @@
     <section id="albums">
         {% for album in albums %}
             <article class="album margin-bottom">
-                <img class="img-max-height-fix" src="{{ asset(album.webPath) }}" alt="" />
+                <a href="{{ path('work_album_photos_public_display', {'id': album.id}) }}"
+                   title="{{ album.title }}">
+                    <img class="img-max-height-fix" src="{{ asset(album.webPath) }}" alt="" />
+                </a>
+
                 <div class="title">
-                    <label>{{ album.title }}</label>
+                    <a href="{{ path('work_album_photos_public_display', {'id': album.id}) }}"
+                       title="{{ album.title }}">
+                        <label>{{ album.title|truncate(45) }}</label>
+                    </a>
                 </div>
             </article>
         {% endfor %}

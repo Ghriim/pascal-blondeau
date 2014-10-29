@@ -1,0 +1,35 @@
+{% extends '::layout.html.twig' %}
+
+{% trans_default_domain "adminBiography" %}
+
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {% if errors is defined %}
+            {{ errors }}
+        {% endif %}
+
+        <div>
+            {{ form_row(form.content) }}
+        </div>
+
+        <div>
+            {{ form_row(form.file) }}
+        </div>
+
+        {{ form_rest(form) }}
+
+        <div class="submits text-right">
+            <button type="button" class="btn btn-default" data-dismiss="modal">
+                <span class="fa fa-times"></span>
+                {{ 'form.action.cancel' | trans({}) }}
+            </button>
+
+            <button type="submit" class="submit btn btn-primary">
+                <span class="fa fa-floppy-o"></span>
+                {{ 'form.action.save' | trans({}) }}
+            </button>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

@@ -68,6 +68,11 @@ html, body {
     margin: 20px;
 }
 
+/* Font */
+.text-italic {
+    font-style: italic;
+}
+
 /* Badge */
 .badge.status-active {
     background-color: #3fad46;
