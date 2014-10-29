@@ -1,10 +1,10 @@
-PBlondeau\Bundle\WorkBundle\Entity\Album:
-    basic_album (template):
-        title (unique): <text()>
+PBlondeau\Bundle\WorkBundle\Entity\Photo:
+    basic_photo (template):
         path: fakepath
         user: @admin
-    active_album{1..10} (extends basic_album):
+        album: @<numberBetween(1, 5)>
+    active_photo{1..50} (extends basic_photo):
         position (unique): <numberBetween(1, 10)>
-    stopped_album{1..10} (extends basic_album):
+    stopped_photo{1..10} (extends basic_photo):
         position: ~
         status: stopped

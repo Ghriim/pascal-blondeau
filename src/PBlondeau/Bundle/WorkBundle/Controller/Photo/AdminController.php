@@ -1,19 +1,19 @@
 <?php
 
-namespace PBlondeau\Bundle\WorkBundle\Controller\Album;
+namespace PBlondeau\Bundle\WorkBundle\Controller\Photo;
 
+use PBlondeau\Bundle\WorkBundle\Entity\Album;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
-use PBlondeau\Bundle\WorkBundle\Entity\Album;
-use PBlondeau\Bundle\WorkBundle\Form\Type\AlbumType;
+use PBlondeau\Bundle\WorkBundle\Entity\Photo;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Album controller.
+ * Photo controller.
  *
  * @Route("/admin/albums")
  */
@@ -21,75 +21,39 @@ class AdminController extends BaseController
 {
 
     /**
-     * @Route("/", name="admin_work_albums")
+     * @param Album $album
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @Route("/{id}", name="admin_work_album_photos")
      * @Method("GET")
      */
-    public function indexAction()
+    public function indexAction(Album $album)
     {
-        $albums = $this->getPaginator()->paginate(
-            $this->getAlbumRepository()->findForAdminList(),
+        $photos = $this->getPaginator()->paginate(
+            $this->getPhotoRepository()->findForAdminList($album),
             $this->get('request')->query->get('page', 1)
         );
 
         return $this->render(
-            'PBlondeauWorkBundle:Album/Admin:index.html.twig',
+            'PBlondeauWorkBundle:Photo/Admin:index.html.twig',
             array(
-                'albums' => $albums,
+                'album'  => $album,
+                'photos' => $photos,
             )
         );
     }
 
     /**
-     * @param Request $request
      * @param Album   $album
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
-     * @Route("/create", name="admin_work_albums_create")
-     * @Route("/{id}/update", name="admin_work_albums_edit")
-     * @Method({"GET", "POST"})
-     */
-    public function saveAjaxAction(Request $request, Album $album = null)
-    {
-        if (!$album) {
-            $album = new Album();
-            $album->setUser($this->getUser());
-        }
-
-        $form = $this->buildSaveForm($album);
-
-        if ($request->isMethod('POST')) {
-            $form->submit($request);
-
-            if ($form->isValid()) {
-                $this->getEntityManager()->persist($album);
-                $this->getEntityManager()->flush();
-
-                $context = $album ? 'update' : 'create';
-                $message = $this->getSuccessMessageFromContext($context);
-                $this->addFlashMessage($message, 'success');
-
-                return $this->redirect($this->generateUrl('admin_work_albums'));
-            }
-        }
-
-        return $this->render(
-            'PBlondeauWorkBundle:Album/Admin:_saveForm.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
-    }
-
-    /**
      * @param Request $request
      *
      * @return JsonResponse
      *
-     * @Route("/update-position", name="admin_work_albums_update_positions")
+     * @Route("/{id}/update-position", name="admin_work_album_photos_update_positions")
      * @Method("POST")
      */
-    public function updatePositionAjaxAction(Request $request)
+    public function updatePositionAjaxAction(Request $request, Album $album)
     {
         if (!$request->isXmlHttpRequest()) {
             throw new AccessDeniedException('This path is only accessible in ajax');
@@ -97,12 +61,12 @@ class AdminController extends BaseController
 
         $idWithPositionList = $request->get('idWithPositionList');
         foreach ($idWithPositionList as $idWithPosition) {
-            /** @var Album $album */
-            $album = $this->getAlbumRepository()->find($idWithPosition['id']);
-            if (!$album) {
+            /** @var Photo $photo */
+            $photo = $this->getPhotoRepository()->find($idWithPosition['id']);
+            if (!$photo || $photo->getAlbum() != $album) {
                 throw new NotFoundHttpException();
             }
-            $album->setPosition($idWithPosition['position']);
+            $photo->setPosition($idWithPosition['position']);
         }
 
         $this->getEntityManager()->flush();
@@ -110,22 +74,22 @@ class AdminController extends BaseController
         return new JsonResponse(
             array(
                 'status'  => 'success',
-                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminWorkAlbum')
+                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminWorkPhoto')
             )
         );
     }
 
     /**
-     * @param Album $album
+     * @param Photo $photo
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/{id}", name="admin_work_albums_delete")
+     * @Route("/{id}", name="admin_work_album_photo_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Album $album)
+    public function deleteAction(Photo $photo)
     {
-        $this->getEntityManager()->remove($album);
+        $this->getEntityManager()->remove($photo);
         $this->getEntityManager()->flush();
 
         $message = $this->getSuccessMessageFromContext('delete');
@@ -135,43 +99,13 @@ class AdminController extends BaseController
     }
 
     /**
-     * @param Album $album
-     *
-     * @return \Symfony\Component\Form\Form
-     */
-    private function buildSaveForm(Album $album)
-    {
-        if ($album->isNew()) {
-            $action           = $this->generateUrl('admin_work_albums_create');
-            $validationGroups = array('creation');
-        } else {
-            $action = $this->generateUrl(
-                'admin_work_albums_edit',
-                array('id' => $album->getId())
-            );
-
-            $validationGroups = array('default');
-        }
-
-        return $this->createForm(
-            new AlbumType(), $album, array(
-                'action'            => $action,
-                'method'            => 'POST',
-                'attr'              => array('class' => 'form form-horizontal'),
-                'validation_groups' => $validationGroups
-            ),
-            $album
-        );
-    }
-
-    /**
      * @param $context
      *
      * @return string
      */
     private function getSuccessMessageFromContext($context = 'create')
     {
-        return $this->getTranslator()->trans('form.' . $context . '.success.message', array(), 'adminWorkAlbum');
+        return $this->getTranslator()->trans('form.' . $context . '.success.message', array(), 'adminWorkPhoto');
     }
 
 }

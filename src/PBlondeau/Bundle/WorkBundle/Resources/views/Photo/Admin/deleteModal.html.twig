@@ -1,4 +1,4 @@
-{% trans_default_domain "adminWorkAlbum" %}
+{% trans_default_domain "adminWorkPhoto" %}
 
 <div class="modal-dialog">
     <div class="modal-content">
@@ -17,7 +17,7 @@
                 {{ 'form.delete.modal.action.cancel' | trans({}) }}
             </button>
 
-            <form action="{{ path('admin_work_albums_delete', {'id': album.id}) }}" method="post" class="form-delete">
+            <form action="{{ path('admin_work_album_photo_delete', {'id': photo.id}) }}" method="post" class="form-delete">
                 <input type="hidden" name="_method" value="delete">
                 <button type="submit" class="btn btn-primary">
                     <span class="fa fa-trash-o"></span>

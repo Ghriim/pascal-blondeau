@@ -1,6 +1,6 @@
 <?php
 
-namespace PBlondeau\Bundle\WorkBundle\Controller\Album;
+namespace PBlondeau\Bundle\WorkBundle\Controller\Photo;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
@@ -22,12 +22,12 @@ class PublicController extends BaseController
         );
 
         $albums = $this->getPaginator()->paginate(
-            $this->getAlbumRepository()->findBy($criteria, $order),
+            $this->getPhotoRepository()->findBy($criteria, $order),
             $this->get('request')->query->get('page', 1)
         );
 
         return $this->render(
-            'PBlondeauWorkBundle:Album/Public:index.html.twig',
+            'PBlondeauWorkBundle:Photo/Public:index.html.twig',
             array(
                 'albums' => $albums
             ));

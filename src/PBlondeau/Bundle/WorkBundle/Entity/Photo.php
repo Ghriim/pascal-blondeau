@@ -10,12 +10,12 @@ use PBlondeau\Bundle\UserBundle\Entity\User;
 /**
  * Exhibition
  *
- * @ORM\Table(name="album")
- * @ORM\Entity(repositoryClass="PBlondeau\Bundle\WorkBundle\Repository\AlbumRepository")
+ * @ORM\Table(name="photo")
+ * @ORM\Entity(repositoryClass="PBlondeau\Bundle\WorkBundle\Repository\PhotoRepository")
  *
  * @ORM\HasLifecycleCallbacks
  */
-class Album extends BaseEntity
+class Photo extends BaseEntity
 {
     /**
      * @var integer
@@ -25,15 +25,6 @@ class Album extends BaseEntity
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=50)
-     * @Assert\NotBlank()
-     * @Assert\Length(max="50")
-     */
-    private $title;
 
     /**
      * @var string
@@ -67,6 +58,14 @@ class Album extends BaseEntity
     private $status;
 
     /**
+     * @var Album
+     *
+     * @ORM\ManyToOne(targetEntity="PBlondeau\Bundle\WorkBundle\Entity\Album")
+     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+     */
+    private $album;
+
+    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="PBlondeau\Bundle\UserBundle\Entity\User")
@@ -97,29 +96,6 @@ class Album extends BaseEntity
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return $this
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -216,6 +192,26 @@ class Album extends BaseEntity
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @param Album $album
+     *
+     * @return $this
+     */
+    public function setAlbum($album)
+    {
+        $this->album = $album;
+
+        return $this;
+    }
+
+    /**
+     * @return Album
+     */
+    public function getAlbum()
+    {
+        return $this->album;
     }
 
     /**

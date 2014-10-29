@@ -23,7 +23,7 @@ list:
 
 form:
     create:
-        title: Add a new Albums=
+        title: Add a new Albums
         success.message: A new Album has been successfully added
     update:
         title: Update Album informations

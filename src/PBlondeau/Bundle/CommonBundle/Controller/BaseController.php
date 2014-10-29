@@ -96,4 +96,12 @@ class BaseController extends Controller
     {
         return $this->getEntityManager()->getRepository('PBlondeauWorkBundle:Album');
     }
+
+    /**
+     * @return \PBlondeau\Bundle\WorkBundle\Repository\PhotoRepository
+     */
+    protected function getPhotoRepository()
+    {
+        return $this->getEntityManager()->getRepository('PBlondeauWorkBundle:Photo');
+    }
 }

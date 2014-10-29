@@ -75,6 +75,13 @@ class Album extends BaseEntity
     private $user;
 
     /**
+     * @var Photo[]
+     *
+     * @ORM\OneToMany(targetEntity="PBlondeau\Bundle\WorkBundle\Entity\Photo", mappedBy="album", indexBy="id")
+     */
+    private $photos;
+
+    /**
      * @Assert\File(
      *      maxSize="6000000",
      *      mimeTypes = {"image/jpeg", "image/gif", "image/png"}
@@ -239,6 +246,14 @@ class Album extends BaseEntity
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @return Photo[]
+     */
+    public function getPhotos()
+    {
+        return $this->photos;
     }
 
     public function getAbsolutePath()

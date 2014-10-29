@@ -38,9 +38,9 @@
                         <img src="{{ asset(album.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                     </td>
                     <td class="title" width="40%">
-                        <span title="{{ album.title }}">
-                            {{ album.title|truncate(55) }}
-                        </span>
+                        <a href="{{ path('admin_work_album_photos', {'id': album.id}) }}" title="{{ album.title }}">
+                            {{ album.title|truncate(45) }}
+                        </a>
                     </td>
 	                <td class="position">
 		                {{ album.position }}

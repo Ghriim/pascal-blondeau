@@ -1,10 +1,11 @@
 list:
     action:
-        add: Add a new Album
+        add: Add a new Photo
 
-    album:
-        count: %numberOfAlbums% Albums
-        empty: No Album added yet
+    photo:
+        back-to-albums: Back to Albums
+        count: %numberOfPhotos% Photos
+        empty: No Photo added yet
         header:
             cover: Cover
             title: Title
@@ -23,27 +24,27 @@ list:
 
 form:
     create:
-        title: Add a new Albums=
-        success.message: A new Album has been successfully added
+        title: Add a new Photo
+        success.message: A new Photo has been successfully added
     update:
-        title: Update Album informations
-        success.message: The Album has been successfully modified
+        title: Update Photo informations
+        success.message: The Photo has been successfully modified
     modal:
         action:
-            save: Save the Album
+            save: Save the Photo
             cancel: Cancel
     delete:
         modal:
-            title: Remove Album
+            title: Remove Photo
             content: >
-                You are about to delete an Album.<br />
+                You are about to delete a Photo.<br />
                 Suppression is permanent and you won't be able to recover the data.<br />
                 <br />
                 Are you sure you want to proceed ?
             action:
-                confirm: Remove the Album
+                confirm: Remove the Photo
                 cancel: Cancel
-        success.message: The Album has been successfully removed
+        success.message: The Photo has been successfully removed
 
     updatePosition:
         message: Positions have been successfully updated

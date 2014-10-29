@@ -13,7 +13,8 @@ class LoadData extends DataFixtureLoader
             __DIR__ . '/../../../ExhibitionBundle/DataFixtures/ORM/exhibitions.yml',
             __DIR__ . '/../../../NewsBundle/DataFixtures/ORM/news.yml',
             __DIR__ . '/../../../PressBundle/DataFixtures/ORM/pressArticles.yml',
-            __DIR__ . '/../../../WorkBundle/DataFixtures/ORM/albums.yml'
+            __DIR__ . '/../../../WorkBundle/DataFixtures/ORM/albums.yml',
+            //__DIR__ . '/../../../WorkBundle/DataFixtures/ORM/photos.yml'
         );
     }
 }
