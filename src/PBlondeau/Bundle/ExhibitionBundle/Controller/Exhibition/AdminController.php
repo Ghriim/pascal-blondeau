@@ -163,7 +163,8 @@ class AdminController extends BaseController
                 'method'            => 'POST',
                 'attr'              => array('class' => 'form form-horizontal'),
                 'validation_groups' => $validationGroups
-            )
+            ),
+            $exhibition
         );
     }
 

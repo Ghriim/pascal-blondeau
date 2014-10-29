@@ -51,10 +51,6 @@ class AdminController extends BaseController
      */
     public function saveAjaxAction(Request $request, Slide $slide = null)
     {
-        if (!$request->isXmlHttpRequest()) {
-            throw new AccessDeniedException('This path is only accessible in ajax');
-        }
-
         if (!$slide) {
             $slide = new Slide();
             $slide->setUser($this->getUser());
@@ -163,7 +159,8 @@ class AdminController extends BaseController
                 'attr'              => array('class' => 'form form-horizontal'),
                 'method'            => 'POST',
                 'validation_groups' => $validationGroups
-            )
+            ),
+            array('slide' => $slide)
         );
     }
 

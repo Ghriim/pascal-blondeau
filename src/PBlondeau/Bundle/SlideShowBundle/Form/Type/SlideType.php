@@ -2,6 +2,7 @@
 
 namespace PBlondeau\Bundle\SlideShowBundle\Form\Type;
 
+use PBlondeau\Bundle\SlideShowBundle\Entity\Slide;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -16,7 +17,7 @@ class SlideType extends AbstractType
     {
         $builder
             ->add('file', 'file', array(
-                'required' => false
+                'required' => !$this->isEditMode($options)
             ))
             ->add('status', 'pblondeau_status')
         ;
@@ -30,6 +31,7 @@ class SlideType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'PBlondeau\Bundle\SlideShowBundle\Entity\Slide',
             'csrf_protection' => false,
+            'slide' => null,
         ));
     }
 
@@ -39,5 +41,22 @@ class SlideType extends AbstractType
     public function getName()
     {
         return 'pblondeau_bundle_slideshowbundle_slide';
+    }
+
+    /**
+     * @param $options
+     *
+     * @return bool
+     */
+    private function isEditMode($options)
+    {
+        /** @var Slide $slide */
+        $slide = $options['data'];
+
+        if ($slide && !$slide->isNew()) {
+            return true;
+        }
+
+        return false;
     }
 }

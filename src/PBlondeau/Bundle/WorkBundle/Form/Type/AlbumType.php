@@ -2,6 +2,7 @@
 
 namespace PBlondeau\Bundle\WorkBundle\Form\Type;
 
+use PBlondeau\Bundle\WorkBundle\Entity\Album;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -17,7 +18,7 @@ class AlbumType extends AbstractType
         $builder
             ->add('title')
             ->add('file', 'file', array(
-                'required' => false
+                'required' => !$this->isEditMode($options)
             ))
             ->add('status', 'pblondeau_status')
         ;
@@ -40,5 +41,22 @@ class AlbumType extends AbstractType
     public function getName()
     {
         return 'pblondeau_bundle_work_album';
+    }
+
+    /**
+     * @param $options
+     *
+     * @return bool
+     */
+    private function isEditMode($options)
+    {
+        /** @var Album $album */
+        $album = $options['data'];
+
+        if ($album && !$album->isNew()) {
+            return true;
+        }
+
+        return false;
     }
 }

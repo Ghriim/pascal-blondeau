@@ -2,6 +2,7 @@
 
 namespace PBlondeau\Bundle\ExhibitionBundle\Form\Type;
 
+use PBlondeau\Bundle\ExhibitionBundle\Entity\Exhibition;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -16,7 +17,7 @@ class ExhibitionType extends AbstractType
     {
         $builder
             ->add('file', 'file', array(
-                'required' => false
+                'required' => !$this->isEditMode($options)
             ))
             ->add('status', 'pblondeau_status')
         ;
@@ -39,5 +40,22 @@ class ExhibitionType extends AbstractType
     public function getName()
     {
         return 'pblondeau_bundle_exhibitions';
+    }
+
+    /**
+     * @param $options
+     *
+     * @return bool
+     */
+    private function isEditMode($options)
+    {
+        /** @var Exhibition $exhibition */
+        $exhibition = $options['data'];
+
+        if ($exhibition && !$exhibition->isNew()) {
+            return true;
+        }
+
+        return false;
     }
 }
