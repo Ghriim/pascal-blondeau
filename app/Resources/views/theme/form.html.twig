@@ -1,0 +1,711 @@
+{% extends "form_div_layout.html.twig" %}
+
+{# Widgets #}
+
+{% block form_widget_simple %}
+    {% set type = type|default('text') %}
+    {% set widget_addon_prepend = widget_addon_prepend|default(null) %}
+    {% set widget_addon_append = widget_addon_append|default(null) %}
+    {% set has_widget_addon = type != 'hidden' and (widget_addon_prepend is not null or widget_addon_append is not null) %}
+    {% spaceless %}
+        {% if has_widget_addon %}
+
+            {% set has_group_addon = false %}
+            {% set addonRowClass = [] %}
+            {% set innerAddonClass = [] %}
+            {% if widget_addon_prepend is not null %}
+                {% if widget_addon_prepend.type|default('group') == 'inner' %}
+                    {% set innerAddonClass = innerAddonClass|merge(['left-inner-addon']) %}
+                {% else %}
+                    {% set has_group_addon = true %}
+                {% endif %}
+            {% endif %}
+
+            {% if widget_addon_append is not null %}
+                {% if widget_addon_append.type|default('group') == 'inner' %}
+                    {% set innerAddonClass = innerAddonClass|merge(['right-inner-addon']) %}
+                {% else %}
+                    {% set has_group_addon = true %}
+                {% endif %}
+            {% endif %}
+
+            {% if has_group_addon %}
+                {% set addonRowClass = addonRowClass|merge(['input-group']) %}
+            {% endif %}
+
+            {% set addonRowClass = addonRowClass|merge(innerAddonClass) %}
+
+            <div class="{{ addonRowClass|join(' ') }}">
+        {% endif %}
+
+        {# widget prepend append : BEGIN #}
+        {% if has_widget_addon and widget_addon_prepend is not null %}
+            {% set widget_addon = widget_addon_prepend %}
+            {{ block('widget_addon') }}
+        {% endif %}
+        {# widget prepend append : END #}
+
+        {% if form.vars.block_prefixes[1]|default('') != 'file' %}
+            {% set attr = attr|merge({ 'class': 'form-control '~attr.class|default('') }) %}
+        {% endif %}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+
+        {# widget addon append : BEGIN #}
+        {% if has_widget_addon and widget_addon_append is not null %}
+            {% set widget_addon = widget_addon_append %}
+            {{ block('widget_addon') }}
+        {% endif %}
+        {% if has_widget_addon %}
+            </div>
+        {% endif %}
+        {# widget addon append :END #}
+    {% endspaceless %}
+{% endblock form_widget_simple %}
+
+{% block choice_widget_collapsed %}
+    {% spaceless %}
+        {% if form.vars.block_prefixes[1]|default('') != 'file' %}
+            {% set attr = attr|merge({ 'class': 'form-control '~attr.class|default('') }) %}
+        {% endif %}
+        <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+            {% if empty_value is not none %}
+                <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+            {% endif %}
+            {% if preferred_choices|length > 0 %}
+                {% set options = preferred_choices %}
+                {{ block('choice_widget_options') }}
+                {% if choices|length > 0 and separator is not none %}
+                    <option disabled="disabled">{{ separator }}</option>
+                {% endif %}
+            {% endif %}
+            {% set options = choices %}
+            {{ block('choice_widget_options') }}
+        </select>
+    {% endspaceless %}
+{% endblock choice_widget_collapsed %}
+
+{% block choice_widget_expanded %}
+    {% spaceless %}
+        <div {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                {% set input_type = 'checkbox' %}
+                {% if child.vars.block_prefixes[2]|default('') == 'radio' %}
+                    {% set input_type = 'radio' %}
+                {% endif %}
+                {% if choice_full_css %}
+                    {{ form_row(child) }}
+                {% else %}
+                    <div class="form-choice {{ input_type }}">
+                        {{ form_widget(child) }}
+                        {{ form_label(child) }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            <div class="clear"></div>
+        </div>
+    {% endspaceless %}
+{% endblock choice_widget_expanded %}
+
+{% block choice_widget_options %}
+    {% spaceless %}
+        {% for group_label, choice in options %}
+            {% if choice is iterable %}
+                <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+                    {% set options = choice %}
+                    {{ block('choice_widget_options') }}
+                </optgroup>
+            {% else %}
+                <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}
+                {% if choice.attr is defined %}
+                    {% for attrname, attrvalue in choice.attr %}{% if attrname in ['title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}" {% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
+                {% endif %}
+                >{{ choice.label|trans({}, translation_domain) }}</option>
+            {% endif %}
+        {% endfor %}
+    {% endspaceless %}
+{% endblock choice_widget_options %}
+
+{% block button_widget %}
+    {% set widget_addon_prepend = widget_addon_prepend|default(null) %}
+    {% set widget_addon_append = widget_addon_append|default(null) %}
+    {% spaceless %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        {% set attr = attr|merge({ 'class': 'btn '~attr.class|default('') }) %}
+        <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>
+            {% if widget_addon_prepend is not null %}
+                {% set widget_addon = widget_addon_prepend %}
+                {{ block('widget_addon') }}
+            {% endif %}
+            {{ label|trans({}, translation_domain)|raw }}
+            {% if widget_addon_append is not null %}
+                {% set widget_addon = widget_addon_append %}
+                {{ block('widget_addon') }}
+            {% endif %}
+        </button>
+    {% endspaceless %}
+{% endblock button_widget %}
+
+{# Labels #}
+
+{% block form_label %}
+    {% spaceless %}
+        {% if label is not sameas(false) %}
+            {% if not compound %}
+                {% set label_attr = label_attr|merge({'for': id}) %}
+            {% endif %}
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+
+            {% set tooltipOnLabel = form_tooltip_on_label is defined and form_tooltip_on_label %}
+
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}
+        {% if form_tooltip is defined and tooltipOnLabel %}data-toggle="tooltip" title="{{- form_tooltip|trans({}, translation_domain)|raw -}}" data-html="true"{% endif %}>
+            {{- label|trans({}, translation_domain)|raw -}}
+            </label>
+            {% if form_tooltip is defined and not tooltipOnLabel %}
+                <span class="fa fa-info-circle color-fade margin-left" data-toggle="tooltip" title="{{- form_tooltip|trans({}, translation_domain)|raw -}}" data-html="true"></span>
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_label %}
+
+{# Rows #}
+
+{% block form_row %}
+    {% spaceless %}
+        {% if horizontal %}
+            {% set form_label_attr = form_label_attr|merge({ 'class': 'col-xs-3 '~form_label_attr.class|default('') }) %}
+            {% set form_widget_attr = form_widget_attr|merge({ 'class': 'col-xs-9 '~form_widget_attr.class|default('') }) %}
+        {% endif %}
+        {% set form_row_attr = form_row_attr|merge({ 'class': 'form-group '~form_row_attr.class|default('') }) %}
+        {% set form_label_attr = form_label_attr|merge({ 'class': 'form-label control-label '~form_label_attr.class|default('') }) %}
+        {% set form_widget_attr = form_widget_attr|merge({ 'class': 'form-widget '~form_widget_attr.class|default('') }) %}
+        <div {{ block('form_row_attr') }}>
+            <div {{ block('form_label_attr') }}>
+                {{ form_label(form) }}
+            </div>
+            <div {{ block('form_widget_attr') }}>
+                {{ form_widget(form) }}
+                {{ form_errors(form) }}
+                {% if form_help is defined %}
+                    <div class="help-block">
+                        {{ form_help|trans({}, translation_domain)|raw }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block checkbox_row %}
+    {% spaceless %}
+        {% set extraClass = '' %}
+        {% if errors|length > 0 %}
+            {% set extraClass = extraClass~' has-error' %}
+        {% endif %}
+        {% if horizontal %}
+            {% set form_widget_attr = form_widget_attr|merge({ 'class': 'col-xs-8 '~form_widget_attr.class|default('') }) %}
+        {% endif %}
+        {% set form_row_attr = form_row_attr|merge({ 'class': 'form-group '~form_row_attr.class|default('') }) %}
+        {% set form_widget_attr = form_widget_attr|merge({ 'class': 'form-widget '~form_widget_attr.class|default('') }) %}
+        {% set input_type = 'checkbox' %}
+        {% if form.vars.block_prefixes[2]|default('') == 'radio' %}
+            {% set input_type = 'radio' %}
+        {% endif %}
+
+        {% if (not full_css) or (full_css and not horizontal) %}
+            <div {{ block('form_row_attr') }}>
+            <div {{ block('form_widget_attr') }}>
+        {% endif %}
+
+        {% if full_css %}
+            <div class="form-special{{ extraClass }}">
+                <div class="{{ input_type }}-special">
+                    {{ form_widget(form) }} <label for="{{ id }}"></label>
+                </div>
+                {{ form_label(form) }}
+                {{ form_errors(form) }}
+            </div>
+        {% else %}
+            <div class="form-choice {{ input_type }}">
+                {{ form_widget(form) }}
+                {{ form_label(form) }}
+                {{ form_errors(form) }}
+            </div>
+        {% endif %}
+
+        {% if (not full_css) or (full_css and not horizontal) %}
+        </div>
+        {% endif %}
+
+        {% if form_help is defined %}
+            <div class="help-block col-xs-8 col-xs-offset-4">
+                {{ form_help|trans({}, translation_domain)|raw }}
+            </div>
+        {% endif %}
+
+        {% if (not full_css) or (full_css and not horizontal) %}
+            </div>
+        {% endif %}
+
+    {% endspaceless %}
+{% endblock %}
+
+{% block switch_row %}
+    {% spaceless %}
+        {% set form_row_attr = form_row_attr|merge({ 'class': 'form-row checkbox-slider '~form_row_attr.class|default('') }) %}
+        <div {{ block('form_row_attr') }}>
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+            {{ form_errors(form) }}
+            {% if form_help is defined %}
+                <div class="help-block col-xs-8 col-xs-offset-4">
+                    {{ form_help|trans({}, translation_domain)|raw }}
+                </div>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block switch_widget %}
+    {% set form_widget_attr = form_widget_attr|merge({ 'class': 'form-widget checkbox-switcher '~form_widget_attr.class|default('') }) %}
+    <div {{ block('form_widget_attr') }} {% if switch_target %}data-target="{{ switch_target }}"{% endif %}>
+        <div class="switcher">
+            <label {% if switch_target %}data-target="{{ switch_target }}" data-toggle="{{ switch_toggle }}"{% endif %} for="{{ form.vars.form.vars.id }}" class="switcher-global">
+                {{ form_widget(form) }}
+                <label for="{{ form.vars.form.vars.id }}" class="switcher-handle"></label>
+            </label>
+        </div>
+    </div>
+{% endblock %}
+
+{% block slider_row %}
+    {% spaceless %}
+        {% set form_row_attr = form_row_attr|merge({ 'class': 'form-row slider '~form_row_attr.class|default('') }) %}
+        <div {{ block('form_row_attr') }}>
+            <label>{{ form_label(form) }}</label>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block slider_widget %}
+    {% spaceless %}
+        {% set form_widget_attr = form_widget_attr|merge({ 'class': 'form-widget slider '~form_widget_attr.class|default('') }) %}
+        <div {{ block('form_widget_attr') }}>
+            <div id="slider-range"></div>
+            {{ form_widget(form) }}
+            <div class="ui-slider-output rangeSelection"></div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block radio_row %}
+    {% spaceless %}
+        {{ block('checkbox_row') }}
+    {% endspaceless %}
+{% endblock radio_row %}
+
+{% block submit_row %}
+    {% spaceless %}
+        <div class="submit-area">
+            {{ form_widget(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock submit_row %}
+
+{# Misc #}
+
+{% block form_start %}
+    {% spaceless %}
+        {% set attr = attr|merge({ 'id': 'form_'~form.vars.id }) %}
+        {% set method = method|upper %}
+        {% if method in ["GET", "POST"] %}
+            {% set form_method = method %}
+        {% else %}
+            {% set form_method = "POST" %}
+        {% endif %}
+        <form method="{{ form_method|lower }}" action="{{ action }}"{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+        {% if form_method != method %}
+            <input type="hidden" name="_method" value="{{ method }}" />
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_start %}
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <ul class="form-errors error-message list-unstyled clear">
+                {% for error in errors %}
+                    <li>{{ error.message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+{# Support #}
+
+{% block form_row_attr %}
+    {% spaceless %}
+        {% set extraClass = '' %}
+        {% if read_only %}
+            {% set extraClass = extraClass~' read_only' %}
+        {% endif %}
+        {% if disabled %}
+            {% set extraClass = extraClass~' disabled' %}
+        {% endif %}
+        {% if required %}
+            {% set extraClass = extraClass~' required is-required' %}
+        {% endif %}
+        {% if not valid %}
+            {% set extraClass = extraClass~' has-child-error' %}
+        {% endif %}
+        {% if errors|length > 0 %}
+            {% set extraClass = extraClass~' has-error' %}
+        {% endif %}
+        {% for value in form.vars.block_prefixes %}
+            {% set extraClass = extraClass~' _'~value %}
+        {% endfor %}
+        {% if form.vars.expanded|default(false) %}
+            {% set extraClass = extraClass~' expanded' %}
+        {% endif %}
+        {% if form.parent.vars.block_prefixes[1]|default('') == 'collection' %}
+            {% set extraClass = extraClass~' collection-child' %}
+        {% endif %}
+        {% set form_row_attr = form_row_attr|merge({ 'class': form_row_attr.class|default('')~extraClass }) %}
+        {% for attrname, attrvalue in form_row_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}
+    {% endspaceless %}
+{% endblock form_row_attr %}
+
+{% block form_label_attr %}
+    {% spaceless %}
+        {% for attrname, attrvalue in form_label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}
+    {% endspaceless %}
+{% endblock form_label_attr %}
+
+{% block form_widget_attr %}
+    {% spaceless %}
+        {% for attrname, attrvalue in form_widget_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}
+    {% endspaceless %}
+{% endblock form_widget_attr %}
+
+{% block widget_attributes %}
+    {% spaceless %}
+        id="{{ id }}" name="{{ full_name }}"{% if read_only %} readonly="readonly"{% endif %}{% if disabled %} disabled="disabled"{% endif %}{% if required %} required="required"{% endif %}{% if max_length %} maxlength="{{ max_length }}"{% endif %}{% if pattern %} pattern="{{ pattern }}"{% endif %}
+        {% for attrname, attrvalue in attr %}{% if attrname in ['placeholder', 'data-placeholder', 'title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}" {% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
+    {% endspaceless %}
+{% endblock widget_attributes %}
+
+{# Bootstrap widget addon #}
+
+{% block widget_addon %}
+    {% set text = widget_addon.text|default(false) %}
+    {% set icon = widget_addon.icon|default(false) %}
+    {% set type = widget_addon.type|default('group') %}
+    {% spaceless %}
+        {% if type != 'button' %}
+            <span class="{{ (type == 'group') ? 'input-group-addon' : 'inner-addon' }}">
+        {% endif %}
+
+        {% if icon %}
+        <span class="{{ icon }}">
+        {% endif %}
+        {{ (text) ? text|trans({}, translation_domain)|raw }}
+        {% if icon %}
+        </span>
+        {% endif %}
+
+        {% if type != 'button' %}
+            </span>
+        {% endif %}
+    {% endspaceless %}
+{% endblock widget_addon %}
+
+{# Favorite List #}
+
+{% block favorite_list_row %}
+    {% set id = form.vars.id|default() %}
+    {% set form_row_attr = form_row_attr|merge({ 'class': 'form-group '~form_row_attr.class|default('') }) %}
+    {% set form_widget_attr = form_widget_attr|merge({ 'class': 'empty-place '~form_widget_attr.class|default('') }) %}
+
+    {% set show_order = form.vars['show_order'] %}
+    {% set show_remove_item = form.vars['show_remove_item'] %}
+
+    {% set object_class = form.vars['object_class'] %}
+    {% set object_property_value = form.vars['object_property_value'] %}
+    {% set object_property_search_value = form.vars['object_property_search_value'] %}
+    {% set object_template = form.vars['object_template']|default('default') %}
+
+    {% spaceless %}
+        <div {{ block('form_row_attr') }} id="{{ id }}">
+            <div {{ block('form_widget_attr') }}>
+                <div class="filigrane fa fa-globe"></div>
+                <div class="empty-place-title">{{ form_label(form) }}</div>
+
+                {% set baseForm = form %}
+                {% set form = form.children['list'] %}
+                {{ block('favorite_list_list_widget') }}
+                {{ form_errors(form) }}
+                {% set form = baseForm %}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block favorite_list_list_widget %}
+    {% set id = form.parent.vars.id %}
+    {% set data = form.vars.data|default() %}
+    {% spaceless %}
+        <div class="empty-place-wrapper {% if show_order %}visible{% endif %}">
+            <ul class="list-group list-group-sm sortable js-sortable js-connected-sortable {% if show_order %}list-group-numbered{% endif %}" id="{{ id }}-list-container">
+                {% if data|length > 0 %}
+                    {% for object in data %}
+                        {{ block('favorite_list_list_widget_item') }}
+                    {% endfor %}
+                {% endif %}
+            </ul>
+            <div class="real-list hide ">
+                {{ form_widget(form) }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block favorite_list_list_widget_item %}
+    {% set item_attr_class = 'list-group-item grab' %}
+    {% if show_remove_item %}
+        {% set item_attr_class = item_attr_class~' add-vertical-stripe add-vertical-right' %}
+    {% endif %}
+    {% spaceless %}
+        <li class="{{ item_attr_class }}" data-value="{{ attribute(object, object_property_value) }}" data-search-value="{{ attribute(object, object_property_search_value) }}">
+            <div class="media">
+                <div class="pull-left">
+                    {% if show_remove_item %}
+                        <div class="vertical-stripe vertical-stripe-right">
+                            <a href="#"><span class="icon fa fa-times"></span></a>
+                        </div>
+                    {% endif %}
+                    <span class="fa fa-bars"></span>
+                </div>
+                <div class="media-body ellipsis margin-right">
+                    {% include "MobPartnerCoreBundle::Form/FavoriteObjectType/ListItem/_"~object_template~".html.twig" with {'object' : object, 'object_property_value' : object_property_value, 'object_property_search_value' : object_property_search_value} only %}
+                </div>
+            </div>
+        </li>
+    {% endspaceless %}
+{% endblock %}
+
+
+{# Favorites objects (country, campaign) #}
+
+{% block favorite_object_row %}
+    {% set form_row_attr = form_row_attr|merge({ 'class': ' '~form_row_attr.class|default('') }) %}
+    {% set form_label_attr = form_label_attr|merge({ 'class': 'empty-place-title '~form_label_attr.class|default('') }) %}
+    {% set form_widget_attr = form_widget_attr|merge({ 'class': ' '~form_widget_attr.class|default('') }) %}
+
+    {% set elementForm = form %}
+    {% set searchForm = form.children['search'] %}
+    {% set topListForm = form.children['top-list'] %}
+
+    {% set choices = topListForm.children['list'].vars.choices|default() %}
+    {% set topListData = topListForm.children['list'].vars.data %}
+
+    {% set show_order = topListForm.vars.show_order %}
+    {% set show_remove_item = topListForm.vars.show_remove_item %}
+
+    {% set object_template = topListForm.vars.object_template %}
+    {% set object_property_value = topListForm.vars.object_property_value %}
+    {% set object_property_search_value = topListForm.vars.object_property_search_value %}
+
+    {% spaceless %}
+        <div {{ block('form_row_attr') }} id="{{ id }}">
+
+            <div class="empty-place">
+                <div class="filigrane fa fa-trophy"></div>
+                <div {{ block('form_label_attr') }}>
+                    {{ form_label(form) }}
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        {{ form_widget(searchForm) }}
+                    </div>
+                </div>
+
+                <div class="empty-place-wrapper hide">
+                    <ul class="list-group list-group-sm sortable js-sortable js-connected-sortable" id="{{ id }}-list-container">
+                        {% if choices|length > 0 %}
+                            {% for choice in choices %}
+                                {% set object = choice.data %}
+                                {% if (object not in topListData) %}
+                                    {{ block('favorite_list_list_widget_item') }}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div>
+
+                {% set form = topListForm.children['list'] %}
+                {{ block('favorite_list_list_widget') }}
+            </div>
+
+            {{ form_errors(elementForm) }}
+
+        </div>
+
+    {% endspaceless %}
+{% endblock %}
+
+
+{# Traffic Countries list #}
+
+{% block service_traffic_country_row %}
+    {% set form_row_attr = form_row_attr|merge({ 'class': 'form-group '~form_row_attr.class|default('') }) %}
+    {% set form_label_attr = form_label_attr|merge({ 'class': 'form-label control-label col-xs-4 '~form_label_attr.class|default('') }) %}
+    {% set form_widget_attr = form_widget_attr|merge({ 'class': ' '~form_widget_attr.class|default('') }) %}
+
+    {% set searchForm = form.children['search'] %}
+    {% set topListForm = form.children['top-list'] %}
+    {% set secondaryListForm = form.children['secondary-list'] %}
+
+    {% set choices = topListForm.children['list'].vars.choices|default() %}
+    {% set topListData = topListForm.children['list'].vars.data %}
+    {% set secondaryListData = secondaryListForm.children['list'].vars.data %}
+
+    {% set show_order = topListForm.vars.show_order %}
+    {% set show_remove_item = topListForm.vars.show_remove_item %}
+
+    {% set object_template = topListForm.vars.object_template %}
+    {% set object_property_value = topListForm.vars.object_property_value %}
+    {% set object_property_search_value = topListForm.vars.object_property_search_value %}
+
+    {% spaceless %}
+        <div {{ block('form_row_attr') }} id="{{ id }}">
+            <div {{ block('form_label_attr') }}>
+                {{ form_label(form) }}
+            </div>
+            <div class="col-xs-4">
+                <div class="empty-place">
+
+                    <div class="empty-place-title">{{ form_label(searchForm) }}</div>
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            {{ form_widget(searchForm) }}
+                        </div>
+                    </div>
+
+                    <div class="empty-place-wrapper">
+                        <ul class="list-group list-group-sm sortable js-sortable js-connected-sortable" id="{{ id }}-list-container">
+                            {% if choices|length > 0 %}
+                                {% for countryChoice in choices %}
+                                    {% set object = countryChoice.data %}
+                                    {% if (object not in topListData) and (object not in secondaryListData ) %}
+                                        {{ block('favorite_list_list_widget_item') }}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                {% set baseForm = form %}
+                {% set form = topListForm %}
+                {{ block('favorite_list_row') }}
+
+                {% set form = secondaryListForm %}
+                {{ block('favorite_list_row') }}
+                {% set form = baseForm %}
+            </div>
+            <div class="row">
+                <div class="col-xs-8 col-xs-offset-4">
+                    {{ form_errors(form) }}
+                </div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+
+{# Business Models #}
+
+{% block service_favorite_business_model_list_row %}
+    {% set form_row_attr = form_row_attr|merge({ 'class': 'empty-place '~form_row_attr.class|default('') }) %}
+    {% set form_label_attr = form_label_attr|merge({ 'class': 'empty-place-title '~form_label_attr.class|default('') }) %}
+    {% set form_widget_attr = form_widget_attr|merge({ 'class': 'empty-place-wrapper '~form_widget_attr.class|default('') }) %}
+    {% set currentForm = form %}
+    {% spaceless %}
+        <div {{ block('form_row_attr') }} id="{{ id }}">
+
+            <div {{ block('form_label_attr') }}>
+                {{ label }}
+            </div>
+
+            <div {{ block('form_widget_attr') }}>
+                <ul class="list-group list-business-models">
+
+                    {% if form.children|length > 0 %}
+                        {% for childForm in form.children %}
+                            {{ form_row(childForm) }}
+                        {% endfor %}
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block service_business_model_row %}
+
+    {% set errorsCount = 0 %}
+    {% set firstError = null %}
+    {% for child in form.children %}
+        {% set childErrors = child.vars.errors %}
+        {% set errorsCount = errorsCount + childErrors|length %}
+
+        {% if childErrors|length > 0 %}
+            {% set firstError = childErrors|first %}
+        {% endif %}
+    {% endfor %}
+    {% set hasErrors = (errorsCount > 0) %}
+
+    {% set form_row_attr = form_row_attr|merge({ 'class': 'list-group-item '~form_row_attr.class|default('') }) %}
+    {% if hasErrors %}
+        {% set form_row_attr = form_row_attr|merge({ 'class': form_row_attr.class|default('')~' has-error' }) %}
+    {% endif %}
+    {% set form_label_attr = form_label_attr|merge({ 'class': 'empty-place-title '~form_label_attr.class|default('') }) %}
+    {% set form_widget_attr = form_widget_attr|merge({ 'class': 'empty-place-wrapper '~form_widget_attr.class|default('') }) %}
+    {% set currentForm = form %}
+    {% set checkboxForm = form.children['check'] %}
+    {% set minPriceForm = form.children['minPrice'] %}
+    {% spaceless %}
+        <li {{ block('form_row_attr') }} id="{{ id }}">
+            <div class="form-special">
+                <div class="checkbox-special" data-target="{{ checkboxForm.vars.target }}" data-toggle="{{ checkboxForm.vars.toggle }}">
+                    {{ form_widget(checkboxForm) }} <label for="{{ checkboxForm.vars.id }}"></label>
+                </div>
+                <label for="{{ checkboxForm.vars.id }}">{{ form.vars.label }}</label>
+            </div>
+
+            <div class="input-block {{ checkboxForm.vars.checked ? 'collapse in' : 'collapse' }} {% if hasErrors %}in{% endif %} {{ checkboxForm.vars.target|slice(1) }}">
+                <div class="form-label control-label">
+                    {{ form_label(minPriceForm) }}
+                </div>
+                <div class="form-widget input-group input-width-md text-right margin-left-sm">
+                    {{ form_widget(minPriceForm) }}
+                </div>
+            </div>
+
+            {% if hasErrors and firstError %}
+                <p class="error-message">
+                    {{ firstError.message }}
+                </p>
+            {% endif %}
+        </li>
+
+    {% endspaceless %}
+{% endblock %}

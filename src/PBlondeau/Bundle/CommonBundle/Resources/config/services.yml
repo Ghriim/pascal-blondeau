@@ -1,4 +1,9 @@
 services:
+    pblondeau.form.type_extension:
+        class: PBlondeau\Bundle\CommonBundle\Form\Extension\FormExtension
+        tags:
+            - { name: form.type_extension, alias: form }
+
     pblondeau.form.type.pblondeau_status:
         class: PBlondeau\Bundle\CommonBundle\Form\Type\StatusType
         tags:

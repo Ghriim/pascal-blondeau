@@ -35,11 +35,12 @@ class AdminController extends BaseController
             'PBlondeauExhibitionBundle:Exhibition/Admin:index.html.twig',
             array(
                 'exhibitions' => $exhibitions,
-            ));
+            )
+        );
     }
 
     /**
-     * @param Request $request
+     * @param Request    $request
      * @param Exhibition $exhibition
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -75,11 +76,13 @@ class AdminController extends BaseController
                 return $this->redirect($this->generateUrl('admin_exhibitions'));
             }
         }
+
         return $this->render(
             'PBlondeauExhibitionBundle:Exhibition/Admin:_saveForm.html.twig',
             array(
                 'form' => $form->createView()
-            ));
+            )
+        );
     }
 
     /**
@@ -110,7 +113,7 @@ class AdminController extends BaseController
 
         return new JsonResponse(
             array(
-                'status' => 'success',
+                'status'  => 'success',
                 'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminExhibition')
             )
         );
@@ -143,20 +146,25 @@ class AdminController extends BaseController
     private function buildSaveForm(Exhibition $exhibition)
     {
         if ($exhibition->isNew()) {
-            $action = $this->generateUrl('admin_exhibitions_create');
+            $action           = $this->generateUrl('admin_exhibitions_create');
             $validationGroups = array('creation');
         } else {
-            $action = $this->generateUrl('admin_exhibitions_edit',
-                array('id' => $exhibition->getId()));
+            $action = $this->generateUrl(
+                'admin_exhibitions_edit',
+                array('id' => $exhibition->getId())
+            );
 
             $validationGroups = array('default');
         }
 
-        return $this->createForm(new ExhibitionType(), $exhibition, array(
-            'action' => $action,
-            'method' => 'POST',
-            'validation_groups' => $validationGroups
-        ));
+        return $this->createForm(
+            new ExhibitionType(), $exhibition, array(
+                'action'            => $action,
+                'method'            => 'POST',
+                'attr'              => array('class' => 'form form-horizontal'),
+                'validation_groups' => $validationGroups
+            )
+        );
     }
 
     /**

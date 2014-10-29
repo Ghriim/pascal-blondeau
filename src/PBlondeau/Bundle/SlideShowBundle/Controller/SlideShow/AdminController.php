@@ -35,12 +35,13 @@ class AdminController extends BaseController
             'PBlondeauSlideShowBundle:SlideShow/Admin:index.html.twig',
             array(
                 'slides' => $slides,
-            ));
+            )
+        );
     }
 
     /**
      * @param Request $request
-     * @param Slide $slide
+     * @param Slide   $slide
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -80,7 +81,8 @@ class AdminController extends BaseController
             'PBlondeauSlideShowBundle:SlideShow/Admin:_saveForm.html.twig',
             array(
                 'form' => $form->createView(),
-            ));
+            )
+        );
     }
 
     /**
@@ -111,7 +113,7 @@ class AdminController extends BaseController
 
         return new JsonResponse(
             array(
-                'status' => 'success',
+                'status'  => 'success',
                 'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminSlideShow')
             )
         );
@@ -144,20 +146,25 @@ class AdminController extends BaseController
     private function buildSaveForm(Slide $slide)
     {
         if ($slide->isNew()) {
-            $action = $this->generateUrl('admin_slides_create');
+            $action           = $this->generateUrl('admin_slides_create');
             $validationGroups = array('creation');
         } else {
-            $action = $this->generateUrl('admin_slides_edit',
-                array('id' => $slide->getId()));
+            $action = $this->generateUrl(
+                'admin_slides_edit',
+                array('id' => $slide->getId())
+            );
 
             $validationGroups = array('default');
         }
 
-        return $this->createForm(new SlideType(), $slide, array(
-            'action' => $action,
-            'method' => 'POST',
-            'validation_groups' => $validationGroups
-        ));
+        return $this->createForm(
+            new SlideType(), $slide, array(
+                'action'            => $action,
+                'attr'              => array('class' => 'form form-horizontal'),
+                'method'            => 'POST',
+                'validation_groups' => $validationGroups
+            )
+        );
     }
 
     /**

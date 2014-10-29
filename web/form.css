@@ -1,0 +1,1198 @@
+/*
+ ---------------------------------------
+ form.css - SUMMARY
+ ---------------------------------------
+ *
+ * RESET................Réinitialisation des styles par défaut de bootstrap
+ * FORM-SLIDER..........Barre avec curseur générée à partir d'un input
+ * FORM-SPECIAL.........Style spéciaux appliqués sur les inputs de type radio ou checkbox
+ * INNER-ADDON..........Icones insérées à l'intérieur d'un input de type text
+ * CHECKBOX-SLIDER......Bouton ON/OFF à partir de 2 inputs de type checkbox
+ */
+fieldset {
+    margin: 10px auto;
+    padding-top: 10px;
+}
+select option {
+    line-height: 25px;
+    padding: 5px;
+    background-color: white;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.select-wrapper {
+    overflow: hidden;
+    padding-left: 0;
+    position: relative;
+}
+.select-wrapper:after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    width: 0px;
+    height: 0px;
+    margin-top: -2px;
+    border-width: 4px 4px 0px;
+    border-style: solid solid dotted;
+    border-color: transparent;
+    border-top-color: #F04C23;
+}
+.select-wrapper > select {
+    width: 118%;
+    border: medium none;
+    margin: 0px;
+    padding: 10px 0px 5px 7px;
+    position: relative;
+    top: -10px;
+    color: #555;
+    -webkit-appearance: none;
+}
+.form-inline .select-wrapper > select {
+    width: 140%;
+}
+@-moz-document url-prefix()
+{
+    .select-wrapper>select {
+        padding-bottom: 0px;
+    }
+}
+.select-wrapper > select:focus {
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+.select-wrapper:after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    width: 0px;
+    height: 0px;
+    margin-top: -2px;
+    border-width: 4px 4px 0px;
+    border-style: solid solid dotted;
+    border-color: transparent;
+    border-top-color: #F04C23;
+}
+.select-wrapper .form-control {
+    z-index: 0;
+}
+
+.select-wrapper > select option {
+    padding-left: 10px;
+}
+.radio, .checkbox {
+    padding-left: 15px;
+}
+.form-group {
+    margin-bottom:10px;
+}
+.form-control:focus, .has-error .form-control:focus {
+    outline: none;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+    /*background-color: #fff1e9;
+    -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);*/
+}
+.form-horizontal .form-group:last-child {
+    margin-bottom: 0;
+}
+.form-control {
+    border-color: #ddd;
+}
+.radio-inline, .checkbox-inline {
+    min-width: 60px;
+}
+.radio-inline.auto, .checkbox-inline.auto {
+    min-width: auto;
+}
+.form-control.input-width-sm, .input-width-sm {
+    width: 40px;
+}
+.form-control.input-width-md, .input-width-md {
+    width: 100px;
+}
+.form-control.input-width-lg, .input-width-lg {
+    width: 180px;
+}
+.form-control.input-width-auto, .input-width-auto {
+    width: auto;
+}
+.form-control.input-height-sm {
+    height: 85px;
+}
+.form-control.input-height-lg {
+    height: 200px;
+}
+.form-indent {
+    margin-left: 20px;
+}
+.form-group.form-indent {
+    margin-left: 60px;
+}
+.form_image {
+    margin-bottom: 5px;
+}
+.placeholder, .btn-default.placeholder, select option[default] {
+    color: #999;
+    font-style: italic;
+}
+.placeholder:focus {
+    color: #333;
+    font-style: normal;
+}
+.control-label.text-left {
+    text-align: left !important;
+}
+.has-error .form-control, .has-error .checkbox-special > label, .has-error .radio-special > label {
+    border-color: #ddd;
+    background-color: #fff;
+}
+.has-error .input-group-addon {
+    border-color: #ddd;
+    background-color: #eee;
+    color: #555;
+}
+.has-error .control-label {
+    color: #F04C23;
+}
+.has-error .help-block {
+    color: #737373;
+}
+.has-error .error-message {
+    padding: 8px 12px;
+    margin: 12px 0 0 0;
+    background-color: #fffbe5;
+    border: 1px solid #ffebc1;
+    color: #963;
+    position: relative;
+}
+.has-error .checkbox .error-message, .has-error .radio .error-message {
+    clear: both;
+    margin-top: 28px;
+}
+.has-error .error-message:before, .has-error .error-message:after {
+    left: 30px;
+    top: -11px;
+    position: absolute;
+    display: block;
+    content: '';
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #ffebc1;
+}
+.has-error .error-message:after {
+    top: -9px;
+    border-bottom: 10px solid #fffbe5;
+}
+.has-error .error-message .fa {
+    margin-right: 5px;
+    font-size: 12px;
+}
+.is-required .control-label label:after {
+    content: '*';
+    color: #F04C23;
+    float: right;
+    margin-right: -8px;
+}
+/*------------------------------------*\
+    $FORM-SLIDER
+\*------------------------------------*/
+.form-slider .slider, .ui-slider {
+    min-width: 100px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.form-slider-large .slider {
+    max-width: 900px;
+}
+.form-slider-output, .ui-slider-output {
+    display: inline-block;
+}
+.ui-slider-output {
+    border: none;
+    margin-left: 8px;
+}
+.no-output .form-slider-output {
+    display: none;
+}
+.slider > .dragger, .ui-slider .ui-slider-handle {
+    width: 18px;
+    height: 18px;
+    margin-top: -2px;
+    border: 1px solid #eee;
+    background: #fff;
+    cursor: pointer;
+
+    background: -webkit-linear-gradient(top, #fff, #ededed);
+    background: -moz-linear-gradient(top, #fff, #ededed);
+    background: linear-gradient(top, #fff, #ededed);
+
+    -webkit-border-radius: 18px;
+    -moz-border-radius: 18px;
+    border-radius: 18px;
+
+    -webkit-box-shadow: outset 0 2px 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: outset 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.slider > .dragger:hover {
+    background: #fff;
+}
+.slider > .track, .ui-slider, .slider > .highlight-track {
+    background: #ccc;
+    border-radius: 8px;
+    height: 8px;
+
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
+.slider > .highlight-track, .ui-slider {
+    margin: 0 10px;
+    background: rgb(239,161,119); /* Old browsers */
+    background: -moz-linear-gradient(left,  rgba(239,161,119,1) 0%, rgba(240,107,35,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(239,161,119,1)), color-stop(100%,rgba(240,107,35,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left,  rgba(239,161,119,1) 0%,rgba(240,107,35,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left,  rgba(239,161,119,1) 0%,rgba(240,107,35,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left,  rgba(239,161,119,1) 0%,rgba(240,107,35,1) 100%); /* IE10+ */
+    background: linear-gradient(to right,  rgba(239,161,119,1) 0%,rgba(240,107,35,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efa177', endColorstr='#f06b23',GradientType=1 ); /* IE6-9 */
+}
+.form-slider-wrapper {
+    border-radius: 4px;
+    padding: 5px 10px;
+    text-align: center;
+    display: inline-block;
+    border: 1px solid #fff;
+    line-height: 48px;
+}
+.form-slider-wrapper .fa {
+    vertical-align: middle;
+    color: #999;
+}
+/*------------------------------------*\
+    $FORM-SPECIAL
+\*------------------------------------*/
+.form-special {
+    float: left;
+}
+.form-special.has-error {
+    float: none;
+}
+.form-special-vertical {
+    float: none;
+}
+.form-special label {
+    font-weight: normal;
+    margin-right: 10px;
+    margin-left: 25px;
+}
+.radio-special input[type=radio], .checkbox-special input[type=checkbox] {
+    display: none;
+}
+.radio-special, .checkbox-special {
+    width: 20px;
+    position: relative;
+    float: left;
+}
+.radio-special label,.checkbox-special label {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 0;
+    left: 0;
+    border-radius: 30px;
+    margin: 0;
+    border: 1px solid #ddd;
+    background: #f3f3f3;
+    cursor: pointer;
+}
+.well .radio-special label,.well .checkbox-special label, .showroom .radio-special label,.showroom .checkbox-special label, .btn-default .checkbox-special label {
+    background: #fff;
+}
+.btn-default .form-special {
+    height: 17px;
+    width: 15px;
+}
+.checkbox-special label {
+    border-radius: 4px;
+}
+.radio-special label:after, .checkbox-special label:after {
+    content: '';
+    position: absolute;
+    background: transparent;
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+}
+.radio-special label:after {
+    width: 8px;
+    height: 8px;
+    top: 3px;
+    left: 3px;
+    border: 1px solid #ea542e;
+    background-color: #ea542e;
+    border-radius: 20px;
+}
+.checkbox-special label:after {
+    width: 15px;
+    height: 7px;
+    top: 1px;
+    left: 3px;
+    border: 3px solid #F04C23;
+    border-top: none;
+    border-right: none;
+
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.radio-special label:hover::after {
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+    filter: alpha(opacity=50);
+    opacity: 0.5;
+}
+.checkbox-special label:hover::after {
+    opacity: 0.5;
+}
+.radio-special input[disabled=disabled] + label:hover:after, .checkbox-special input[disabled=disabled] + label:hover:after {
+    opacity: 0;
+}
+.radio-special input[type=radio]:checked + label:after, .checkbox-special input[type=checkbox]:checked + label:after, .radio-special input[disabled=disabled]:checked + label:hover:after, .checkbox-special input[disabled=disabled]:checked + label:hover:after {
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+.radio-special input[disabled=disabled] + label:after {
+    background-color: #999;
+    border: 1px solid #999;
+}
+.checkbox-special input[disabled=disabled] + label:after {
+    border-color: #999;
+}
+.radio-special input[disabled=disabled] + label:hover, .checkbox-special input[disabled=disabled] + label:hover {
+    cursor: not-allowed;
+}
+
+.ie8 .checkbox-special label{
+    display:none;
+}
+.ie8 .checkbox-special input{
+    display:inline;
+}
+.ie8 .radio-special label{
+    display:none;
+}
+.ie8 .radio-special input{
+    display:inline;
+}
+.ie8 .checkbox-special + label, .ie8 .radio-special + label{
+    margin-left:0px;
+}
+/*------------------------------------*\
+    $INNER-ADDON
+\*------------------------------------*/
+.left-inner-addon, .right-inner-addon {
+    position: relative;
+}
+.inner-addon {
+    position: absolute;
+    padding: 8px 10px;
+    top: 0;
+    z-index:5;
+    cursor: pointer;
+}
+.inner-addon .fa {
+    opacity: 0.5;
+}
+.right-inner-addon .inner-addon {
+    right: 0;
+}
+.left-inner-addon .inner-addon {
+    left: 0;
+}
+.left-inner-addon input {
+    padding-left: 30px;
+}
+.right-inner-addon input {
+    padding-right: 30px;
+}
+.input-between {
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    margin-top: -7px;
+}
+.input-between-text {
+    width: 15px;
+    text-align: center;
+}
+.input-between.fa-angle-right{
+    right: -4px;
+}
+/*------------------------------------*\
+    $CHECKBOX-SLIDER
+\*------------------------------------*/
+.checkbox-switcher input[type=checkbox] {
+    visibility: hidden;
+}
+.checkbox-switcher .control-label {
+    vertical-align: bottom;
+    margin-bottom:6px;
+    padding-top:0px;
+}
+.checkbox-switcher .switcher-handle + .switcher {
+    margin-left: 20px;
+}
+.checkbox-switcher .switcher {
+    width: 80px;
+    height: 28px;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    display: inline-block;
+    position: relative;
+
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+}
+.checkbox-switcher .switcher:before, .checkbox-switcher .switcher:after {
+    top: 0;
+}
+.checkbox-switcher .switcher:after {
+    content: 'OFF';
+    font: 12px/26px Arial, sans-serif;
+    color: #999;
+    position: absolute;
+    right: 10px;
+    z-index: 0;
+    font-weight: bold;
+
+    text-shadow: 1px 1px 0px rgba(255,255,255,.15);
+}
+.checkbox-switcher .switcher:before {
+    content: 'ON';
+    font: 12px/26px Arial, sans-serif;
+    color: #F04C23;
+    position: absolute;
+    left: 10px;
+    z-index: 0;
+    font-weight: bold;
+}
+.checkbox-switcher .switcher-yn:after {
+    content: 'NO';
+}
+.checkbox-switcher .switcher-yn:before {
+    content: 'YES';
+}
+.checkbox-switcher .switcher .switcher-handle {
+    display: block;
+    width: 32px;
+    height: 20px;
+    border: 1px solid #e3e3e3;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    background: #fcfff4;
+
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+
+    -webkit-transition: all .4s ease;
+    -moz-transition: all .4s ease;
+    -o-transition: all .4s ease;
+    -ms-transition: all .4s ease;
+    transition: all .4s ease;
+}
+.checkbox-switcher .switcher input[type=checkbox]:checked + .switcher-handle {
+    left: 43px;
+}
+.checkbox-switcher .switcher-global {
+    width: 100%;
+    height: 28px;
+    position: relative;
+    z-index: 5;
+    cursor: pointer;
+}
+.checkbox-switcher > label {
+    margin-right: 10px;
+}
+.checkbox-switcher .switcher-ma:after {
+    content: 'MANUAL';
+}
+.checkbox-switcher .switcher-ma:before {
+    content: 'AUTO';
+    margin-left: 6px;
+}
+.checkbox-switcher .switcher-ma {
+    width: 130px;
+    margin-top: 2px;
+}
+.checkbox-switcher .switcher-ma .switcher-handle {
+    width: 60px;
+}
+.checkbox-switcher .switcher-ma input[type=checkbox]:checked + .switcher-handle {
+    left: 65px;
+}
+.ie8 .checkbox-switcher .switcher-global{
+    width: auto;
+    height: auto;
+    position: relative;
+    z-index: 5;
+    cursor: default;
+}
+.ie8 .checkbox-switcher .switcher .switcher-handle{
+    display:none;
+}
+.ie8 .checkbox-switcher .switcher:before, .ie8 .checkbox-switcher .switcher:after{
+    display:none;
+}
+.ie8 .checkbox-switcher .switcher{
+    width:auto;
+    height:auto;
+    border:none;
+}
+.ie8 .checkbox-switcher .switcher input{
+    visibility: visible;
+}
+/*------------------------------------*\
+    $RUNNING - Running 2.0
+\*------------------------------------*/
+.running-wrapper {
+    position: relative;
+}
+.running {
+    padding: 0;
+    display: table;
+    width: 100%;
+    padding-bottom: 35px;
+}
+.running a:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+.running li {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    z-index:5;
+    float:left;
+    text-align: center;
+}
+.running li:first-child {
+    text-align: left;
+}
+.running li:last-child {
+    text-align: right;
+}
+.running-split-3 li {
+    width:33.3333%;
+}
+.running-split-4 li {
+    width:25%;
+}
+.running-split-4 li:nth-child(2) {
+    text-align: left;
+}
+.running-split-4 li:nth-child(2):before {
+    width:30%;
+}
+.running-split-4 li:nth-child(2):after {
+    left:35%;
+    width:70%;
+}
+.running-split-4 li:nth-child(2) .title {
+    position:relative;
+    left:34%;
+    margin-left:-22.5px;
+}
+.running-split-4 li:nth-child(2) .running-status {
+    left:34%;
+}
+.running-split-4 li:nth-child(3) {
+    text-align: left;
+}
+.running-split-4 li:nth-child(3):before {
+    width: 60%;
+}
+.running-split-4 li:nth-child(3):after {
+    left: 60%;
+}
+.running-split-4 li:nth-child(3) .title {
+    position:relative;
+    left:65%;
+    margin-left:-22.5px;
+}
+.running-split-4 li:nth-child(3) .running-status {
+    left:65%;
+}
+.running-split-5 li{
+    width:20%;
+}
+.running-split-5 li:nth-child(2):before {
+    width:60%;
+}
+.running-split-5 li:nth-child(2):after {
+    left:30%;
+    width:70%;
+}
+.running-split-5 li:nth-child(2) .title {
+    position:relative;
+    right:25%;
+}
+.running-split-5 li:nth-child(2) .running-status {
+    left:25%;
+}
+.running-split-5 li:nth-child(4):before {
+    width:70%;
+}
+.running-split-5 li:nth-child(4):after {
+    left:70%;
+    width:30%;
+}
+.running-split-5 li:nth-child(4) .title {
+    position:relative;
+    left:25%;
+}
+.running-split-5 li:nth-child(4) .running-status {
+    left:75%;
+}
+.running-split-6 li {
+    width:20%;
+}
+.running-split-6 li:first-child, .running-split-6 li:last-child {
+    width:10%;
+}
+.running .title {
+    font-size: 16px;
+    color: #999;
+}
+.running li:before, .running li .running-status, .running li:after {
+    display: block;
+    content: '';
+    position: absolute;
+}
+.running li:before {
+    background-color: #eee;
+    height: 8px;
+    bottom: -25px;
+}
+.running li:before {
+    width: 50%;
+}
+.running li:first-child:before, .running li:last-child:before {
+    width: 100%;
+}
+.running li:after {
+    background-color: #eee;
+    height: 8px;
+    width: 50%;
+    left: 50%;
+    bottom: -25px;
+    z-index: 1;
+}
+.running li:first-child:before, .running li:last-child:before {
+    width: 100%;
+}
+.running li.success:after {
+    background-color: #f06b23;
+}
+.running li .running-status {
+    background-color: #eee;
+    height: 30px;
+    width: 30px;
+    border-radius: 75px;
+    top: 30px;
+    left: 50%;
+    margin-left: -15px;
+    text-align: center;
+    color: #fff;
+    z-index: 5;
+}
+.running li:first-child .running-status {
+    left: -1px;
+    margin-left: 0;
+}
+.running li:first-child.active:before {
+    background-color: #eee;
+}
+.running li:last-child.active:before, .running li:last-child.active:after {
+    background-color: #f06b23;
+}
+.running li:last-child .running-status {
+    right: -1px;
+    left: auto;
+}
+.running .success:before {
+    background-color: #f06b23;
+}
+.running .success .running-status, .running .running-status.active, .running .active .running-status, .running .active:before {
+    background-color: #f06b23;
+}
+.running .active .title {
+    color: #f06b23;
+}
+.running .running-status .fa {
+    vertical-align: middle;
+    line-height: 30px;
+}
+.running .running-status .fa-circle-o, .running .running-status .fa-circle {
+    font-size: 20px;
+}
+/*---------------------------------------------------------*\
+    $UI-COLORPICKER - Reset jQuery colorpicker style
+\*---------------------------------------------------------*/
+.btn-preview {
+    border-radius: 4px 0 0 4px;
+    background-color: #eee;
+    background-clip: padding-box;
+    text-align: right;
+    border: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    padding: 13px 10px 10px 10px;
+}
+.btn-preview .caret {
+    border-top-color: #333;
+    margin-left: 0;
+}
+.ui-colorpicker-dialog .ui-dialog-content {
+    margin: 20px;
+    width: auto;
+}
+.ui-colorpicker-dialog .ui-colorpicker-map, .ui-colorpicker-dialog .ui-colorpicker-border {
+    border: 1px solid #ddd;
+}
+.ui-colorpicker-dialog input[type=text], .ui-colorpicker-dialog input[type=number]
+{
+    border: 1px solid #ddd;
+    height: 31px;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.42857;
+    color: #555;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+.ui-colorpicker-dialog .ui-dialog-content label {
+    margin: 0 5px;
+}
+.ui-dialog-content .ui-colorpicker-preview {
+    height: 30px;
+}
+.ui-dialog-content .ui-colorpicker-preview-initial, .ui-dialog-content .ui-colorpicker-preview-current {
+    height: 28px;
+}
+.ui-dialog-content .ui-colorpicker-bar, .ui-dialog-content .ui-colorpicker-bar > * {
+    overflow: visible;
+}
+.ui-colorpicker-dialog .ui-colorpicker-cancel span,.ui-colorpicker-dialog .ui-colorpicker-ok span {
+    display: none;
+}
+.ui-colorpicker-dialog .ui-colorpicker-buttonset {
+    margin-top: 5px;
+}
+/*-----------------------------------------------------*\
+    $UI-DATEPICKER - Reset jQuery UI datepicker style
+\*-----------------------------------------------------*/
+.ui-datepicker, .ui-datepicker-inline {
+    background-color: #fff;
+    margin-top: 10px;
+    padding: 5px 10px 20px;
+    width: auto;
+    z-index: 10 !important;
+
+    -webkit-box-shadow: outset 0 2px 4px rgba(0,0,0,0.2);
+    -moz-box-shadow: outset 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+.ui-datepicker .ui-widget-header, .calendar-date thead > tr:first-child > th, .daterangepicker th.available:hover {
+    font-family: GothBook;
+    text-transform: uppercase;
+    background-color: #F0603C;
+    color: #fff;
+    padding: 8px 5px;
+    margin: -10px -10px 10px -10px;
+}
+.ui-datepicker td span, .ui-datepicker td a, .daterangepicker .table-condensed td {
+    background-color: #f5f5f5;
+    text-align: center;
+    color: #666;
+    padding: 7px 9px;
+}
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next, .daterangepicker th.available:hover {
+    cursor: pointer;
+    top: 8px;
+}
+.ui-datepicker .ui-datepicker-prev {
+    left: 8px;
+}
+.ui-datepicker .ui-datepicker-next {
+    right: 0;
+}
+.ui-datepicker .ui-datepicker-prev span:before, .ui-datepicker .ui-datepicker-next span:before, .daterangepicker .calendar-date .fa:before {
+    background-image: none;
+    content: "\f053";
+    font-family: FontAwesome;
+    color: #fff;
+    display: block;
+    text-indent: 0;
+}
+.ui-datepicker .ui-datepicker-next span:before, .daterangepicker .calendar-date .next .fa:before {
+    content: "\f054";
+}
+.ui-datepicker td, .daterangepicker td {
+    padding: 0;
+    border: 1px solid #ddd;
+}
+.ui-datepicker-calendar .ui-state-hover,.daterangepicker td.available:hover, .daterangepicker th.available:hover {
+    background-color: #ddd;
+}
+.ui-datepicker-calendar .ui-datepicker-today a {
+    background-color: #fff;
+    color: #F0603C;
+}
+.ui-datepicker-calendar .ui-state-active, .ui-datepicker-calendar .ui-datepicker-today .ui-state-active, .daterangepicker td.active, .daterangepicker td.active:hover, .daterangepicker th.available:hover {
+    background-color: #F0603C;
+    color: #fff;
+    font-weight: bold;
+    border-color: #F0603C;
+}
+.ui-datepicker .ui-state-disabled {
+    border-color: #fff;
+}
+.ui-datepicker-calendar tr:first-child .ui-state-disabled {
+    border-bottom: 1px solid #ddd;
+}
+.ui-datepicker-calendar tr:first-child .ui-datepicker-other-month {
+    border-left: 1px solid #fff;
+}
+.ui-datepicker-calendar tr:first-child .ui-state-default {
+    border-left: 1px solid #ddd;
+    margin-left: -1px;
+}
+.ui-datepicker:before {
+    margin-top: -20px;
+    margin-left: 15px;
+    float: left;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #f06b23;
+}
+/* reset .calendar-date */
+.daterangepicker {
+    margin-top: 5px;
+    padding: 10px 5px;
+}
+.daterangepicker.dropdown-menu {
+    width: auto;
+}
+.daterangepicker td, .daterangepicker .calendar-date {
+    border-radius: 0;
+}
+.daterangepicker .calendar-date {
+    border: none;
+    padding: 0;
+    clear: both;
+}
+.daterangepicker .calendar-date thead > tr:last-child > th {
+    padding: 20px 10px 7px 10px;
+}
+.daterangepicker .calendar-date thead > tr:first-child > th {
+    font-weight: normal;
+    border-radius: 0;
+}
+.daterangepicker .calendar-date .fa {
+    color: #fff;
+    font-size: 12px;
+}
+.daterangepicker .btn.cancelBtn {
+    border-radius: 4px 0 0 4px;
+}
+.daterangepicker .btn.applyBtn {
+    border-radius: 0 4px 4px 0;
+}
+.daterangepicker .range_inputs{
+    padding-top: 10px;
+}
+.daterangepicker .ranges li {
+    color: #666;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+}
+.daterangepicker .ranges li.active, .daterangepicker .ranges li:hover {
+    background-color: #F0603C;
+    border-color: #F0603C;
+}
+.daterangepicker td.in-range {
+    background-color: #fff1e9;
+}
+.daterangepicker td.off {
+    background-color: #fff;
+    color: #ddd;
+}
+/* .chosen */
+form .chzn-container-active .chzn-single-with-drop, form .chzn-container-single .chzn-single {
+    background-color: #fff;
+}
+form .chzn-container .chzn-drop {
+    border-color: #ddd;
+    margin-top: -2px;
+}
+form .chzn-container .chzn-choices, form .chzn-container-single .chzn-single {
+    border-radius: 4px;
+    border-color: #ddd;
+    background-image: none;
+    padding: 1px 7px 0 7px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+}
+form .chzn-container-single .chzn-single {
+    padding: 0 12px;
+    height: 31px;
+    line-height: 31px;
+}
+form .chzn-container-single .chzn-single div {
+    display: none;
+}
+form .chzn-container-single:after {
+    content: '';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    width: 0px;
+    height: 0px;
+    margin-top: -2px;
+    border-width: 4px 4px 0px;
+    border-style: solid solid dotted;
+    border-color: transparent;
+    border-top-color: #F04C23;
+}
+form .chzn-container-multi .chzn-choices li.search-choice {
+    border-color: #ddd;
+    color: #666;
+    font-size: 12px;
+    background: #f5f5f5;
+    margin: 3px 4px 0 -2px;
+    padding: 4px 19px 2px 6px;
+}
+form .chzn-container-multi .chzn-choices li.search-field input[type="text"] {
+    min-height: 25px;
+    color: #999;
+    font-size: 12px;
+}
+form .chzn-container-multi .chzn-choices li.search-choice .search-choice-close {
+    background-image: url('../images/chosen-sprite.png');
+    top: 5px;
+    right: 4px;
+    height: 10px;
+}
+form .chzn-container .chzn-results li.highlighted, .drop-group .chzn-container .chzn-results li.highlighted{
+    background: #F04C23;
+    color: #fff;
+}
+form .chzn-container-multi .chzn-choices .search-field input {
+    margin-bottom:0;
+}
+form .chzn-container-active .chzn-choices{
+    box-shadow: none;
+}
+.ie8 .chzn-container{
+    width:100% !important;
+}
+/* .select2 */
+.select2-container-multi .select2-choices .select2-search-choice {
+    padding: 3px 5px 3px 20px;
+    margin: 3px 0 0 3px;
+    color: #666;
+    border: 1px solid #ddd;
+    background: none #f5f5f5;
+}
+.select2-search-choice-close {
+    width: 14px;
+    top: 3px;
+    left: 2px;
+}
+.form-control.select2-container.select2-dropdown-open, .select2-drop-active {
+    outline: none;
+    border: 1px solid #ccc;
+}
+.form-control.select2-container.select2-dropdown-open {
+    background: #fffbec;
+    -webkit-box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+.select2-results .select2-highlighted {
+    background-color: #F04C23;
+    color: #fff;
+}
+
+/*styles for jquery ui daterangepicker plugin */
+
+.ui-daterangepickercontain {
+    position: absolute;
+    z-index: 999;
+    background:#FFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+    margin: -1px 0 0;
+}
+.ui-daterangepickercontain .ui-daterangepicker {
+    float: left;
+    padding: 5px !important;
+    width: auto;
+    display: inline;
+    background-image: none !important;
+    clear: left;
+}
+.ui-daterangepicker ul, .ui-daterangepicker .ranges, .ui-daterangepicker .range-start, .ui-daterangepicker .range-end {
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+.ui-daterangepicker .ranges {
+    width: auto;
+    position: relative;
+    padding: 5px 5px 40px 0;
+    margin-left: 10px;
+}
+.ui-daterangepicker .range-start, .ui-daterangepicker .range-end {
+    margin-left: 5px;
+}
+.ui-daterangepicker button.btnDone {
+    position: absolute;
+    bottom: 0;
+    right: 4px;
+    clear: both;
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: #F0603C;
+    border-color: #F0603C;
+    color:#FFF;
+}
+.ui-daterangepicker button.btnDone:hover,
+.ui-daterangepicker button.btnDone:focus,
+.ui-daterangepicker button.btnDone:active,
+.ui-daterangepicker button.btnDone.active {
+    background-color: #F07354;
+    border-color: #F07354;
+}
+.ui-daterangepicker ul {
+    width: 160px;
+    background: none;
+    border: 0;
+}
+.ui-daterangepicker li {
+    list-style: none;
+    cursor: pointer;
+}
+.ui-daterangepicker li.ui-state-hover, .ui-daterangepicker li.ui-state-active {
+    padding: 0;
+}
+.ui-daterangepicker li.preset_0 {
+    margin-top: 1.5em !important;
+}
+.ui-daterangepicker .ui-widget-content a {
+    text-decoration: none !important;
+}
+.ui-daterangepicker li a {
+    font-weight: normal;
+    display: block;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    color: #666666;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    background: none repeat scroll 0 0 #F5F5F5;
+}
+.ui-daterangepicker li a:hover {
+    background-color: #F0603C;
+    border-color: #F0603C;
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    color: #FFFFFF;
+}
+.ui-daterangepicker li span {
+    float: right;
+    margin: .3em .2em;
+}
+.ui-daterangepicker .title-start, .ui-daterangepicker .title-end {
+    display: none;
+    margin: 0 0 .2em;
+    font-size: 1em;
+    padding: 0 4px 2px;
+}
+.ui-daterangepicker .ui-datepicker-inline {
+    font-size: 1em;
+}
+.ui-daterangepicker-arrows {
+    padding: 2px;
+    width: 204px;
+    position: relative;
+}
+.ui-daterangepicker-arrows input.ui-rangepicker-input {
+    width: 158px;
+    margin: 0 2px 0 20px;
+    padding: 2px;
+    height: 1.1em;
+}
+.ui-daterangepicker-arrows .ui-daterangepicker-prev, .ui-daterangepicker-arrows .ui-daterangepicker-next {
+    position: absolute;
+    top: 2px;
+    padding: 1px;
+}
+.ui-daterangepicker-arrows .ui-daterangepicker-prev {
+    left: 2px;
+}
+.ui-daterangepicker-arrows .ui-daterangepicker-next {
+    right: 2px;
+}
+.ui-daterangepicker-arrows .ui-daterangepicker-prev:hover,
+.ui-daterangepicker-arrows .ui-daterangepicker-next:hover,
+.ui-daterangepicker-arrows .ui-daterangepicker-prev:focus,
+.ui-daterangepicker-arrows .ui-daterangepicker-next:focus {
+    padding: 0;
+}
+
+
+/*chosen drop*/
+
+.form-widget  .chzn-container-multi .chzn-drop {
+    border-color:#DDDDDD;
+}

@@ -35,12 +35,13 @@ class AdminController extends BaseController
             'PBlondeauNewsBundle:News/Admin:index.html.twig',
             array(
                 'newsList' => $newsList,
-            ));
+            )
+        );
     }
 
     /**
      * @param Request $request
-     * @param News $news
+     * @param News    $news
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -80,7 +81,8 @@ class AdminController extends BaseController
             'PBlondeauNewsBundle:News/Admin:_saveForm.html.twig',
             array(
                 'form' => $form->createView(),
-            ));
+            )
+        );
     }
 
     /**
@@ -110,20 +112,25 @@ class AdminController extends BaseController
     private function buildSaveForm(News $news)
     {
         if ($news->isNew()) {
-            $action = $this->generateUrl('admin_news_create');
+            $action           = $this->generateUrl('admin_news_create');
             $validationGroups = array('creation');
         } else {
-            $action = $this->generateUrl('admin_news_edit',
-                array('id' => $news->getId()));
+            $action = $this->generateUrl(
+                'admin_news_edit',
+                array('id' => $news->getId())
+            );
 
             $validationGroups = array('default');
         }
 
-        return $this->createForm(new NewsType(), $news, array(
-            'action' => $action,
-            'method' => 'POST',
-            'validation_groups' => $validationGroups
-        ));
+        return $this->createForm(
+            new NewsType(), $news, array(
+                'action'            => $action,
+                'attr'              => array('class' => 'form form-horizontal'),
+                'method'            => 'POST',
+                'validation_groups' => $validationGroups
+            )
+        );
     }
 
     /**

@@ -35,11 +35,12 @@ class AdminController extends BaseController
             'PBlondeauPressBundle:PressArticle/Admin:index.html.twig',
             array(
                 'pressArticles' => $pressArticles,
-            ));
+            )
+        );
     }
 
     /**
-     * @param Request $request
+     * @param Request      $request
      * @param PressArticle $pressArticle
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -80,7 +81,8 @@ class AdminController extends BaseController
             'PBlondeauPressBundle:PressArticle/Admin:index.html.twig',
             array(
                 'form' => $form->createView(),
-            ));
+            )
+        );
     }
 
     /**
@@ -111,7 +113,7 @@ class AdminController extends BaseController
 
         return new JsonResponse(
             array(
-                'status' => 'success',
+                'status'  => 'success',
                 'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminPressArticle')
             )
         );
@@ -144,20 +146,25 @@ class AdminController extends BaseController
     private function buildSaveForm(PressArticle $pressArticle)
     {
         if ($pressArticle->isNew()) {
-            $action = $this->generateUrl('admin_press_articles_create');
+            $action           = $this->generateUrl('admin_press_articles_create');
             $validationGroups = array('creation');
         } else {
-            $action = $this->generateUrl('admin_press_articles_edit',
-                array('id' => $pressArticle->getId()));
+            $action = $this->generateUrl(
+                'admin_press_articles_edit',
+                array('id' => $pressArticle->getId())
+            );
 
             $validationGroups = array('default');
         }
 
-        return $this->createForm(new PressArticleType(), $pressArticle, array(
-            'action' => $action,
-            'method' => 'POST',
-            'validation_groups' => $validationGroups
-        ));
+        return $this->createForm(
+            new PressArticleType(), $pressArticle, array(
+                'action'            => $action,
+                'method'            => 'POST',
+                'attr'              => array('class' => 'form form-horizontal'),
+                'validation_groups' => $validationGroups
+            )
+        );
     }
 
     /**
