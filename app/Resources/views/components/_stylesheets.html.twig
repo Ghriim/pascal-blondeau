@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" media="screen" />
 <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" media="screen" />
 <link rel="stylesheet" href="{{ asset('css/jquery-ui/jquery-ui.min.css') }}" media="screen" />
-<link rel="stylesheet" href="{{ asset('css/chosen/chosen.min.css') }}" media="screen" />
 <link rel="stylesheet" href="{{ asset('css/main.css') }}" media="screen" />
 <link rel="stylesheet" href="{{ asset('css/form.css') }}?1" media="screen" />
+
+{% if is_granted('ROLE_ADMIN') %}
+    <link rel="stylesheet" href="{{ asset('css/chosen/chosen.min.css') }}" media="screen" />
+{% endif %}

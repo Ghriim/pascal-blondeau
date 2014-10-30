@@ -34,7 +34,7 @@ class BiographyType extends AbstractType
                         "searchreplace visualblocks code fullscreen",
                         "insertdatetime media table contextmenu paste"
                     ),
-                    'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+                    'toolbar' => "undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link",
                 )
             ))
             ->add('file', 'file', array(

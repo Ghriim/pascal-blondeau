@@ -2,6 +2,17 @@
 
 {% trans_default_domain "adminBiography" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ form_stylesheet(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+    {{ form_javascript(form) }}
+{% endblock %}
+
 {% block body %}
     {{ form_start(form) }}
         {{ form_errors(form) }}

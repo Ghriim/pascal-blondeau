@@ -1,9 +1,9 @@
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/chosen/chosen.jquery.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 
 {% if is_granted('ROLE_ADMIN') %}
+    <script src="{{ asset('js/chosen/chosen.jquery.min.js') }}"></script>
     <script src="{{ asset('js/main-admin.js') }}"></script>
 {% endif %}
