@@ -6,6 +6,10 @@ php:
 matrix:
     fast_finish: true
 
+addons:
+  code_climate:
+    repo_token: 3597ea141cc2c662dc3ab6588fe8add9fec35bb86462341d115aee05bcde6867
+
 install:
     - composer self-update && composer --version
     - composer install --prefer-dist
@@ -20,5 +24,6 @@ script:
     - phpunit -c app --coverage-clover=coverage.clover
 
 after_script:
+    - vendor/bin/test-reporter
     - wget https://scrutinizer-ci.com/ocular.phar
     - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
