@@ -24,6 +24,12 @@ class BiographyRepository extends EntityRepository
     public function findForSaveAdmin()
     {
         $qb = $this->getQueryBuilder();
-        return $qb->getQuery()->getFirstResult();
+        return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    public function findForPublicDisplay()
+    {
+        $qb = $this->getQueryBuilder();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 } 

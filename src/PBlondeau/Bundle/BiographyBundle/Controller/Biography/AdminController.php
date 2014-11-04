@@ -68,9 +68,12 @@ class AdminController extends BaseController
             new BiographyType(),
             $biography,
             array(
-                'action'            => $this->generateUrl('admin_biography_save'),
-                'method'            => 'POST',
-                'attr'              => array('class' => 'form form-horizontal'),
+                'action' => $this->generateUrl('admin_biography_save'),
+                'method' => 'POST',
+                'attr'   => array(
+                    'class'      => 'form form-horizontal',
+                    'novalidate' => 'novalidate'
+                ),
             )
         );
     }
