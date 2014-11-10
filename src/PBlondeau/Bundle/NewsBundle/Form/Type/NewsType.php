@@ -29,7 +29,8 @@ class NewsType extends AbstractType
                     'required' => !$this->isEditMode($options)
                 )
             )
-            ->add('status', 'pblondeau_status');
+            ->add('status', 'pblondeau_status')
+        ;
     }
 
     /**
@@ -51,7 +52,7 @@ class NewsType extends AbstractType
      */
     public function getName()
     {
-        return 'pblondeau_bundle_newss';
+        return 'pblondeau_bundle_news';
     }
 
     /**

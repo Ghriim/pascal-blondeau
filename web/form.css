@@ -131,6 +131,9 @@ input[type=number]::-webkit-outer-spin-button {
 .form-control.input-height-lg {
     height: 200px;
 }
+textarea.form-control {
+    height: 5em;
+}
 .form-indent {
     margin-left: 20px;
 }

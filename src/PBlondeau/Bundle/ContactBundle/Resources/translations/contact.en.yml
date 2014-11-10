@@ -1,0 +1,13 @@
+form:
+    action:
+        send: Send Email
+        cancel: Cancel
+
+    success:
+        message: Message successfuly sent. You will get an answer shortly.
+
+    error:
+        message: An error has occurred. Please try again or use <a href="mailto:%mailer_recipient%">%mailer_recipient%</a>
+
+    field:
+        sender: Your email

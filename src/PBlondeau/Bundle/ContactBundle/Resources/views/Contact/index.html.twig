@@ -1,5 +1,33 @@
 {% extends '::layout.html.twig' %}
 
+{% trans_default_domain "contact" %}
+
 {% block body %}
-    CONTACT
+    <div class="row">
+        <div class="col-md-8 col-lg-offset-2">
+            {{ form_start(form) }}
+                {{ form_errors(form) }}
+
+            {{ form_row(form.sender) }}
+
+                {{ form_row(form.subject) }}
+
+                {{ form_row(form.content) }}
+
+                {{ form_rest(form) }}
+
+                <div class="submits text-right">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <span class="fa fa-times"></span>
+                        {{ 'form.action.cancel' | trans({}) }}
+                    </button>
+
+                    <button type="submit" class="submit btn btn-primary">
+                        <span class="fa fa-envelope"></span>
+                        {{ 'form.action.send' | trans({}) }}
+                    </button>
+                </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
 {% endblock %}
