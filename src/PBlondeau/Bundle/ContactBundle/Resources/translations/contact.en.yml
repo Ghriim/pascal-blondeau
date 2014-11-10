@@ -11,3 +11,7 @@ form:
 
     field:
         sender: Your email
+
+email:
+    subject:
+        prefix: "[Contact from Site]"

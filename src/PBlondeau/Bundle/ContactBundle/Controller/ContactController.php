@@ -42,7 +42,9 @@ class ContactController extends BaseController
 
             if ($form->isValid()) {
                 $message = \Swift_Message::newInstance();
-                $message->setSubject($contactEmail->getSubject())
+
+                $contactSubjectPrefix = $this->getTranslator()->trans('email.subject.prefix', array(), 'contact');
+                $message->setSubject($contactSubjectPrefix . " " . $contactEmail->getSubject())
                         ->setFrom($contactEmail->getSender())
                         ->setTo($this->container->getParameter('mailer_recipient'))
                         ->setBody($contactEmail->getContent());
