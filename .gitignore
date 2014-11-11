@@ -1,10 +1,16 @@
 /web/bundles/
 /web/uploads/slideshow/*
+!/web/uploads/slideshow/.gitkeep
 /web/uploads/exhibitions/*
+!/web/uploads/exhibitions/.gitkeep
 /web/uploads/albums/*
-/web/uploads/press/*
+!/web/uploads/albums/.gitkeep
+/web/uploads/pressArticles/*
+!/web/uploads/pressArticles/.gitkeep
 /web/uploads/news/*
+!/web/uploads/news/.gitkeep
 /web/uploads/biography/*
+!/web/uploads/slideshow/.gitkeep
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
