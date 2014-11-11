@@ -10,7 +10,7 @@
 /web/uploads/news/*
 !/web/uploads/news/.gitkeep
 /web/uploads/biography/*
-!/web/uploads/slideshow/.gitkeep
+!/web/uploads/biography/.gitkeep
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
