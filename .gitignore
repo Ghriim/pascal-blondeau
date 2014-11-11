@@ -4,6 +4,7 @@
 /web/uploads/albums/*
 /web/uploads/press/*
 /web/uploads/news/*
+/web/uploads/biography/*
 /app/bootstrap.php.cache
 /app/cache/*
 /app/config/parameters.yml
