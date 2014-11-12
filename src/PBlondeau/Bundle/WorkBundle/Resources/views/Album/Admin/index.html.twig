@@ -2,6 +2,11 @@
 
 {% trans_default_domain "adminWorkAlbum" %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/pblondeauwork/js/albums.js') }}"></script>
+{% endblock %}
+
 {% block body %}
      <div class="row">
         <div class="col-md-10 padding-left">
@@ -17,7 +22,7 @@
         </div>
     </div>
 
-    <table class="table table-striped table-hover table-sortable">
+    <table id="albums" class="table table-striped table-hover table-sortable">
         <thead>
             <tr>
                 <th>{{ 'list.album.header.cover' | trans({}) }}</th>
@@ -38,7 +43,9 @@
                         <img src="{{ asset(album.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                     </td>
                     <td class="title" width="40%">
-                        <a href="{{ path('admin_work_album_photos', {'id': album.id}) }}" title="{{ album.title }}">
+                        <a class="deploy" href="#" title="{{ album.title }}"
+                           data-album-id="{{ album.id }}"
+                           data-action="{{ path('admin_work_album_photos_ajax', {'id': album.id}) }}">
                             {{ album.title|truncate(45) }}
                         </a>
                     </td>

@@ -1,0 +1,48 @@
+{% trans_default_domain "adminWorkPhoto" %}
+
+<tr id="entity-{{ album.id }}-photos" class="details">
+    <td colspan="4">
+        <h4>{{ 'list.photo.count' | trans({'%numberOfPhotos%': photos.getTotalItemCount}) }}</h4>
+
+        <section>
+            {% for photo in photos %}
+                <img src="{{ asset(photo.webPath) }}" class="img-responsive img-thumbnail" alt="" />
+            {% else %}
+                {{ 'list.photo.empty' | trans({}) }}
+            {% endfor %}
+
+            <div class="paginator">
+                {{ knp_pagination_render(photos) }}
+            </div>
+        </section>
+    </td>
+
+    <td colspan="2">
+        <div class="text-right">
+            <button class="btn btn-default"
+                    data-action=""
+                    data-title="{{ 'form.create.title' | trans({})  }}">
+                <span class="fa fa-plus"></span>{{ 'list.action.add' | trans({}) }}
+            </button>
+        </div>
+
+        <div class="uploader">
+
+        </div>
+    </td>
+</tr>
+
+<div id="save-form" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title"></h4>
+            </div>
+
+            <div id="save-form-container"></div>
+        </div>
+    </div>
+</div>

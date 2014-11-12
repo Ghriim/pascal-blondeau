@@ -25,7 +25,7 @@ class AdminController extends BaseController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}", name="admin_work_album_photos")
+     * @Route("/{id}", name="admin_work_album_photos_ajax")
      * @Method("GET")
      */
     public function indexAction(Album $album)
@@ -36,45 +36,10 @@ class AdminController extends BaseController
         );
 
         return $this->render(
-            'PBlondeauWorkBundle:Photo/Admin:index.html.twig',
+            'PBlondeauWorkBundle:Photo/Admin:_index.html.twig',
             array(
                 'album'  => $album,
                 'photos' => $photos,
-            )
-        );
-    }
-
-    /**
-     * @param Album   $album
-     * @param Request $request
-     *
-     * @return JsonResponse
-     *
-     * @Route("/{id}/update-position", name="admin_work_album_photos_update_positions")
-     * @Method("POST")
-     */
-    public function updatePositionAjaxAction(Request $request, Album $album)
-    {
-        if (!$request->isXmlHttpRequest()) {
-            throw new AccessDeniedException('This path is only accessible in ajax');
-        }
-
-        $idWithPositionList = $request->get('idWithPositionList');
-        foreach ($idWithPositionList as $idWithPosition) {
-            /** @var Photo $photo */
-            $photo = $this->getPhotoRepository()->find($idWithPosition['id']);
-            if (!$photo || $photo->getAlbum() != $album) {
-                throw new NotFoundHttpException();
-            }
-            $photo->setPosition($idWithPosition['position']);
-        }
-
-        $this->getEntityManager()->flush();
-
-        return new JsonResponse(
-            array(
-                'status'  => 'success',
-                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminWorkPhoto')
             )
         );
     }
@@ -84,7 +49,7 @@ class AdminController extends BaseController
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/{id}", name="admin_work_album_photo_delete")
+     * @Route("/{id}", name="admin_work_album_photo_delete_ajax")
      * @Method("DELETE")
      */
     public function deleteAction(Photo $photo)

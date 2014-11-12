@@ -287,7 +287,15 @@ main.container {
 #albums .album:hover .title {
     opacity: 1;
 }
-
 #albums .album .title label {
     margin: 0 0 0 15px;
+}
+#albums .details td:first-child {
+    padding: 8px 0 8px 35px;
+}
+#albums .details td:last-child {
+    padding: 8px 35px 8px 0;
+}
+#albums .details td img {
+    margin: 5px;
 }

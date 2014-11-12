@@ -21,24 +21,17 @@ class PhotoRepository extends EntityRepository
 
     /**
      * @param Album $album
-     * @param null  $status
      *
      * @return Photo[]
      */
-    public function findForAdminList(Album $album, $status = null)
+    public function findForAdminList(Album $album)
     {
         $qb = $this->getQueryBuilder();
 
         $qb->where("photo.album = :album")
             ->setParameter("album", $album->getId());
 
-        if ($status) {
-            $qb->andWhere('photo.status = :status')
-               ->setParameter('status', $status);
-        }
-
-        $qb->orderBy('photo.status');
-        $qb->addOrderBy('photo.position');
+        $qb->orderBy('photo.position');
 
         return $qb->getQuery()->getResult();
     }

@@ -51,13 +51,6 @@ class Photo extends BaseEntity
     private $creation;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="status", type="string", length=10)
-     */
-    private $status;
-
-    /**
      * @var Album
      *
      * @ORM\ManyToOne(targetEntity="PBlondeau\Bundle\WorkBundle\Entity\Album")
@@ -165,33 +158,6 @@ class Photo extends BaseEntity
     public function getCreation()
     {
         return $this->creation;
-    }
-
-    /**
-     * Set status
-     *
-     * @param string $status
-     * @return $this
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        if($status == BaseEntity::STATUS_STOPPED) {
-            $this->setPosition(null);
-        }
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return string
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**
