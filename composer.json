@@ -27,8 +27,7 @@
         "coresphere/console-bundle": "dev-master",
         "doctrine/data-fixtures": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "hautelook/alice-bundle": "0.1.*",
-        "oneup/uploader-bundle": "~1.3"
+        "hautelook/alice-bundle": "0.1.*"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "dev-master",
