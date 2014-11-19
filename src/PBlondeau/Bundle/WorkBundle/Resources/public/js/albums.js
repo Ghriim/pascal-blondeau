@@ -21,9 +21,11 @@ function initExpandAlbum()
             if (detailsDom.length == 0){
                 jQuery.ajax({
                     url: $this.data('action'),
-                    success: function (html) {
+                    success: function (albumDetails) {
                         var parent = $this.closest('tr');
-                        parent.after(html);
+                        parent.after(albumDetails);
+
+                        initAddPhoto(detailsDom);
                     }
                 });
             } else {
@@ -31,4 +33,16 @@ function initExpandAlbum()
             }
         }
     );
+}
+
+function initAddPhoto(detailsDom)
+{
+    var addPhotoForm = detailsDom.find('form');
+    alert(addPhotoForm.attr('action'));
+
+    addPhotoForm.on('submit', function(event) {
+        event.preventDefault();
+
+        alert('prevented');
+    });
 }

@@ -18,17 +18,7 @@
     </td>
 
     <td colspan="2">
-        <div class="text-right">
-            <button class="btn btn-default"
-                    data-action=""
-                    data-title="{{ 'form.create.title' | trans({})  }}">
-                <span class="fa fa-plus"></span>{{ 'list.action.add' | trans({}) }}
-            </button>
-        </div>
-
-        <div class="uploader">
-
-        </div>
+        {% include "PBlondeauWorkBundle:Photo/Admin:_addForm.html.twig" with {'addPhotoForm': addPhotoForm } %}
     </td>
 </tr>
 
