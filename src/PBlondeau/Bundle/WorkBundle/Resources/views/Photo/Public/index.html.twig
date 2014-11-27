@@ -4,21 +4,12 @@
 
 {% block body %}
     <section id="albums">
-        {% for album in albums %}
-            <article class="album margin-bottom">
-                <img class="img-max-height-fix" src="{{ asset(album.webPath) }}" alt="" />
-                <div class="title">
-                    <label>{{ album.title }}</label>
-                </div>
-            </article>
-        {% else %}
-            <div class="text-center text-italic">
-                {{ 'list.photo.empty' | trans({}) }}
-            </div>
+        {% for photo in photos %}
+            <img class="img-max-height-fix" src="{{ asset(photo.webPath) }}" alt="" />
         {% endfor %}
     </section>
 
     <div class="paginator">
-        {{ knp_pagination_render(albums) }}
+        {{ knp_pagination_render(photos) }}
     </div>
 {% endblock %}

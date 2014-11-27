@@ -19,15 +19,14 @@ class PublicController extends BaseController
     public function indexAction(Album $album)
     {
         $criteria = array(
-            'album'  => $album,
-            'status' => BaseEntity::STATUS_ACTIVE
+            'album'  => $album
         );
 
         $order = array(
             'position' => 'ASC'
         );
 
-        $albums = $this->getPaginator()->paginate(
+        $photos = $this->getPaginator()->paginate(
             $this->getPhotoRepository()->findBy($criteria, $order),
             $this->get('request')->query->get('page', 1)
         );
@@ -35,7 +34,7 @@ class PublicController extends BaseController
         return $this->render(
             'PBlondeauWorkBundle:Photo/Public:index.html.twig',
             array(
-                'albums' => $albums
+                'photos' => $photos
             ));
     }
 }
