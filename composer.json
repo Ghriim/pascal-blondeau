@@ -27,8 +27,7 @@
         "coresphere/console-bundle": "dev-master",
         "doctrine/data-fixtures": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "hautelook/alice-bundle": "0.1.*",
-        "punkave/symfony2-file-uploader-bundle": "1.0.*@dev"
+        "hautelook/alice-bundle": "0.1.*"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "dev-master",

@@ -27,7 +27,7 @@ class AdminController extends BaseController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}", name="admin_work_photos")
+     * @Route("/{id}/photos", name="admin_work_photos")
      * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request, Album $album)
@@ -38,41 +38,61 @@ class AdminController extends BaseController
         );
 
         $addPhotoForm = $this->buildAddForm($album);
-        if($request->isMethod("POST")) {
+        if ($request->isMethod("POST")) {
             $addPhotoForm->submit($request);
 
             if ($addPhotoForm->isValid()) {
+                foreach ($addPhotoForm->get("files")->getData() as $file) {
+                    $photo = new Photo();
+                    $photo->setUser($this->getUser());
+                    $photo->setAlbum($album);
+                    $photo->file = $file;
 
+                    $this->getEntityManager()->persist($photo);
+                }
+
+                $this->getEntityManager()->flush();
+                return $this->redirect(
+                    $this->generateUrl('admin_work_photos', array("id" => $album->getId()))
+                );
             }
         }
 
         return $this->render(
             'PBlondeauWorkBundle:Photo/Admin:index.html.twig',
             array(
-                'album'        => $album,
-                'photos'       => $photos,
+                'album' => $album,
+                'photos' => $photos,
                 'addPhotoForm' => $addPhotoForm->createView(),
             )
         );
     }
 
     /**
-     * @param Photo $photo
+     * @param Album $album
+     * @param integer $photoId
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      *
-     * @Route("/{id}", name="admin_work_album_photo_delete_ajax")
+     * @Route("/{id}/photos/{photoId}", name="admin_work_photo_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Photo $photo)
+    public function deleteAction(Album $album, $photoId)
     {
+        $photo = $this->getPhotoRepository()->find($photoId);
+        if(is_null($photo)) {
+            throw new NotFoundHttpException();
+        }
+
         $this->getEntityManager()->remove($photo);
         $this->getEntityManager()->flush();
 
         $message = $this->getSuccessMessageFromContext('delete');
         $this->addFlashMessage($message, 'success');
 
-        return $this->redirect($this->generateUrl('admin_work_albums'));
+        return $this->redirect(
+            $this->generateUrl('admin_work_photos', array("id" => $album->getId()))
+        );
     }
 
     /**
@@ -98,7 +118,7 @@ class AdminController extends BaseController
             array(
                 'action' => $this->generateUrl('admin_work_photos', array('id' => $album->getId())),
                 'method' => 'POST',
-                'attr'   => array('class' => 'form form-horizontal'),
+                'attr' => array('class' => 'form form-horizontal'),
             )
         );
     }

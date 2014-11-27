@@ -4,7 +4,7 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/pblondeauwork/js/photo.js') }}"></script>
+    <script src="{{ asset('bundles/pblondeauwork/js/photos.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -21,7 +21,6 @@
                 <tr>
                     <th>{{ 'list.photo.header.cover' | trans({}) }}</th>
                     <th>{{ 'list.photo.header.position' | trans({}) }}</th>
-                    <th>{{ 'list.photo.header.status' | trans({}) }}</th>
                     <th>{{ 'list.photo.header.creation' | trans({}) }}</th>
                     <th>{{ 'list.photo.header.actions' | trans({}) }}</th>
                 </tr>
@@ -29,19 +28,13 @@
 
                 <tbody>
                 {% for photo in photos %}
-                    <tr id="entity-{{ photo.id }}" data-id="{{ photo.id }}"
-                        class="{% if photo.isStopped %}sortable-disabled{% endif %}">
+                    <tr id="entity-{{ photo.id }}" data-id="{{ photo.id }}">
                         <td class="preview">
-                            <span class="fa fa-arrows-v margin-x {% if photo.isStopped %}invisible{% endif %}"></span>
+                            <span class="fa fa-arrows-v margin-x"></span>
                             <img src="{{ asset(photo.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                         </td>
                         <td class="position">
                             {{ photo.position }}
-                        </td>
-                        <td>
-                            <span class="badge status-{{ photo.status }}">
-                                {{ ('list.photo.body.status.' ~ photo.status) | trans({}) }}
-                            </span>
                         </td>
                         <td>{{ photo.creation|date('d-m-Y') }}</td>
                         <td>
@@ -52,7 +45,7 @@
                                     </button>
 
                                     <div id="delete-modal-{{ photo.id }}" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                                        {% include "PBlondeauWorkBundle:Photo/Admin:deleteModal.html.twig" %}
+                                        {% include "PBlondeauWorkBundle:Photo/Admin:deleteModal.html.twig" with {'album': album, 'photo': photo} only %}
                                     </div>
                                 </li>
                             </ul>
@@ -72,7 +65,7 @@
         </div>
 
         <div class="col-md-3">
-            
+            {% include "PBlondeauWorkBundle:Photo/Admin:_addForm.html.twig" with {'addPhotoForm': addPhotoForm} only %}
         </div>
     </div>
 {% endblock %}

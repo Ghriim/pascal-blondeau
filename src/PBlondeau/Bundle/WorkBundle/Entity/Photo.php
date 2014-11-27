@@ -220,7 +220,7 @@ class Photo extends BaseEntity
 
     protected function getUploadDir()
     {
-        return 'uploads/exhibitions';
+        return 'uploads/albums/' . $this->getAlbum()->getId();
     }
 
     /**
@@ -244,7 +244,12 @@ class Photo extends BaseEntity
             return;
         }
 
-        $this->file->move($this->getUploadRootDir(), $this->path);
+        $dir = $this->getUploadRootDir();
+        if (!file_exists($dir)) {
+            mkdir($dir);
+        }
+
+        $this->file->move($dir, $this->path);
         $this->path = $this->file->getClientOriginalName();
         $this->file = null;
     }
@@ -267,13 +272,5 @@ class Photo extends BaseEntity
     public function isNew()
     {
         return is_null($this->getId());
-    }
-
-    /**
-     * @return bool
-     */
-    public function isStopped()
-    {
-        return $this->status == BaseEntity::STATUS_STOPPED;
     }
 }

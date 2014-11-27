@@ -273,7 +273,7 @@ class Album extends BaseEntity
 
     protected function getUploadDir()
     {
-        return 'uploads/exhibitions';
+        return 'uploads/albums';
     }
 
     /**
