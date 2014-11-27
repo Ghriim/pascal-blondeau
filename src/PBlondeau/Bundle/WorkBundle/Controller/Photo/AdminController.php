@@ -27,7 +27,7 @@ class AdminController extends BaseController
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
-     * @Route("/{id}", name="admin_work_album_photos_ajax")
+     * @Route("/{id}", name="admin_work_photos")
      * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request, Album $album)
@@ -47,7 +47,7 @@ class AdminController extends BaseController
         }
 
         return $this->render(
-            'PBlondeauWorkBundle:Photo/Admin:_index.html.twig',
+            'PBlondeauWorkBundle:Photo/Admin:index.html.twig',
             array(
                 'album'        => $album,
                 'photos'       => $photos,
@@ -96,7 +96,7 @@ class AdminController extends BaseController
             new PhotoType(),
             null,
             array(
-                'action' => $this->generateUrl('admin_work_album_photos_ajax', array('id' => $album->getId())),
+                'action' => $this->generateUrl('admin_work_photos', array('id' => $album->getId())),
                 'method' => 'POST',
                 'attr'   => array('class' => 'form form-horizontal'),
             )
