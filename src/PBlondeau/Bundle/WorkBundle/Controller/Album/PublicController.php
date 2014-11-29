@@ -2,14 +2,19 @@
 
 namespace PBlondeau\Bundle\WorkBundle\Controller\Album;
 
+use PBlondeau\Bundle\WorkBundle\Entity\Album;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class PublicController extends BaseController
 {
     /**
      * @Route("/albums", name="work_albums_public_display")
+     * @Method("GET")
      */
     public function indexAction()
     {

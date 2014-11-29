@@ -3,6 +3,7 @@
 namespace PBlondeau\Bundle\ExhibitionBundle\Controller\Exhibition;
 
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
@@ -11,6 +12,7 @@ class PublicController extends BaseController
 {
     /**
      * @Route("/exhibitions", name="exhibition_public_display")
+     * @Method("GET")
      */
     public function indexAction()
     {

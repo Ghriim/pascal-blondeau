@@ -3,20 +3,24 @@
 namespace PBlondeau\Bundle\WorkBundle\Controller\Photo;
 
 use PBlondeau\Bundle\WorkBundle\Entity\Album;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
+use Symfony\Component\HttpFoundation\Request;
 
 class PublicController extends BaseController
 {
     /**
-     * @param Album $album
+     * @param Album   $album
+     * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/albums/{id}/photos", name="work_album_photos_public_display")
+     * @Method("GET")
      */
-    public function indexAction(Album $album)
+    public function indexAction(Request $request, Album $album)
     {
         $criteria = array(
             'album'  => $album
@@ -26,10 +30,18 @@ class PublicController extends BaseController
             'position' => 'ASC'
         );
 
+        $defaultPage = 1;
+        $page = $request->get('page', $defaultPage);
+
         $photos = $this->getPaginator()->paginate(
             $this->getPhotoRepository()->findBy($criteria, $order),
-            $this->get('request')->query->get('page', 1)
+            $page
         );
+
+        if ($page == $defaultPage) {
+            $album->incrementOpenedCount();
+            $this->getEntityManager()->flush();
+        }
 
         return $this->render(
             'PBlondeauWorkBundle:Photo/Public:index.html.twig',

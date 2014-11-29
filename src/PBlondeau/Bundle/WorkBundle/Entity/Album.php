@@ -17,6 +17,8 @@ use PBlondeau\Bundle\UserBundle\Entity\User;
  */
 class Album extends BaseEntity
 {
+    const OPENED_COUNT_DEFAULT = 0;
+
     /**
      * @var integer
      *
@@ -49,6 +51,15 @@ class Album extends BaseEntity
      * @Assert\GreaterThanOrEqual(1)
      */
     private $position;
+
+
+    /**
+     * @var integer
+     * @ORM\Column(name="opened_count", type="integer", nullable=false)
+     * @Assert\GreaterThanOrEqual(0)
+     *
+     */
+    private $openedCount = self::OPENED_COUNT_DEFAULT;
 
     /**
      * @var \DateTime
@@ -223,6 +234,30 @@ class Album extends BaseEntity
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOpenedCount()
+    {
+        return $this->openedCount;
+    }
+
+    /**
+     * @param int $openedCount
+     */
+    public function setOpenedCount($openedCount)
+    {
+        $this->openedCount = $openedCount;
+    }
+
+    /**
+     * Increase Opened Count by one
+     */
+    public function incrementOpenedCount()
+    {
+        $this->openedCount++;
     }
 
     /**

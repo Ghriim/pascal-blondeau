@@ -3,6 +3,7 @@
 namespace PBlondeau\Bundle\PressBundle\Controller\PressArticle;
 
 use PBlondeau\Bundle\CommonBundle\Entity\BaseEntity;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use PBlondeau\Bundle\CommonBundle\Controller\BaseController;
 
@@ -10,6 +11,7 @@ class PublicController extends BaseController
 {
     /**
      * @Route("/press", name="press_public_display")
+     * @Method("GET")
      */
     public function indexAction()
     {
