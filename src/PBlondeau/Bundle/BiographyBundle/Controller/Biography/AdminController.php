@@ -53,7 +53,8 @@ class AdminController extends BaseController
         }
 
         return array(
-            'form' => $form->createView()
+            'biography' => $biography,
+            'form'      => $form->createView()
         );
     }
 

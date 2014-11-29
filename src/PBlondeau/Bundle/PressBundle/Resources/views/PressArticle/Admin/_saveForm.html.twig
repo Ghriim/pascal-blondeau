@@ -10,6 +10,13 @@
 
     <div>
         {{ form_row(form.file) }}
+        {% if not pressArticle.isNew %}
+            <div class="row">
+                <div class="col-md-offset-4 margin-bottom">
+                    <img src="{{ asset(pressArticle.webPath) }}" class="img-responsive img-thumbnail" alt="" />
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     <div>

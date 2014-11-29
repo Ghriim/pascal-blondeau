@@ -76,7 +76,8 @@ class AdminController extends BaseController
         return $this->render(
             'PBlondeauPressBundle:PressArticle/Admin:_saveForm.html.twig',
             array(
-                'form' => $form->createView(),
+                'pressArticle' => $pressArticle,
+                'form'         => $form->createView(),
             )
         );
     }
