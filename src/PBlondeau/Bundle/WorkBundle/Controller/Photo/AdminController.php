@@ -42,7 +42,8 @@ class AdminController extends BaseController
             $addPhotoForm->submit($request);
 
             if ($addPhotoForm->isValid()) {
-                foreach ($addPhotoForm->get("files")->getData() as $file) {
+                $files = $addPhotoForm->get("files")->getData();
+                foreach ($files as $file) {
                     $photo = new Photo();
                     $photo->setUser($this->getUser());
                     $photo->setAlbum($album);
@@ -52,6 +53,10 @@ class AdminController extends BaseController
                 }
 
                 $this->getEntityManager()->flush();
+
+                $message = $this->getSuccessMessageFromContext();
+                $this->addFlashMessage($message, 'success');
+
                 return $this->redirect(
                     $this->generateUrl('admin_work_photos', array("id" => $album->getId()))
                 );
@@ -64,6 +69,47 @@ class AdminController extends BaseController
                 'album' => $album,
                 'photos' => $photos,
                 'addPhotoForm' => $addPhotoForm->createView(),
+            )
+        );
+    }
+
+    /**
+     * @param Request $request
+     * @param Album   $album
+     *
+     * @return JsonResponse
+     *
+     * @Route("/{id}/photos/update-position", name="admin_work_photos_update_positions")
+     * @Method("POST")
+     */
+    public function updatePositionAjaxAction(Request $request, Album $album)
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException('This path is only accessible in ajax');
+        }
+
+        $idWithPositionList = $request->get('idWithPositionList');
+        foreach ($idWithPositionList as $idWithPosition) {
+            /** @var Photo $photo */
+            $photo = $this->getPhotoRepository()->findOneBy(
+                array(
+                    "id" => $idWithPosition['id'],
+                    "album" => $album
+                )
+            );
+
+            if (!$photo) {
+                throw new NotFoundHttpException();
+            }
+            $photo->setPosition($idWithPosition['position']);
+        }
+
+        $this->getEntityManager()->flush();
+
+        return new JsonResponse(
+            array(
+                'status'  => 'success',
+                'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminWorkPhoto')
             )
         );
     }

@@ -118,7 +118,7 @@ class AdminController extends BaseController
     /**
      * @param Album $album
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponseœ
      *
      * @Route("/{id}", name="admin_work_albums_delete")
      * @Method("DELETE")

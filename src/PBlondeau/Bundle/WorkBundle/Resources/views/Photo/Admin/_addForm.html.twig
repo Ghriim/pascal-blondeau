@@ -1,5 +1,12 @@
+{% trans_default_domain "adminWorkPhoto" %}
+
 {{ form_start(addPhotoForm) }}
     {{ form_row(addPhotoForm.files) }}
 
-    <input type="submit" />
+    <div class="text-right">
+        <button type="submit" class="btn btn-primary">
+            <span class="fa fa-trash-o"></span>
+            {{ 'form.create.title' | trans({}) }}
+        </button>
+    </div>
 {{ form_end(addPhotoForm) }}

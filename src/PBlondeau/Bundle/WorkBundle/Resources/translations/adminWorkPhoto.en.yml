@@ -24,15 +24,9 @@ list:
 
 form:
     create:
-        title: Add a new Photo
-        success.message: A new Photo has been successfully added
-    update:
-        title: Update Photo informations
-        success.message: The Photo has been successfully modified
-    modal:
-        action:
-            save: Save the Photo
-            cancel: Cancel
+        title: Add Photo
+        success.message: New Photo(s) successfully added
+
     delete:
         modal:
             title: Remove Photo
