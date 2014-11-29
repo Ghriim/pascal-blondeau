@@ -106,8 +106,12 @@ html, body {
 /* Table */
 .table>thead>tr>th, .table>tbody>tr>td {
     vertical-align: baseline;
+    text-align: center;
 }
-.table>tbody>tr>td.centered {
+.table>tbody>tr>td:first-of-type, .table>tbody>tr>td.align-left {
+    text-align: left;
+}
+.table>tbody>tr>td.align-center {
     text-align: center;
 }
 table .list-inline {

@@ -31,10 +31,10 @@
         <tbody>
             {% for news in newsList %}
                 <tr id="entity-{{ news.id }}" data-id="{{ news.id }}">
-                    <td class="preview">
+                    <td class="align-center">
                         <img src="{{ asset(news.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                     </td>
-                    <td class="title" width="40%">
+                    <td class="align-left" width="40%">
                         <span title="{{ news.title }}">
                             {{ news.title|truncate(55) }}
                         </span>

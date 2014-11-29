@@ -35,7 +35,8 @@ class PublicController extends BaseController
 
         $photos = $this->getPaginator()->paginate(
             $this->getPhotoRepository()->findBy($criteria, $order),
-            $page
+            $page,
+            self::DEFAULT_ITEMS_PER_PAGE
         );
 
         if ($page == $defaultPage) {

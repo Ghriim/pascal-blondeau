@@ -25,7 +25,8 @@ class PublicController extends BaseController
 
         $newsList = $this->getPaginator()->paginate(
             $this->getNewsRepository()->findBy($criteria, $order),
-            $this->get('request')->query->get('page', 1)
+            $this->get('request')->query->get('page', 1),
+            self::DEFAULT_ITEMS_PER_PAGE
         );
 
         return $this->render(

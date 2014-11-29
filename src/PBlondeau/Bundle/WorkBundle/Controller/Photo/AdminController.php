@@ -34,7 +34,8 @@ class AdminController extends BaseController
     {
         $photos = $this->getPaginator()->paginate(
             $this->getPhotoRepository()->findForAdminList($album),
-            $this->get('request')->query->get('page', 1)
+            $this->get('request')->query->get('page', 1),
+            self::DEFAULT_ITEMS_PER_PAGE
         );
 
         $addPhotoForm = $this->buildAddForm($album);

@@ -32,11 +32,11 @@
             {% for pressArticle in pressArticles %}
                 <tr id="entity-{{ pressArticle.id }}" data-id="{{ pressArticle.id }}"
                         class="{% if pressArticle.isStopped %}sortable-disabled{% endif %}">
-                    <td class="preview">
+                    <td class="preview" width="40%">
                         <span class="fa fa-arrows-v margin-x {% if pressArticle.isStopped %}invisible{% endif %}"></span>
                         <img src="{{ asset(pressArticle.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                     </td>
-	                <td class="position">
+	                <td>
 		                {{ pressArticle.position }}
 	                </td>
                     <td>

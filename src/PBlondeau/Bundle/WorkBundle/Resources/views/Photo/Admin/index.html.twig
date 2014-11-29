@@ -29,11 +29,11 @@
                 <tbody data-action="{{ path('admin_work_photos_update_positions', {'id': album.id}) }}">
                 {% for photo in photos %}
                     <tr id="entity-{{ photo.id }}" data-id="{{ photo.id }}">
-                        <td class="preview">
+                        <td class="preview" width="40%">
                             <span class="fa fa-arrows-v margin-x"></span>
                             <img src="{{ asset(photo.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                         </td>
-                        <td class="position">
+                        <td>
                             {{ photo.position }}
                         </td>
                         <td>{{ photo.creation|date('d-m-Y') }}</td>

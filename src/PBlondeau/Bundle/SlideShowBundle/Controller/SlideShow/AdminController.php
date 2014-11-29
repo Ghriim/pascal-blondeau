@@ -28,7 +28,8 @@ class AdminController extends BaseController
     {
         $slides = $this->getPaginator()->paginate(
             $this->getSlideRepository()->findForAdminList(),
-            $this->get('request')->query->get('page', 1)
+            $this->get('request')->query->get('page', 1),
+            self::DEFAULT_ITEMS_PER_PAGE
         );
 
         return $this->render(

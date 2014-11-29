@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BaseController extends Controller
 {
-    const DEFAULT_ITEMS_PER_PAGE = 25;
+    const DEFAULT_ITEMS_PER_PAGE = 50;
 
     /**
      * @return \Doctrine\Common\Persistence\ObjectManager

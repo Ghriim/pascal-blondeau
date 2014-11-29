@@ -87,7 +87,7 @@ fos_user:
     user_class: PBlondeau\Bundle\UserBundle\Entity\User
 
 knp_paginator:
-    page_range: 25
+    page_range: 50
     template:
         pagination: PBlondeauCommonBundle::_pagination.html.twig
 
