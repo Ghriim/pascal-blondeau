@@ -41,7 +41,7 @@ class AdminController extends BaseController
 
     /**
      * @param Request $request
-     * @param Album   $album
+     * @param Album $album
      *
      * @return \Symfony\Component\HttpFoundation\Response
      *
@@ -76,7 +76,8 @@ class AdminController extends BaseController
         return $this->render(
             'PBlondeauWorkBundle:Album/Admin:_saveForm.html.twig',
             array(
-                'form' => $form->createView(),
+                'form'  => $form->createView(),
+                'album' => $album
             )
         );
     }
@@ -109,7 +110,7 @@ class AdminController extends BaseController
 
         return new JsonResponse(
             array(
-                'status'  => 'success',
+                'status' => 'success',
                 'message' => $this->getTranslator()->trans('form.updatePosition.message', array(), 'adminWorkAlbum')
             )
         );
@@ -142,7 +143,7 @@ class AdminController extends BaseController
     private function buildSaveForm(Album $album)
     {
         if ($album->isNew()) {
-            $action           = $this->generateUrl('admin_work_albums_create');
+            $action = $this->generateUrl('admin_work_albums_create');
             $validationGroups = array('creation');
         } else {
             $action = $this->generateUrl(
@@ -155,9 +156,9 @@ class AdminController extends BaseController
 
         return $this->createForm(
             new AlbumType(), $album, array(
-                'action'            => $action,
-                'method'            => 'POST',
-                'attr'              => array('class' => 'form form-horizontal'),
+                'action' => $action,
+                'method' => 'POST',
+                'attr' => array('class' => 'form form-horizontal'),
                 'validation_groups' => $validationGroups
             ),
             $album
