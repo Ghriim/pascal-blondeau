@@ -103,7 +103,6 @@ class AdminController extends BaseController
             }
             $photo->setPosition($idWithPosition['position']);
         }
-
         $this->getEntityManager()->flush();
 
         return new JsonResponse(
