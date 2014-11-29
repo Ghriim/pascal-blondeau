@@ -32,6 +32,9 @@ class AlbumRepository extends EntityRepository
                ->setParameter('status', $status);
         }
 
+        $qb->leftJoin('album.photos', 'photo');
+        $qb->addSelect('photo');
+
         $qb->orderBy('album.status');
         $qb->addOrderBy('album.position');
 

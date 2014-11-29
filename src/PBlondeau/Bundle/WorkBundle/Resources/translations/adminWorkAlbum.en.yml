@@ -9,6 +9,7 @@ list:
             cover: Cover
             title: Title
             position: Position
+            numberOfPhotos: Photos
             openedCount: Opened
             status: Status
             creation: Added

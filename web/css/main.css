@@ -107,7 +107,7 @@ html, body {
 .table>thead>tr>th, .table>tbody>tr>td {
     vertical-align: baseline;
 }
-.table>tbody>tr>td.position, .table>tbody>tr>td.openedCount {
+.table>tbody>tr>td.centered {
     text-align: center;
 }
 table .list-inline {

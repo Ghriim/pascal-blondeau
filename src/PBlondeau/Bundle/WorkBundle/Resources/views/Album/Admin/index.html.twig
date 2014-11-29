@@ -23,6 +23,7 @@
                 <th>{{ 'list.album.header.cover' | trans({}) }}</th>
                 <th>{{ 'list.album.header.title' | trans({}) }}</th>
 	            <th>{{ 'list.album.header.position' | trans({}) }}</th>
+                <th>{{ 'list.album.header.numberOfPhotos' | trans({}) }}</th>
                 <th>{{ 'list.album.header.openedCount' | trans({}) }}</th>
                 <th>{{ 'list.album.header.status' | trans({}) }}</th>
                 <th>{{ 'list.album.header.creation' | trans({}) }}</th>
@@ -38,15 +39,18 @@
                         <span class="fa fa-arrows-v margin-x {% if album.isStopped %}invisible{% endif %}"></span>
                         <img src="{{ asset(album.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                     </td>
-                    <td class="title" width="35%">
+                    <td class="title" width="30%">
                         <a href="{{ path('admin_work_photos', {'id': album.id}) }}" title="{{ album.title }}">
-                            {{ album.title|truncate(45) }}
+                            {{ album.title|truncate(40) }}
                         </a>
                     </td>
-	                <td class="position">
+	                <td class="centered">
 		                {{ album.position }}
 	                </td>
-                    <td class="openedCount">
+                    <td class="centered">
+                        {{ album.photos|length }}
+                    </td>
+                    <td class="centered">
                         {{ album.openedCount }}
                     </td>
                     <td>
