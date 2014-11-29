@@ -12,12 +12,19 @@
         {{ form_row(form.title) }}
     </div>
 
-    <div>
+    <div class="margin-top">
         {{ form_row(form.content) }}
     </div>
 
-    <div>
+    <div class="margin-top">
         {{ form_row(form.file) }}
+        {% if not news.isNew %}
+            <div class="row">
+                <div class="col-md-offset-4 margin-bottom">
+                    <img src="{{ asset(news.webPath) }}" class="img-responsive img-thumbnail" alt="" />
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     <div>
