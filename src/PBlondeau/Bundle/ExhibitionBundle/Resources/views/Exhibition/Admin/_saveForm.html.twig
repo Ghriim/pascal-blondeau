@@ -10,6 +10,13 @@
 
     <div>
         {{ form_row(form.file) }}
+        {% if not exhibition.isNew %}
+            <div class="row">
+                <div class="col-md-offset-4 margin-bottom">
+                    <img src="{{ asset(exhibition.webPath) }}" class="img-responsive img-thumbnail" alt="" />
+                </div>
+            </div>
+        {% endif %}
     </div>
 
     <div>
