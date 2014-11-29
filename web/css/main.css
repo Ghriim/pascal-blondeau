@@ -303,3 +303,6 @@ main.container {
 #albums .details td img {
     margin: 5px;
 }
+#photos-public a img {
+    margin: 10px;
+}

@@ -18,6 +18,7 @@ class PublicController extends BaseController
      * @return \Symfony\Component\HttpFoundation\Response
      *
      * @Route("/albums/{id}/photos", name="work_album_photos_public_display")
+     * @Route("/albums/{id}/photos/", name="work_album_photos_public_display_alias")
      * @Method("GET")
      */
     public function indexAction(Request $request, Album $album)

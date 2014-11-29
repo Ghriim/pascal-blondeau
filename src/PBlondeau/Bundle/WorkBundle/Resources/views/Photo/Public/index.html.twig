@@ -2,14 +2,51 @@
 
 {% trans_default_domain "publicWorkPhoto" %}
 
-{% block body %}
-    <section id="albums">
-        {% for photo in photos %}
-            <img class="img-max-height-fix" src="{{ asset(photo.webPath) }}" alt="" />
-        {% endfor %}
-    </section>
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/gamma-gallery/modernizr.custom.70736.js') }}"></script>
+    <script src="{{ asset('js/gamma-gallery/jquery.masonry.min.js') }}"></script>
+    <script src="{{ asset('js/gamma-gallery/jquery.history.js') }}"></script>
+    <script src="{{ asset('js/gamma-gallery/js-url.min.js') }}"></script>
+    <script src="{{ asset('js/gamma-gallery/jquerypp.custom.js') }}"></script>
+    <script src="{{ asset('js/gamma-gallery/gamma.js') }}"></script>
 
-    <div class="paginator">
-        {{ knp_pagination_render(photos) }}
-    </div>
+    <script src="{{ asset('bundles/pblondeauwork/js/photos.js') }}"></script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/gamma-gallery/style.css') }}"/>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="main">
+        <div class="gamma-container gamma-loading" id="gamma-container">
+
+            <ul class="gamma-gallery">
+                {% for photo in photos %}
+                    <li>
+                        <div data-alt="img03" data-description="<h3>Sky high</h3>" data-max-width="1800"
+                             data-max-height="1350">
+                            <div data-src="{{ asset(photo.webPath) }}" data-min-width="1300"></div>
+                            <div data-src="{{ asset(photo.webPath) }}" data-min-width="1000"></div>
+                            <div data-src="{{ asset(photo.webPath) }}" data-min-width="700"></div>
+                            <div data-src="{{ asset(photo.webPath) }}" data-min-width="300"></div>
+                            <div data-src="{{ asset(photo.webPath) }}" data-min-width="200"></div>
+                            <div data-src="{{ asset(photo.webPath) }}" data-min-width="140"></div>
+                            <div data-src="{{ asset(photo.webPath) }}"></div>
+                            <noscript>
+                                <img src="{{ asset(photo.webPath) }}" alt="img03"/>
+                            </noscript>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <div class="gamma-overlay"></div>
+        </div>
+
+    </div><!--/main-->
+</div>
 {% endblock %}
