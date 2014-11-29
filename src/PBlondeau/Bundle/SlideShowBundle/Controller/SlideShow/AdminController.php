@@ -76,7 +76,8 @@ class AdminController extends BaseController
         return $this->render(
             'PBlondeauSlideShowBundle:SlideShow/Admin:_saveForm.html.twig',
             array(
-                'form' => $form->createView(),
+                'slide' => $slide,
+                'form'  => $form->createView(),
             )
         );
     }
