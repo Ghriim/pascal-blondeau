@@ -1,3 +1,7 @@
 list:
     photo:
         empty: No Photo added yet
+
+gallery:
+    view:
+        full-screen: View in Full Screen

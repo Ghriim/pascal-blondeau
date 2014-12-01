@@ -37,14 +37,14 @@
                         class="{% if album.isStopped %}sortable-disabled{% endif %}">
                     <td class="preview">
                         <span class="fa fa-arrows-v margin-x {% if album.isStopped %}invisible{% endif %}"></span>
-                        <img src="{{ album.webPath | apply_filter('small_thumb') }}" class="img-responsive img-thumbnail" alt="" />
+                        <img src="{{ asset(album.webPath) }}" class="img-responsive img-thumbnail" alt="" />
                     </td>
                     <td class="align-left" width="30%">
                         <a href="{{ path('admin_work_photos', {'id': album.id}) }}" title="{{ album.title }}">
                             {{ album.title|truncate(40) }}
                         </a>
                     </td>
-	                <td>
+	                <td class="position">
 		                {{ album.position }}
 	                </td>
                     <td>
