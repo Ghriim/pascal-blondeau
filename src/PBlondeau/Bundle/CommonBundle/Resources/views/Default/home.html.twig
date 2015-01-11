@@ -1,5 +1,34 @@
-{% extends '::layout.html.twig' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Pascal Blondeau{% endblock %}</title>
 
-{% block body %}
-    HOME
-{% endblock %}
+    {% block stylesheets %}
+        {% include "::components/_stylesheets.html.twig" %}
+    {% endblock %}
+
+    {% block icons %}
+        {% include "::components/_icons.html.twig" %}
+    {% endblock %}
+</head>
+<body>
+    <div class="display-table full-size-container">
+        <div class="display-cell">
+            <div id="home" class="row">
+                <div class="col-md-5 col-md-offset-1">
+                    <h1 class="margin-bottom-none">Pascal Blondeau</h1>
+                    <h2 class="margin-top-none">
+                        <span>Artist</span>
+                        <span style="padding-left: 50px">Photographer</span>
+                    </h2>
+                </div>
+
+                <div class="col-md-6 text-center">
+                    <img class="img-responsive margin-auto" src="{{ asset('images/home.jpg') }}" alt="Cover" />
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

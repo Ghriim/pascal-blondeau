@@ -3,9 +3,9 @@
 {% block body %}
     <section id="press">
         {% for pressArticle in pressArticles %}
-            <div class="text-center margin-bottom">
+            <article class="text-center margin-bottom">
                 <img class="img-max-width" src="{{ asset(pressArticle.webPath) }}" alt="" />
-            </div>
+            </article>
         {% endfor %}
     </section>
 

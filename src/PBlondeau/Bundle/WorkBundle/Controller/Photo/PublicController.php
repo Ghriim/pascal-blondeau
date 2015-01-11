@@ -48,6 +48,7 @@ class PublicController extends BaseController
         return $this->render(
             'PBlondeauWorkBundle:Photo/Public:index.html.twig',
             array(
+                'album'  => $album,
                 'photos' => $photos
             ));
     }

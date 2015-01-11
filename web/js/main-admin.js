@@ -55,7 +55,7 @@ function updateEntityPosition(sortableTable)
                 + '</div>';
 
             var flashMessagesContainer = jQuery('#flash-messages');
-            flashMessagesContainer.append(newFlashMessage);
+            flashMessagesContainer.html(newFlashMessage);
         }
     });
 }

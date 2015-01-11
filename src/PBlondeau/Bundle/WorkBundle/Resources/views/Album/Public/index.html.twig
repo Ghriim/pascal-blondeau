@@ -3,10 +3,10 @@
 {% block body %}
     <section id="albums">
         {% for album in albums %}
-            <article class="album margin-bottom">
+            <article class="album">
                 <a href="{{ path('work_album_photos_public_display', {'id': album.id}) }}"
                    title="{{ album.title }}">
-                    <img class="img-max-height-fix" src="{{ asset(album.webPath) }}" alt="" />
+                    <img class="img-max-height-fix-lg" src="{{ asset(album.webPath) }}" alt="" />
                 </a>
 
                 <div class="title">

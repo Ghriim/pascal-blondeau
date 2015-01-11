@@ -41,6 +41,9 @@ html, body {
 }
 
 /* Margin - Default */
+.margin-auto {
+    margin: auto;
+}
 .margin-left {
     margin-left: 20px;
 }
@@ -49,6 +52,12 @@ html, body {
 }
 .margin-bottom {
     margin-bottom: 20px;
+}
+.margin-bottom-sm {
+    margin-bottom: 10px;
+}
+.margin-bottom-none {
+    margin-bottom: 0;
 }
 .margin-top {
     margin-top: 20px;
@@ -67,10 +76,30 @@ html, body {
 .margin-xy {
     margin: 20px;
 }
-
+.display-table {
+    display: table;
+}
+.display-cell {
+    display: table-cell;
+    vertical-align: middle;
+}
+.full-size-container {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
 /* Font */
 .text-italic {
     font-style: italic;
+}
+
+/* Navigation */
+.navigation-link {
+    color: #333;
+}
+.navigation-link:hover {
+    text-decoration: underline;
+    color: #333;
 }
 
 /* Badge */
@@ -240,6 +269,10 @@ main.container {
     max-height: 250px;
 }
 
+.img-max-height-fix-lg {
+    max-height: 300px;
+}
+
 /* Toolip */
 .tooltip {
     white-space:pre-wrap;
@@ -248,10 +281,35 @@ main.container {
 
 }
 
+/* Home */
+#home {
+    font-family: sans-serif;
+    text-align: center;
+}
+#home h1,#home h2 {
+    text-transform: uppercase;
+}
+#home h1 {
+    color: #999;
+    font-size: 50px;
+    margin-top: 40%;
+}
+#home h2 {
+    color: #CCC;
+    font-size: 35px;
+}
+#home img{
+    height: 550px;
+}
+
 /* News feed */
 #news {
     width: 80%;
     margin: auto;
+}
+#news h4 {
+    font-weight: 700;
+    margin-bottom: 1.5em;
 }
 #news article img {
     width: 250px;
@@ -261,15 +319,18 @@ main.container {
     text-align: justify;
 }
 .separator {
-    margin: 25px auto 35px auto;
+    margin: 25px auto 50px auto;
     width: 80%;
     border: 1px dotted #EEE;
 }
 
 /* Work */
+#albums {
+    text-align: center;
+}
 #albums .album {
-    float: left;
-    margin: 10px;
+    display: inline-block;
+    padding: 0 5px;
 }
 #albums .album img {
     position: relative;
@@ -281,18 +342,21 @@ main.container {
     left: 0;
     width: 100%;
     z-index: 500;
-    color: #FFF;
     overflow-y: hidden;
     background-color: rgba(0, 0, 0, 0.5);
 
     opacity: 0;
     transition: opacity 0.3s linear;
 }
+#albums .album .title a, #albums .album .title:hover a {
+    color: #FFF;
+}
+
 #albums .album:hover .title {
     opacity: 1;
 }
 #albums .album .title label {
-    margin: 0 0 0 15px;
+    margin: 0;
 }
 #albums .details td:first-child {
     padding: 8px 0 8px 35px;
@@ -305,4 +369,26 @@ main.container {
 }
 #photos-public a img {
     margin: 10px;
+}
+#gamma-container {
+    margin-left: -45px;
+}
+.album-title {
+    text-align: center;
+    font-weight: 700;
+    margin: -5px 0 1em -100px;
+}
+
+/* Press */
+#press article {
+    margin-bottom: 5em;
+}
+
+/* Biography */
+#biography img {
+    width: 250px;
+    margin-right: 35px;
+}
+#biography .media-body>h3 {
+    margin-top: 0;
 }

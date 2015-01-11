@@ -1,10 +1,16 @@
 {% extends '::layout.html.twig' %}
 
 {% block body %}
-    <article class="media">
-        <img class="img-responsive pull-left" src="{{ asset(biography.webPath) }}" alt="" />
-        <div class="media-body">
-            {{ biography.content |raw }}
-        </div>
-    </article>
+    <section id="biography">
+        {% if biography is not null %}
+            <article class="media">
+                <img class="img-responsive pull-left" src="{{ asset(biography.webPath) }}" alt="" />
+                <div class="media-body">
+                    {{ biography.content |raw }}
+                </div>
+            </article>
+        {% else %}
+            <p>No biography for now.</p>
+        {% endif %}
+    </section>
 {% endblock %}

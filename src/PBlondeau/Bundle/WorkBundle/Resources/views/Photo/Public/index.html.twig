@@ -22,6 +22,19 @@
 {% block body %}
 <div class="container">
     <div class="main">
+        <div class="row">
+            <div class="col-md-3">
+                <a href="{{ path('work_albums_public_display') }}" class="navigation-link" title="Back to the list">
+                    <span class="fa fa-arrow-left"></span>Back to the list
+                </a>
+            </div>
+            <div class="col-md-6">
+                <h4 class="album-title">{{ album.title }}</h4>
+            </div>
+
+        </div>
+
+
         <div class="gamma-container gamma-loading" id="gamma-container">
 
             <ul class="gamma-gallery">
