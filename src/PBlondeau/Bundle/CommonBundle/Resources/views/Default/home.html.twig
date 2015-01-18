@@ -13,22 +13,28 @@
     {% endblock %}
 </head>
 <body>
-    <div class="display-table full-size-container">
-        <div class="display-cell">
-            <div id="home" class="row">
-                <div class="col-md-5 col-md-offset-1">
-                    <h1 class="margin-bottom-none">Pascal Blondeau</h1>
-                    <h2 class="margin-top-none">
-                        <span>Artist</span>
-                        <span style="padding-left: 50px">Photographer</span>
-                    </h2>
-                </div>
+    <a href="{{ path('slide_show_public_display') }}">
+        <div class="display-table full-size-container">
+            <div class="display-cell">
+                <div id="home" class="row">
+                    <div class="col-md-5 col-md-offset-1">
+                        <div class="display-table">
+                            <div class="display-cell">
+                                <h1 class="margin-bottom-none">Pascal Blondeau</h1>
+                                <h2 class="margin-top-none">
+                                    <span>Artist</span>
+                                    <span style="padding-left: 50px">Photographer</span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="col-md-6 text-center">
-                    <img class="img-responsive margin-auto" src="{{ asset('images/home.jpg') }}" alt="Cover" />
+                    <div class="col-md-6 text-center">
+                        <img class="img-max-width" src="{{ asset('images/home.jpg') }}" alt="Cover" />
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </a>
 </body>
 </html>
