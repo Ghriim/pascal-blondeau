@@ -56,6 +56,9 @@ html, body {
 .margin-bottom-sm {
     margin-bottom: 10px;
 }
+.margin-bottom-lg {
+    margin-bottom: 40px;
+}
 .margin-bottom-none {
     margin-bottom: 0;
 }
@@ -261,6 +264,10 @@ main.container {
     visibility: hidden;
 }
 
+.img-full-width {
+    width: 100%;
+}
+
 .img-max-width {
     max-width: 80%;
 }
@@ -292,14 +299,15 @@ main.container {
 #home h1 {
     color: #999;
     font-size: 50px;
-    margin-top: 40%;
 }
 #home h2 {
     color: #CCC;
     font-size: 35px;
 }
-#home img{
-    height: 550px;
+
+#home #title {
+    text-align: center;
+    margin: auto;
 }
 
 /* News feed */

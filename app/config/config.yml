@@ -73,7 +73,7 @@ swiftmailer:
     port:       %mailer_port%
     username:   %mailer_user%
     password:   %mailer_password%
-    delivery_address: %mailer_dev_recipient%
+    delivery_address: %mailer_recipient%
 
 services:
     twig.extension.text:

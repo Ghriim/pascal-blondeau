@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Pascal Blondeau{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="Description" content="Portfolio of the Artist Photographer Pascal Blondeau" />
 
     {% block stylesheets %}
         {% include "::components/_stylesheets.html.twig" %}
@@ -16,22 +18,18 @@
     <a href="{{ path('slide_show_public_display') }}">
         <div class="display-table full-size-container">
             <div class="display-cell">
-                <div id="home" class="row">
-                    <div class="col-md-5 col-md-offset-1">
-                        <div class="display-table">
-                            <div class="display-cell">
-                                <h1 class="margin-bottom-none">Pascal Blondeau</h1>
+                <div id="home">
+                        <div id="title" class="display-table">
+                            <div class="display-cell margin-bottom-lg">
+                                <h1 class="margin-bottom-none margin-top-none">Pascal Blondeau</h1>
                                 <h2 class="margin-top-none">
                                     <span>Artist</span>
                                     <span style="padding-left: 50px">Photographer</span>
                                 </h2>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-6 text-center">
-                        <img class="img-max-width" src="{{ asset('images/home.jpg') }}" alt="Cover" />
-                    </div>
+                    <img class="img-max-width margin-top" src="{{ asset('images/home.jpg') }}" alt="Cover" />
                 </div>
             </div>
         </div>
